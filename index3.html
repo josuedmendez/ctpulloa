@@ -443,113 +443,47 @@
     }
 
     .shortcut {
-      position: relative;
-      min-height: 260px;
-      padding: 1.65rem 1.55rem 1.45rem;
+      padding: 1.15rem 1.2rem;
       border-radius: var(--radius-md);
       background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(17, 32, 61, 0.1);
+      border-top: 4px solid var(--gold);
       color: var(--text);
       box-shadow: 0 18px 42px rgba(8, 21, 52, 0.1);
-      overflow: hidden;
       transition:
         transform 0.22s ease,
-        box-shadow 0.22s ease,
         background-color 0.22s ease,
         border-color 0.22s ease;
-    }
-
-    .shortcut::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--green), var(--gold));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.24s ease;
     }
 
     .shortcut:hover {
       transform: translateY(-4px);
       background: white;
-      border-color: rgba(13, 114, 52, 0.28);
-      box-shadow: 0 26px 58px rgba(8, 21, 52, 0.14);
+      border-color: rgba(13, 114, 52, 0.18);
     }
 
-    .shortcut:hover::after {
-      transform: scaleX(1);
-    }
-
-    .shortcut-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
-      margin-bottom: 1.35rem;
-      border-radius: 16px;
-      background: rgba(13, 114, 52, 0.1);
+    .shortcut small {
+      display: block;
+      margin-bottom: 0.3rem;
       color: var(--green);
-      transition:
-        background-color 0.22s ease,
-        color 0.22s ease,
-        transform 0.22s ease;
-    }
-
-    .shortcut:hover .shortcut-icon {
-      background: var(--green);
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .shortcut-icon svg {
-      width: 30px;
-      height: 30px;
-      stroke-width: 2.2;
-    }
-
-    .shortcut-number {
-      position: absolute;
-      top: 1.05rem;
-      right: 1.2rem;
-      color: rgba(18, 33, 74, 0.07);
-      font-family: "Montserrat", Arial, sans-serif;
-      font-size: 2.6rem;
-      font-weight: 800;
-      line-height: 1;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .shortcut strong {
       display: block;
-      margin-bottom: 0.6rem;
-      font-family: "Montserrat", Arial, sans-serif;
-      font-size: 1.18rem;
-      font-weight: 800;
-      line-height: 1.16;
+      font-size: 1.12rem;
+      font-weight: 700;
       color: var(--navy);
     }
 
-    .shortcut-description {
+    .shortcut span {
       display: block;
+      margin-top: 0.25rem;
       color: var(--muted);
       font-size: 0.96rem;
-    }
-
-    .shortcut-action {
-      display: inline-flex;
-      align-items: center;
-      margin-top: 1.1rem;
-      color: var(--green);
-      font-weight: 800;
-      font-size: 0.92rem;
-      transition: color 0.22s ease;
-    }
-
-    .shortcut:hover .shortcut-action {
-      color: var(--navy);
     }
 
     .section {
@@ -868,27 +802,12 @@
 
     .community-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.25rem;
     }
 
     .community-panel,
     .service-panel,
     .notice-panel {
       padding: 1.55rem;
-    }
-
-    .community-panel.image-panel {
-      padding: 0.9rem;
-      overflow: hidden;
-      aspect-ratio: 1.45 / 1;
-      background: var(--surface);
-    }
-
-    .community-panel.image-panel img {
-      width: 100%;
-      height: 100%;
-      border-radius: 20px;
-      object-fit: contain;
     }
 
     .private-chip {
@@ -1267,7 +1186,8 @@
         <a href="#nuestro-colegio">Nuestro Colegio</a>
         <a href="#oferta-educativa">Oferta Educativa</a>
         <a href="#admision">Admision</a>
-        <a href="#comunidad-educativa">Servicios y Comunidad</a>
+        <a href="#comunidad-educativa">Comunidad</a>
+        <a href="#servicios-recursos">Servicios</a>
         <a href="#informacion-avisos">Avisos</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -1311,61 +1231,25 @@
 
       <div class="hero-shortcuts">
         <div class="container shortcut-strip">
-          <a href="#admision" class="shortcut acceso-rapido-admision">
-            <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M8 4h8" />
-                <path d="M9 2h6v4H9z" />
-                <path d="M7 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1" />
-                <path d="M8 12h8" />
-                <path d="M8 16h5" />
-              </svg>
-            </span>
-            <span class="shortcut-number" aria-hidden="true">01</span>
+          <a href="#admision" class="shortcut">
+            <small>Acceso rapido</small>
             <strong>Admision</strong>
-            <span class="shortcut-description">Matricula, requisitos, proceso y fechas importantes.</span>
-            <span class="shortcut-action">Ver proceso -></span>
+            <span>Matricula, requisitos, proceso y fechas importantes.</span>
           </a>
-          <a href="https://sicai.cr/" target="_blank" rel="noopener" class="shortcut acceso-rapido-sicai">
-            <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="12" rx="2" />
-                <path d="M8 20h8" />
-                <path d="M12 16v4" />
-              </svg>
-            </span>
-            <span class="shortcut-number" aria-hidden="true">02</span>
+          <a href="https://sicai.cr/" target="_blank" class="shortcut">
+            <small>Acceso rapido</small>
             <strong>SICAI</strong>
-            <span class="shortcut-description">Entrada directa al ecosistema academico institucional.</span>
-            <span class="shortcut-action">Ingresar al sistema -></span>
+            <span>Entrada directa al ecosistema academico institucional.</span>
           </a>
-          <a href="#bolsa-empleo" class="shortcut acceso-rapido-bolsa-empleo">
-            <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1" />
-                <rect x="3" y="6" width="18" height="14" rx="2" />
-                <path d="M3 12h18" />
-                <path d="M10 12v2h4v-2" />
-              </svg>
-            </span>
-            <span class="shortcut-number" aria-hidden="true">03</span>
+          <a href="#bolsa-empleo" class="shortcut">
+            <small>Acceso rapido</small>
             <strong>Bolsa de empleo</strong>
-            <span class="shortcut-description">Vinculo con oportunidades laborales y seguimiento.</span>
-            <span class="shortcut-action">Ver oportunidades -></span>
+            <span>Vinculo con oportunidades laborales y seguimiento.</span>
           </a>
-          <a href="#cooperativa" class="shortcut acceso-rapido-cooperativa">
-            <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 21v-2a4 4 0 0 0-8 0v2" />
-                <circle cx="12" cy="7" r="4" />
-                <path d="M20 8v6" />
-                <path d="M17 11h6" />
-              </svg>
-            </span>
-            <span class="shortcut-number" aria-hidden="true">04</span>
+          <a href="#cooperativa" class="shortcut">
+            <small>Acceso rapido</small>
             <strong>Cooperativa</strong>
-            <span class="shortcut-description">Espacio visible para iniciativas y participacion estudiantil.</span>
-            <span class="shortcut-action">Conocer iniciativas -></span>
+            <span>Espacio visible para iniciativas y participacion estudiantil.</span>
           </a>
         </div>
       </div>
@@ -1439,7 +1323,7 @@
         <div>
           <p class="section-tag">Oferta Educativa</p>
         </div>
-
+   
       </div>
 
       <div class="container offer-grid">
@@ -1533,7 +1417,7 @@
         <div class="admission-copy">
           <p class="section-tag tag-light">Admision</p>
           <h2>Proceso de admision.</h2>
-
+      
 
           <div class="admission-actions">
             <a href="#contacto" class="button-primary">Solicitar informacion</a>
@@ -1593,38 +1477,111 @@
     <section class="section" id="comunidad-educativa">
       <div class="container section-header">
         <div>
-          <p class="section-tag">Servicios y Comunidad Educativa</p>
-        </div>
-
+          <p class="section-tag">Comunidad Educativa</p>
+         </div>
+        
       </div>
 
       <div class="container community-grid">
-        <article class="community-panel image-panel" id="cooperativa">
+        <article class="community-panel" id="cooperativa">
           <span>Cooperativa estudiantil</span>
-          <img
-            src="assets/img/comunidad-educativa-cooperativa-estudiantes.png"
-            alt="Cooperativa estudiantil"
-          />
+          <h3>Participacion y gestion con enfoque formativo</h3>
+          <p>
+            Espacio para comunicar proyectos, alcances, beneficios y acciones que articulan participacion y liderazgo.
+          </p>
         </article>
 
-        <article class="community-panel image-panel">
+        <article class="community-panel">
           <span>Junta Administrativa</span>
-          <img
-            src="assets/img/comunidad-educativa-junta-administrativa.png"
-            alt="Junta Administrativa"
-          />
+          <h3>Informacion publica y acceso privado cuando corresponda</h3>
+          <p>
+            El contenido institucional visible puede convivir con una subseccion reservada para subir documentos mediante
+            autenticacion.
+          </p>
+          <div class="private-chip">Acceso privado para carga documental</div>
         </article>
 
-        <article class="community-panel image-panel" id="bolsa-empleo">
+        <article class="community-panel" id="bolsa-empleo">
           <span>Bolsa de empleo</span>
-          <img
-            src="assets/img/comunidad-educativa-bolsa-empleo.png"
-            alt="Bolsa de empleo"
-          />
+          <h3>Conexion del colegio con oportunidades externas</h3>
+          <p>
+            Seccion para vacantes, alianzas, seguimiento a egresados y oportunidades vinculadas con las especialidades.
+          </p>
         </article>
       </div>
     </section>
 
+    <section class="section" id="servicios-recursos">
+      <div class="container section-header">
+        <div>
+          <p class="section-tag">Servicios y Recursos</p>
+          <h2>Valor agregado del colegio, organizado como ayuda util y no como contenido disperso.</h2>
+        </div>
+        <p class="section-lead">
+          Aqui se ubican servicios institucionales, apoyo al estudiante, recursos educativos y el acceso destacado a
+          SICAI.
+        </p>
+      </div>
+
+      <div class="container services-grid">
+        <div class="service-stack">
+          <article class="service-panel">
+            <span>Servicios institucionales</span>
+            <h3>Atencion y acompanamiento</h3>
+            <ul>
+              <li>Informacion administrativa y academica.</li>
+              <li>Canales de consulta y tramites frecuentes.</li>
+              <li>Orientacion por area institucional.</li>
+            </ul>
+          </article>
+
+          <article class="service-panel">
+            <span>Apoyo al estudiante</span>
+            <h3>Bienestar, seguimiento y orientacion</h3>
+            <ul>
+              <li>Apoyo socioeducativo y acompanamiento.</li>
+              <li>Materiales clave para la experiencia estudiantil.</li>
+              <li>Derivacion a recursos y responsables.</li>
+            </ul>
+          </article>
+
+          <article class="service-panel">
+            <span>Recursos educativos</span>
+            <h3>Documentos, guias y materiales de consulta</h3>
+            <ul>
+              <li>Formatos, referencias y recursos institucionales.</li>
+              <li>Material de apoyo para familias y estudiantado.</li>
+              <li>Accesos clasificados por utilidad.</li>
+            </ul>
+          </article>
+
+          <article class="service-panel" id="sicai">
+            <span>SICAI</span>
+            <h3>Acceso academico visible y facil de encontrar</h3>
+            <ul>
+              <li>Entrada destacada desde accesos rapidos.</li>
+              <li>Referencia clara dentro del ecosistema institucional.</li>
+              <li>Ubicacion consistente en contacto y recursos.</li>
+            </ul>
+          </article>
+        </div>
+
+        <aside class="resource-aside">
+          <h3>Accesos rapidos recomendados</h3>
+          <p>
+            Estas rutas funcionan bien como botones visibles porque responden a tareas reales y frecuentes dentro del
+            sitio.
+          </p>
+
+          <div class="resource-links">
+            <a href="#admision" class="resource-link">Admision</a>
+            <a href="#sicai" class="resource-link">SICAI</a>
+            <a href="#bolsa-empleo" class="resource-link">Bolsa de empleo</a>
+            <a href="#cooperativa" class="resource-link">Cooperativa</a>
+          </div>
+        </aside>
+      </div>
+    </section>
 
     <section class="section" id="informacion-avisos">
       <div class="container section-header">
