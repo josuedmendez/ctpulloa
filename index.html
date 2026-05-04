@@ -600,6 +600,91 @@
       gap: 1.4rem;
     }
 
+    .college-campus {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 1.6rem;
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(13, 114, 52, 0.08), rgba(243, 194, 68, 0.12)),
+        var(--surface);
+      border: 1px solid rgba(17, 32, 61, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .college-campus-copy h3 {
+      margin: 0 0 0.9rem;
+      max-width: 15ch;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1.08;
+    }
+
+    .college-campus-copy p {
+      margin: 0 0 1.4rem;
+      max-width: 52ch;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .campus-list {
+      display: grid;
+      gap: 0.9rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .campus-list li {
+      position: relative;
+      padding-left: 2rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .campus-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.17rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 8px 18px rgba(13, 114, 52, 0.2);
+    }
+
+    .campus-list li::after {
+      content: "";
+      position: absolute;
+      left: 0.42rem;
+      top: 0.5rem;
+      width: 0.35rem;
+      height: 0.55rem;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .college-campus-media {
+      padding: 1rem;
+      border-radius: 28px;
+      background: white;
+      box-shadow: 0 20px 50px rgba(8, 21, 52, 0.12);
+    }
+
+    .college-campus-media img {
+      width: 100%;
+      height: clamp(360px, 42vw, 520px);
+      border-radius: 22px;
+      object-fit: contain;
+      background: #f7f9fc;
+    }
+
     .narrative-panel,
     .offer-panel,
     .community-panel,
@@ -1151,6 +1236,7 @@
       }
 
       .college-layout,
+      .college-campus,
       .services-grid,
       .contact-layout,
       .footer-grid,
@@ -1236,12 +1322,25 @@
         grid-template-columns: 1fr;
       }
 
+      .college-campus {
+        padding: 1.35rem;
+      }
+
+      .college-campus-media {
+        padding: 0.75rem;
+      }
+
+      .college-campus-media img {
+        height: 360px;
+      }
+
       .contact-form,
       .contact-card,
       .narrative-panel,
       .resource-aside,
       .service-panel,
       .offer-panel,
+      .college-campus,
       .community-panel,
       .notice-panel {
         border-radius: 24px;
@@ -1375,9 +1474,29 @@
       <div class="container section-header">
         <div>
           <p class="section-tag">Nuestro Colegio</p>
-          <h2>Identidad institucional</h2>
         </div>
 
+      </div>
+
+      <div class="container college-campus">
+        <div class="college-campus-copy">
+          <h3>Campus preparado para aprender, crear y convivir.</h3>
+          <p>
+            La infraestructura del CTP de Ulloa integra espacios academicos, tecnicos, deportivos y de convivencia para
+            acompanar la formacion integral del estudiantado.
+          </p>
+          <ul class="campus-list">
+            <li>+50 espacios entre aulas academicas y tecnicas</li>
+            <li>Laboratorios especializados en tecnologia</li>
+            <li>Cancha techada y areas deportivas</li>
+            <li>Biblioteca institucional</li>
+            <li>Comedor y soda</li>
+            <li>Amplias zonas verdes para recreacion y convivencia</li>
+          </ul>
+        </div>
+        <div class="college-campus-media">
+          <img src="assets/img/mapa-ctpulloa.png" alt="Mapa del campus del Colegio Tecnico Profesional de Ulloa" />
+        </div>
       </div>
 
       <div class="container college-layout">
