@@ -443,47 +443,113 @@
     }
 
     .shortcut {
-      padding: 1.15rem 1.2rem;
+      position: relative;
+      min-height: 260px;
+      padding: 1.65rem 1.55rem 1.45rem;
       border-radius: var(--radius-md);
       background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(17, 32, 61, 0.1);
-      border-top: 4px solid var(--gold);
       color: var(--text);
       box-shadow: 0 18px 42px rgba(8, 21, 52, 0.1);
+      overflow: hidden;
       transition:
         transform 0.22s ease,
+        box-shadow 0.22s ease,
         background-color 0.22s ease,
         border-color 0.22s ease;
+    }
+
+    .shortcut::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--green), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.24s ease;
     }
 
     .shortcut:hover {
       transform: translateY(-4px);
       background: white;
-      border-color: rgba(13, 114, 52, 0.18);
+      border-color: rgba(13, 114, 52, 0.28);
+      box-shadow: 0 26px 58px rgba(8, 21, 52, 0.14);
     }
 
-    .shortcut small {
-      display: block;
-      margin-bottom: 0.3rem;
+    .shortcut:hover::after {
+      transform: scaleX(1);
+    }
+
+    .shortcut-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1.35rem;
+      border-radius: 16px;
+      background: rgba(13, 114, 52, 0.1);
       color: var(--green);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      transition:
+        background-color 0.22s ease,
+        color 0.22s ease,
+        transform 0.22s ease;
+    }
+
+    .shortcut:hover .shortcut-icon {
+      background: var(--green);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .shortcut-icon svg {
+      width: 30px;
+      height: 30px;
+      stroke-width: 2.2;
+    }
+
+    .shortcut-number {
+      position: absolute;
+      top: 1.05rem;
+      right: 1.2rem;
+      color: rgba(18, 33, 74, 0.07);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1;
     }
 
     .shortcut strong {
       display: block;
-      font-size: 1.12rem;
-      font-weight: 700;
+      margin-bottom: 0.6rem;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 1.18rem;
+      font-weight: 800;
+      line-height: 1.16;
       color: var(--navy);
     }
 
-    .shortcut span {
+    .shortcut-description {
       display: block;
-      margin-top: 0.25rem;
       color: var(--muted);
       font-size: 0.96rem;
+    }
+
+    .shortcut-action {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1.1rem;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 0.92rem;
+      transition: color 0.22s ease;
+    }
+
+    .shortcut:hover .shortcut-action {
+      color: var(--navy);
     }
 
     .section {
@@ -530,8 +596,337 @@
 
     .college-layout {
       display: grid;
-      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-      gap: 1.4rem;
+      gap: clamp(2rem, 4vw, 3.4rem);
+      margin-top: 2rem;
+    }
+
+    .identity-overview {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
+      gap: clamp(1.8rem, 4vw, 3rem);
+      align-items: center;
+    }
+
+    .identity-media {
+      position: relative;
+      margin: 0;
+      min-height: clamp(360px, 39vw, 500px);
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 28px 70px rgba(8, 21, 52, 0.16);
+      background: var(--navy);
+    }
+
+    .identity-media img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+    }
+
+    .identity-badge {
+      position: absolute;
+      left: clamp(1.2rem, 4vw, 2rem);
+      bottom: clamp(1.2rem, 4vw, 1.8rem);
+      display: grid;
+      place-items: center;
+      min-width: 190px;
+      padding: 1.1rem 1.4rem;
+      border-radius: 14px;
+      color: #fff;
+      text-align: center;
+      background: var(--green);
+      box-shadow: 0 18px 36px rgba(13, 114, 52, 0.24);
+    }
+
+    .identity-badge strong {
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 3.35rem;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .identity-badge span {
+      margin-top: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .identity-content {
+      min-width: 0;
+    }
+
+    .identity-eyebrow {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 0 0 0.75rem;
+      color: var(--green);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .identity-eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--green);
+    }
+
+    .identity-content h3 {
+      margin: 0;
+      max-width: 18ch;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 3rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .identity-description {
+      display: grid;
+      gap: 0.8rem;
+      margin: 1.4rem 0 0;
+      max-width: 66ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .identity-description p {
+      margin: 0;
+    }
+
+    .identity-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: clamp(1.5rem, 3vw, 2.4rem);
+    }
+
+    .identity-card {
+      padding: 1.6rem;
+      border: 1px solid rgba(17, 32, 61, 0.08);
+      border-top: 4px solid var(--green);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 18px 44px rgba(8, 21, 52, 0.08);
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+    }
+
+    .identity-card:hover,
+    .identity-card:focus-within {
+      border-color: rgba(13, 114, 52, 0.22);
+      box-shadow: 0 24px 54px rgba(8, 21, 52, 0.13);
+      transform: translateY(-8px);
+    }
+
+    .identity-card-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 2.15rem;
+      height: 2.15rem;
+      margin-bottom: 1.1rem;
+      color: var(--green);
+    }
+
+    .identity-card-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke-width: 1.8;
+    }
+
+    .identity-card h4 {
+      margin: 0 0 0.75rem;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.18;
+    }
+
+    .identity-card strong {
+      display: block;
+      margin-bottom: 0.65rem;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .identity-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .milestones {
+      padding-top: 0.6rem;
+    }
+
+    .milestones h3 {
+      margin: 0 0 2.1rem;
+      color: var(--navy);
+      text-align: center;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.25rem;
+      line-height: 1.1;
+    }
+
+    .milestone-list {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1.1rem;
+      margin: 0;
+      padding: 2rem 0 0;
+      list-style: none;
+    }
+
+    .milestone-list::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 4%;
+      right: 4%;
+      height: 3px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(13, 114, 52, 0.16), var(--green), rgba(243, 194, 68, 0.35));
+    }
+
+    .milestone-item {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .milestone-item::before {
+      content: "";
+      position: absolute;
+      top: -2.45rem;
+      left: 50%;
+      width: 1rem;
+      height: 1rem;
+      border: 4px solid rgba(13, 114, 52, 0.25);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: inset 0 0 0 3px var(--green);
+      transform: translateX(-50%);
+    }
+
+    .milestone-year {
+      margin-bottom: 0.35rem;
+      color: var(--green);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .milestone-item h4 {
+      margin: 0 0 0.55rem;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.2;
+    }
+
+    .milestone-item p {
+      margin: 0;
+      max-width: 22ch;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .college-campus {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 1.6rem;
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(13, 114, 52, 0.08), rgba(243, 194, 68, 0.12)),
+        var(--surface);
+      border: 1px solid rgba(17, 32, 61, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .college-campus-copy h3 {
+      margin: 0 0 0.9rem;
+      max-width: 15ch;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1.08;
+    }
+
+    .college-campus-copy p {
+      margin: 0 0 1.4rem;
+      max-width: 52ch;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .campus-list {
+      display: grid;
+      gap: 0.9rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .campus-list li {
+      position: relative;
+      padding-left: 2rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .campus-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.17rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 8px 18px rgba(13, 114, 52, 0.2);
+    }
+
+    .campus-list li::after {
+      content: "";
+      position: absolute;
+      left: 0.42rem;
+      top: 0.5rem;
+      width: 0.35rem;
+      height: 0.55rem;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .college-campus-media {
+      padding: 1rem;
+      border-radius: 28px;
+      background: white;
+      box-shadow: 0 20px 50px rgba(8, 21, 52, 0.12);
+    }
+
+    .college-campus-media img {
+      width: 100%;
+      height: clamp(360px, 42vw, 520px);
+      border-radius: 22px;
+      object-fit: contain;
+      background: #f7f9fc;
     }
 
     .narrative-panel,
@@ -617,44 +1012,161 @@
 
     .offer-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .offer-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(280px, 0.72fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 1.8rem;
+    }
+
+    .offer-intro h2 {
+      margin: 0;
+      max-width: 13ch;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.75rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .offer-intro h2 span {
+      color: var(--green);
+    }
+
+    .offer-intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.1rem;
     }
 
     .offer-panel {
-      padding: 1.6rem;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+      padding: 0;
+      border-radius: 14px;
+      background: var(--surface);
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+    }
+
+    .offer-panel:hover,
+    .offer-panel:focus-within {
+      border-color: rgba(13, 114, 52, 0.2);
+      box-shadow: 0 28px 58px rgba(8, 21, 52, 0.18);
+      transform: translateY(-9px);
+    }
+
+    .offer-panel-media {
+      position: relative;
+      height: clamp(220px, 19vw, 270px);
+      overflow: hidden;
+      border-bottom: 4px solid var(--offer-accent, var(--green));
+    }
+
+    .offer-panel-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.28s ease;
+    }
+
+    .offer-panel:hover .offer-panel-media img,
+    .offer-panel:focus-within .offer-panel-media img {
+      transform: scale(1.045);
+    }
+
+    .offer-panel-badge {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      margin: 0;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      color: var(--navy);
+      background: #fff;
+      box-shadow: 0 12px 26px rgba(8, 21, 52, 0.18);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1;
+      text-transform: none;
+    }
+
+    .offer-panel-body {
+      display: grid;
+      align-content: start;
+      min-height: 230px;
+      padding: 1.35rem;
+    }
+
+    .offer-label {
+      margin: 0 0 0.6rem;
+      color: var(--offer-accent, var(--green));
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .offer-panel-body h3 {
+      margin: 0 0 0.7rem;
+      color: var(--offer-accent, var(--green));
+      font-size: 1.35rem;
+      line-height: 1.15;
+    }
+
+    .offer-panel-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    .offer-panel-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+      color: var(--offer-accent, var(--green));
+      font-weight: 800;
+    }
+
+    .offer-panel-link svg {
+      width: 1rem;
+      height: 1rem;
+      transition: transform 0.22s ease;
+    }
+
+    .offer-panel-link:hover svg,
+    .offer-panel-link:focus-visible svg {
+      transform: translateX(4px);
     }
 
     .offer-panel.featured {
-      grid-column: span 2;
-      background:
-        linear-gradient(180deg, rgba(243, 194, 68, 0.08), rgba(243, 194, 68, 0)),
-        var(--surface);
+      --offer-accent: var(--gold);
     }
 
-    .specialty-groups {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1.1rem;
+    .offer-panel.academic {
+      --offer-accent: var(--navy);
     }
 
-    .specialty-group {
-      padding: 1rem;
-      border: 1px solid rgba(17, 32, 61, 0.08);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.62);
+    .offer-panel.national-plan {
+      --offer-accent: var(--green);
     }
 
-    .specialty-group strong {
-      display: block;
-      margin-bottom: 0.75rem;
-      color: var(--navy);
-      font-family: "Montserrat", Arial, sans-serif;
-      font-size: 0.92rem;
-    }
-
-    .offer-panel ul,
     .service-panel ul,
     .contact-card ul,
     .notice-panel ul,
@@ -667,11 +1179,6 @@
       gap: 0.65rem;
     }
 
-    .offer-panel .specialty-group ul {
-      margin-top: 0;
-    }
-
-    .offer-panel li,
     .service-panel li,
     .contact-card li,
     .notice-panel li,
@@ -682,7 +1189,6 @@
       color: var(--text);
     }
 
-    .offer-panel li::before,
     .service-panel li::before,
     .contact-card li::before,
     .notice-panel li::before,
@@ -802,12 +1308,27 @@
 
     .community-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
     }
 
     .community-panel,
     .service-panel,
     .notice-panel {
       padding: 1.55rem;
+    }
+
+    .community-panel.image-panel {
+      padding: 0.9rem;
+      overflow: hidden;
+      aspect-ratio: 1.45 / 1;
+      background: var(--surface);
+    }
+
+    .community-panel.image-panel img {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      object-fit: contain;
     }
 
     .private-chip {
@@ -1070,6 +1591,8 @@
       }
 
       .college-layout,
+      .college-campus,
+      .identity-overview,
       .services-grid,
       .contact-layout,
       .footer-grid,
@@ -1088,6 +1611,18 @@
       }
 
       .section-header {
+        grid-template-columns: 1fr;
+      }
+
+      .identity-content h3 {
+        font-size: 2.55rem;
+      }
+
+      .offer-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .offer-intro {
         grid-template-columns: 1fr;
       }
     }
@@ -1143,6 +1678,7 @@
       .shortcut-strip,
       .service-stack,
       .institutional-points,
+      .identity-cards,
       .contact-form-grid {
         grid-template-columns: 1fr;
       }
@@ -1151,8 +1687,85 @@
         grid-column: span 1;
       }
 
-      .specialty-groups {
+      .offer-grid {
         grid-template-columns: 1fr;
+      }
+
+      .offer-intro h2 {
+        font-size: 2rem;
+      }
+
+      .offer-intro p {
+        font-size: 1rem;
+      }
+
+      .offer-panel-media {
+        height: 210px;
+      }
+
+      .college-campus {
+        padding: 1.35rem;
+      }
+
+      .college-campus-media {
+        padding: 0.75rem;
+      }
+
+      .college-campus-media img {
+        height: 360px;
+      }
+
+      .identity-media {
+        min-height: 340px;
+      }
+
+      .identity-badge {
+        min-width: 156px;
+        padding: 0.9rem 1rem;
+      }
+
+      .identity-badge strong {
+        font-size: 2.45rem;
+      }
+
+      .identity-content h3 {
+        font-size: 2.05rem;
+      }
+
+      .milestones h3 {
+        text-align: left;
+        font-size: 1.75rem;
+      }
+
+      .milestone-list {
+        grid-template-columns: 1fr;
+        gap: 1.35rem;
+        padding: 0 0 0 1.4rem;
+      }
+
+      .milestone-list::before {
+        top: 0.2rem;
+        bottom: 0.2rem;
+        left: 0.28rem;
+        right: auto;
+        width: 3px;
+        height: auto;
+        background: linear-gradient(180deg, rgba(13, 114, 52, 0.16), var(--green), rgba(243, 194, 68, 0.35));
+      }
+
+      .milestone-item {
+        justify-items: start;
+        text-align: left;
+      }
+
+      .milestone-item::before {
+        top: 0.35rem;
+        left: -1.12rem;
+        transform: none;
+      }
+
+      .milestone-year {
+        font-size: 1.65rem;
       }
 
       .contact-form,
@@ -1161,6 +1774,7 @@
       .resource-aside,
       .service-panel,
       .offer-panel,
+      .college-campus,
       .community-panel,
       .notice-panel {
         border-radius: 24px;
@@ -1186,8 +1800,7 @@
         <a href="#nuestro-colegio">Nuestro Colegio</a>
         <a href="#oferta-educativa">Oferta Educativa</a>
         <a href="#admision">Admision</a>
-        <a href="#comunidad-educativa">Comunidad</a>
-        <a href="#servicios-recursos">Servicios</a>
+        <a href="#comunidad-educativa">Servicios y Comunidad</a>
         <a href="#informacion-avisos">Avisos</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -1216,11 +1829,7 @@
       <div class="container hero-welcome">
         <div class="hero-copy">
           <p class="eyebrow">Colegio Tecnico Profesional de Ulloa</p>
-          <h1>Bienvenidos a la familia del CTP Ulloa.</h1>
-          <p class="hero-lead">
-            Formamos estudiantes con bases tecnicas, academicas y humanas para responder con criterio, practica e
-            innovacion a los desafios del presente.
-          </p>
+          <h1>Bienvenidos a la familia del CTP Ulloa</h1>
 
           <div class="hero-actions">
             <a href="#admision" class="button-primary">Proceso de admision</a>
@@ -1231,25 +1840,61 @@
 
       <div class="hero-shortcuts">
         <div class="container shortcut-strip">
-          <a href="#admision" class="shortcut">
-            <small>Acceso rapido</small>
+          <a href="#admision" class="shortcut acceso-rapido-admision">
+            <span class="shortcut-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 4h8" />
+                <path d="M9 2h6v4H9z" />
+                <path d="M7 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1" />
+                <path d="M8 12h8" />
+                <path d="M8 16h5" />
+              </svg>
+            </span>
+            <span class="shortcut-number" aria-hidden="true">01</span>
             <strong>Admision</strong>
-            <span>Matricula, requisitos, proceso y fechas importantes.</span>
+            <span class="shortcut-description">Matricula, requisitos, proceso y fechas importantes.</span>
+            <span class="shortcut-action">Ver proceso -></span>
           </a>
-          <a href="https://sicai.cr/" target="_blank" class="shortcut">
-            <small>Acceso rapido</small>
+          <a href="https://sicai.cr/" target="_blank" rel="noopener" class="shortcut acceso-rapido-sicai">
+            <span class="shortcut-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="12" rx="2" />
+                <path d="M8 20h8" />
+                <path d="M12 16v4" />
+              </svg>
+            </span>
+            <span class="shortcut-number" aria-hidden="true">02</span>
             <strong>SICAI</strong>
-            <span>Entrada directa al ecosistema academico institucional.</span>
+            <span class="shortcut-description">Entrada directa al ecosistema academico institucional.</span>
+            <span class="shortcut-action">Ingresar al sistema -></span>
           </a>
-          <a href="#bolsa-empleo" class="shortcut">
-            <small>Acceso rapido</small>
+          <a href="#bolsa-empleo" class="shortcut acceso-rapido-bolsa-empleo">
+            <span class="shortcut-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1" />
+                <rect x="3" y="6" width="18" height="14" rx="2" />
+                <path d="M3 12h18" />
+                <path d="M10 12v2h4v-2" />
+              </svg>
+            </span>
+            <span class="shortcut-number" aria-hidden="true">03</span>
             <strong>Bolsa de empleo</strong>
-            <span>Vinculo con oportunidades laborales y seguimiento.</span>
+            <span class="shortcut-description">Vinculo con oportunidades laborales y seguimiento.</span>
+            <span class="shortcut-action">Ver oportunidades -></span>
           </a>
-          <a href="#cooperativa" class="shortcut">
-            <small>Acceso rapido</small>
+          <a href="#cooperativa" class="shortcut acceso-rapido-cooperativa">
+            <span class="shortcut-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-8 0v2" />
+                <circle cx="12" cy="7" r="4" />
+                <path d="M20 8v6" />
+                <path d="M17 11h6" />
+              </svg>
+            </span>
+            <span class="shortcut-number" aria-hidden="true">04</span>
             <strong>Cooperativa</strong>
-            <span>Espacio visible para iniciativas y participacion estudiantil.</span>
+            <span class="shortcut-description">Espacio visible para iniciativas y participacion estudiantil.</span>
+            <span class="shortcut-action">Conocer iniciativas -></span>
           </a>
         </div>
       </div>
@@ -1259,165 +1904,198 @@
       <div class="container section-header">
         <div>
           <p class="section-tag">Nuestro Colegio</p>
-          <h2>Identidad institucional</h2>
         </div>
 
       </div>
 
-      <div class="container college-layout">
-        <article class="narrative-panel">
-          <h3>Historia, proposito e identidad del colegio</h3>
-          <p>
-            El Colegio Tecnico Profesional de Ulloa tiene sus raices en la Escuela de Artes Industriales, creada en
-            1966, y fue consolidandose como una institucion tecnica hasta convertirse oficialmente en el Colegio
-            Tecnico Profesional de Ulloa en 1998. Su evolucion refleja una transicion desde la formacion artesanal hacia
-            una educacion tecnica profesional vinculada con las necesidades del mercado laboral.
-          </p>
-          <p style="margin-top: 1rem;">
-            La institucion promueve una formacion integral que combina conocimientos academicos, tecnicos,
-            tecnologicos, humanos y espirituales, con el proposito de preparar estudiantes capaces de enfrentar con
-            eficiencia las demandas de la sociedad actual.
-          </p>
-        </article>
+      <div class="container college-campus">
+        <div class="college-campus-copy">
+          <h3>Campus preparado para aprender, crear y convivir.</h3>
+          <ul class="campus-list">
+            <li>+50 espacios entre aulas academicas y tecnicas</li>
+            <li>Laboratorios especializados en tecnologia</li>
+            <li>Cancha techada y areas deportivas</li>
+            <li>Biblioteca institucional</li>
+            <li>Comedor y soda</li>
+            <li>Amplias zonas verdes para recreacion y convivencia</li>
+          </ul>
+        </div>
+        <div class="college-campus-media">
+          <img src="assets/img/mapa-ctpulloa.png" alt="Mapa del campus del Colegio Tecnico Profesional de Ulloa" />
+        </div>
+      </div>
 
-        <div class="institutional-points">
-          <article class="point">
-            <span>01</span>
-            <h3>Historia</h3>
-            <p>
-              Origen en 1966 como Escuela de Artes Industriales, consolidacion como institucion tecnica en 1978 y
-              cambio oficial de nombre a Colegio Tecnico Profesional de Ulloa en 1998.
-            </p>
-          </article>
-          <article class="point">
-            <span>02</span>
-            <h3>Servicios distintivos</h3>
-            <p>
-              Formacion tecnica profesional, talleres exploratorios, especialidades actualizadas, educacion
-              diversificada vocacional, orientacion estudiantil y vinculacion con el sector productivo.
-            </p>
-          </article>
-          <article class="point">
-            <span>03</span>
-            <h3>Instalaciones</h3>
-            <p>
-              La institucion cuenta con aulas, laboratorios de informatica, sala de robotica, biblioteca, comedor, soda,
-              enfermeria, cancha techada, talleres tecnicos y espacios acondicionados para la formacion academica y
-              tecnica.
-            </p>
-          </article>
-          <article class="point">
-            <span>04</span>
-            <h3>Vida estudiantil</h3>
-            <p>
-              La vida estudiantil integra formacion academica, tecnica, cultural, deportiva y vocacional, promoviendo
-              identidad institucional, trabajo en equipo, pensamiento critico, responsabilidad y sentido de pertenencia.
-            </p>
-          </article>
+      <div class="container college-layout">
+        <div class="identity-overview">
+          <figure class="identity-media">
+            <img src="assets/img/nuestro-colegio-arcos.jpg" alt="Arcos del Colegio Técnico Profesional de Ulloa" />
+          </figure>
+
+          <div class="identity-content">
+            <p class="identity-eyebrow">Quiénes somos</p>
+            <div class="identity-description">
+              <p>
+                El Colegio Técnico Profesional de Ulloa es una institución pública del MEP con trayectoria en
+                formación técnica y académica, enfocada en el desarrollo integral y la inserción laboral de
+                sus estudiantes.
+              </p>
+            </div>
+
+            <div class="identity-cards">
+              <article class="identity-card">
+                <span class="identity-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <circle cx="12" cy="12" r="5" />
+                    <circle cx="12" cy="12" r="1.5" />
+                  </svg>
+                </span>
+                <h4>Misión</h4>
+                <p>
+                  Garantizar la formación integral del estudiante en educación diversificada y técnica, brindando
+                  condiciones académicas, tecnológicas y humanas que le permitan enfrentar con eficiencia las demandas
+                  de la sociedad.
+                </p>
+              </article>
+
+              <article class="identity-card">
+                <span class="identity-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+                    <circle cx="12" cy="12" r="2.5" />
+                  </svg>
+                </span>
+                <h4>Visión</h4>
+                <p>
+                  Ser una institución líder en educación técnica profesional, reconocida por su calidad académica,
+                  formación integral y capacidad de adaptación a los cambios del entorno social y productivo.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="milestones">
+          <h3>Hitos institucionales</h3>
+          <ol class="milestone-list">
+            <li class="milestone-item">
+              <span class="milestone-year">1966</span>
+              <h4>Origen institucional</h4>
+              <p>Inicio como Escuela de Artes Industriales.</p>
+            </li>
+            <li class="milestone-item">
+              <span class="milestone-year">1978</span>
+              <h4>Fundación técnica</h4>
+              <p>Creación oficial como institución técnica artesanal mediante decreto.</p>
+            </li>
+            <li class="milestone-item">
+              <span class="milestone-year">1998</span>
+              <h4>Transformación clave</h4>
+              <p>Se establece como Colegio Técnico Profesional de Ulloa, con enfoque en formación técnica moderna.</p>
+            </li>
+            <li class="milestone-item">
+              <span class="milestone-year">2012-2018</span>
+              <h4>Modernización de infraestructura</h4>
+              <p>Remodelación de espacios, construcción de comedor, soda y mejora de instalaciones.</p>
+            </li>
+            <li class="milestone-item">
+              <span class="milestone-year">Actualidad</span>
+              <h4>Innovación educativa</h4>
+              <p>Oferta técnica alineada al mercado laboral y fortalecimiento de la formación integral.</p>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
 
     <section class="section" id="oferta-educativa">
-      <div class="container section-header">
+      <div class="container offer-intro">
         <div>
           <p class="section-tag">Oferta Educativa</p>
+
         </div>
-   
       </div>
 
       <div class="container offer-grid">
         <article class="offer-panel featured">
-          <span>Especialidades tecnicas</span>
-          <h3>Base tecnica visible y bien priorizada</h3>
-          <p>
-            El colegio ofrece especialidades tecnicas actualizadas, alineadas con las demandas del mercado laboral y
-            enfocadas en el desarrollo de competencias profesionales.
-          </p>
-          <div class="specialty-groups">
-            <div class="specialty-group">
-              <strong>Area Comercial y Servicios</strong>
-              <ul>
-                <li>Diseno Publicitario</li>
-                <li>Diseno y Desarrollo Digital</li>
-                <li>Ejecutivo Comercial y de Servicio al Cliente</li>
-                <li>Secretariado Ejecutivo</li>
-              </ul>
-            </div>
-            <div class="specialty-group">
-              <strong>Area Industrial</strong>
-              <ul>
-                <li>Electronica Industrial</li>
-                <li>Electromecanica</li>
-                <li>Dibujo y Modelado de Edificaciones</li>
-                <li>Configuracion y Soporte de Redes de Comunicacion y Sistemas Operativos</li>
-              </ul>
-            </div>
+          <div class="offer-panel-media">
+            <img
+              src="assets/img/programa-especialidades-tecnicas.png"
+              alt="Estudiantes del programa de especialidades técnicas del CTP de Ulloa"
+            />
+            <span class="offer-panel-badge">Técnica</span>
+          </div>
+          <div class="offer-panel-body">
+            <h3>Especialidades técnicas</h3>
+            <p>
+              Áreas comerciales, digitales e industriales orientadas al desarrollo de competencias profesionales y
+              empleabilidad.
+            </p>
+            <a href="#contacto" class="offer-panel-link">
+              Ver detalles
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
           </div>
         </article>
 
-        <article class="offer-panel">
-          <span>Area academica</span>
-          <h3>Ruta comun y acompanamiento curricular</h3>
-          <p>
-            El area academica comprende la formacion general del estudiante en asignaturas base del sistema educativo,
-            complementadas con orientacion educativa y seguimiento del proceso formativo integral.
-          </p>
-          <ul>
-            <li>Espanol</li>
-            <li>Matematica</li>
-            <li>Ciencias</li>
-            <li>Estudios Sociales</li>
-            <li>Ingles y Frances</li>
-            <li>Educacion Fisica</li>
-            <li>Educacion Musical</li>
-            <li>Educacion Religiosa</li>
-            <li>Orientacion</li>
-          </ul>
+        <article class="offer-panel academic">
+          <div class="offer-panel-media">
+            <img
+              src="assets/img/programa-area-academica.png"
+              alt="Estudiantes en actividades del área académica del CTP de Ulloa"
+            />
+            <span class="offer-panel-badge">Académica</span>
+          </div>
+          <div class="offer-panel-body">
+            <h3>Área académica</h3>
+            <p>
+              Asignaturas esenciales del currículo nacional con acompañamiento, orientación y seguimiento del proceso
+              integral.
+            </p>
+            <a href="#contacto" class="offer-panel-link">
+              Ver detalles
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </article>
 
-        <article class="offer-panel">
-          <span>Plan Nacional</span>
-          <h3>Formacion base y desarrollo integral</h3>
-          <p>
-            El Plan Nacional incluye asignaturas formativas complementarias que fortalecen habilidades practicas,
-            personales y sociales en los estudiantes.
-          </p>
-          <ul>
-            <li>Educacion para el Hogar</li>
-            <li>Artes Industriales</li>
-            <li>Dibujo Tecnico</li>
-            <li>Artes Plasticas</li>
-            <li>Educacion Especial</li>
-            <li>Ingles como eje transversal</li>
-          </ul>
-        </article>
-
-        <article class="offer-panel">
-          <span>Programas complementarios</span>
-          <h3>Capas de valor mas alla del aula</h3>
-          <p>
-            Programas que fortalecen la formacion integral mediante experiencias practicas, desarrollo de habilidades
-            blandas, tecnologia, emprendedurismo y proyeccion profesional.
-          </p>
-          <ul>
-            <li>Ingles Conversacional</li>
-            <li>Talleres exploratorios de III ciclo</li>
-            <li>Emprendedurismo</li>
-            <li>Proyectos tecnicos</li>
-            <li>Vinculacion con empresas</li>
-            <li>Actividades culturales y deportivas</li>
-          </ul>
+        <article class="offer-panel national-plan">
+          <div class="offer-panel-media">
+            <img
+              src="assets/img/programa-plan-nacional.png"
+              alt="Materiales y recursos del Plan Nacional del CTP de Ulloa"
+            />
+            <span class="offer-panel-badge">Integral</span>
+          </div>
+          <div class="offer-panel-body">
+            <h3>Plan Nacional</h3>
+            <p>
+              Espacios formativos que fortalecen creatividad, habilidades prácticas, convivencia y desarrollo personal
+              del estudiantado.
+            </p>
+            <a href="#contacto" class="offer-panel-link">
+              Ver detalles
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </article>
       </div>
     </section>
-
     <section class="section admission-section" id="admision">
       <div class="container admission-wrap">
         <div class="admission-copy">
           <p class="section-tag tag-light">Admision</p>
           <h2>Proceso de admision.</h2>
-      
+
 
           <div class="admission-actions">
             <a href="#contacto" class="button-primary">Solicitar informacion</a>
@@ -1477,111 +2155,38 @@
     <section class="section" id="comunidad-educativa">
       <div class="container section-header">
         <div>
-          <p class="section-tag">Comunidad Educativa</p>
-         </div>
-        
+          <p class="section-tag">Servicios y Comunidad Educativa</p>
+        </div>
+
       </div>
 
       <div class="container community-grid">
-        <article class="community-panel" id="cooperativa">
+        <article class="community-panel image-panel" id="cooperativa">
           <span>Cooperativa estudiantil</span>
-          <h3>Participacion y gestion con enfoque formativo</h3>
-          <p>
-            Espacio para comunicar proyectos, alcances, beneficios y acciones que articulan participacion y liderazgo.
-          </p>
+          <img
+            src="assets/img/comunidad-educativa-cooperativa-estudiantes.png"
+            alt="Cooperativa estudiantil"
+          />
         </article>
 
-        <article class="community-panel">
+        <article class="community-panel image-panel">
           <span>Junta Administrativa</span>
-          <h3>Informacion publica y acceso privado cuando corresponda</h3>
-          <p>
-            El contenido institucional visible puede convivir con una subseccion reservada para subir documentos mediante
-            autenticacion.
-          </p>
-          <div class="private-chip">Acceso privado para carga documental</div>
+          <img
+            src="assets/img/comunidad-educativa-junta-administrativa.png"
+            alt="Junta Administrativa"
+          />
         </article>
 
-        <article class="community-panel" id="bolsa-empleo">
+        <article class="community-panel image-panel" id="bolsa-empleo">
           <span>Bolsa de empleo</span>
-          <h3>Conexion del colegio con oportunidades externas</h3>
-          <p>
-            Seccion para vacantes, alianzas, seguimiento a egresados y oportunidades vinculadas con las especialidades.
-          </p>
+          <img
+            src="assets/img/comunidad-educativa-bolsa-empleo.png"
+            alt="Bolsa de empleo"
+          />
         </article>
       </div>
     </section>
 
-    <section class="section" id="servicios-recursos">
-      <div class="container section-header">
-        <div>
-          <p class="section-tag">Servicios y Recursos</p>
-          <h2>Valor agregado del colegio, organizado como ayuda util y no como contenido disperso.</h2>
-        </div>
-        <p class="section-lead">
-          Aqui se ubican servicios institucionales, apoyo al estudiante, recursos educativos y el acceso destacado a
-          SICAI.
-        </p>
-      </div>
-
-      <div class="container services-grid">
-        <div class="service-stack">
-          <article class="service-panel">
-            <span>Servicios institucionales</span>
-            <h3>Atencion y acompanamiento</h3>
-            <ul>
-              <li>Informacion administrativa y academica.</li>
-              <li>Canales de consulta y tramites frecuentes.</li>
-              <li>Orientacion por area institucional.</li>
-            </ul>
-          </article>
-
-          <article class="service-panel">
-            <span>Apoyo al estudiante</span>
-            <h3>Bienestar, seguimiento y orientacion</h3>
-            <ul>
-              <li>Apoyo socioeducativo y acompanamiento.</li>
-              <li>Materiales clave para la experiencia estudiantil.</li>
-              <li>Derivacion a recursos y responsables.</li>
-            </ul>
-          </article>
-
-          <article class="service-panel">
-            <span>Recursos educativos</span>
-            <h3>Documentos, guias y materiales de consulta</h3>
-            <ul>
-              <li>Formatos, referencias y recursos institucionales.</li>
-              <li>Material de apoyo para familias y estudiantado.</li>
-              <li>Accesos clasificados por utilidad.</li>
-            </ul>
-          </article>
-
-          <article class="service-panel" id="sicai">
-            <span>SICAI</span>
-            <h3>Acceso academico visible y facil de encontrar</h3>
-            <ul>
-              <li>Entrada destacada desde accesos rapidos.</li>
-              <li>Referencia clara dentro del ecosistema institucional.</li>
-              <li>Ubicacion consistente en contacto y recursos.</li>
-            </ul>
-          </article>
-        </div>
-
-        <aside class="resource-aside">
-          <h3>Accesos rapidos recomendados</h3>
-          <p>
-            Estas rutas funcionan bien como botones visibles porque responden a tareas reales y frecuentes dentro del
-            sitio.
-          </p>
-
-          <div class="resource-links">
-            <a href="#admision" class="resource-link">Admision</a>
-            <a href="#sicai" class="resource-link">SICAI</a>
-            <a href="#bolsa-empleo" class="resource-link">Bolsa de empleo</a>
-            <a href="#cooperativa" class="resource-link">Cooperativa</a>
-          </div>
-        </aside>
-      </div>
-    </section>
 
     <section class="section" id="informacion-avisos">
       <div class="container section-header">

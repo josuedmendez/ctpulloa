@@ -83,17 +83,29 @@
       position: sticky;
       top: 0;
       z-index: 60;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--text);
       backdrop-filter: blur(18px);
+      border-top: 3px solid var(--green);
       border-bottom: 1px solid rgba(17, 32, 61, 0.08);
+      box-shadow: 0 14px 36px rgba(8, 21, 52, 0.08);
+    }
+
+    .header-top {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid rgba(17, 32, 61, 0.1);
     }
 
     .header-shell {
-      min-height: var(--header-height);
+      min-height: calc(var(--header-height) - 44px);
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
-      gap: 1.5rem;
+      gap: 2rem;
       position: relative;
     }
 
@@ -105,7 +117,7 @@
     }
 
     .brand-logo {
-      height: 86px;
+      height: 64px;
       width: auto;
       max-width: 250px;
       object-fit: contain;
@@ -115,7 +127,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.45rem;
       min-width: 0;
       flex-wrap: nowrap;
     }
@@ -150,16 +162,27 @@
     .header-contact {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 0.9rem;
+      justify-content: flex-start;
+      gap: 1.1rem;
       min-width: 0;
     }
 
     .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
       color: var(--muted);
-      font-size: 0.98rem;
-      font-weight: 700;
+      font-size: 0.9rem;
+      font-weight: 600;
       white-space: nowrap;
+    }
+
+    .contact-link svg,
+    .social-link svg {
+      width: 1rem;
+      height: 1rem;
+      color: var(--gold);
+      stroke-width: 1.9;
     }
 
     .contact-separator {
@@ -167,6 +190,26 @@
       height: 24px;
       background: rgba(17, 32, 61, 0.12);
       flex: 0 0 auto;
+    }
+
+    .header-social {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.65rem;
+      min-width: 0;
+    }
+
+    .social-link {
+      display: inline-grid;
+      place-items: center;
+      width: 1.55rem;
+      height: 1.55rem;
+      color: var(--muted);
+    }
+
+    .social-link svg {
+      color: currentColor;
     }
 
     .admissions-btn,
@@ -186,13 +229,12 @@
     }
 
     .admissions-btn {
-      padding: 0.85rem 1.3rem;
+      padding: 0.88rem 1.65rem;
       background: linear-gradient(135deg, var(--green), var(--green-deep));
       color: white;
       font-size: 0.92rem;
       font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      letter-spacing: 0.01em;
       box-shadow: 0 18px 36px rgba(13, 114, 52, 0.2);
       white-space: nowrap;
     }
@@ -596,8 +638,252 @@
 
     .college-layout {
       display: grid;
-      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-      gap: 1.4rem;
+      gap: clamp(2rem, 4vw, 3.4rem);
+      margin-top: 2rem;
+    }
+
+    .identity-overview {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
+      gap: clamp(1.8rem, 4vw, 3rem);
+      align-items: center;
+    }
+
+    .identity-media {
+      position: relative;
+      margin: 0;
+      min-height: clamp(360px, 39vw, 500px);
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 28px 70px rgba(8, 21, 52, 0.16);
+      background: var(--navy);
+    }
+
+    .identity-media img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+    }
+
+    .identity-badge {
+      position: absolute;
+      left: clamp(1.2rem, 4vw, 2rem);
+      bottom: clamp(1.2rem, 4vw, 1.8rem);
+      display: grid;
+      place-items: center;
+      min-width: 190px;
+      padding: 1.1rem 1.4rem;
+      border-radius: 14px;
+      color: #fff;
+      text-align: center;
+      background: var(--green);
+      box-shadow: 0 18px 36px rgba(13, 114, 52, 0.24);
+    }
+
+    .identity-badge strong {
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 3.35rem;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .identity-badge span {
+      margin-top: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .identity-content {
+      min-width: 0;
+    }
+
+    .identity-eyebrow {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 0 0 0.75rem;
+      color: var(--green);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .identity-eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--green);
+    }
+
+    .identity-content h3 {
+      margin: 0;
+      max-width: 18ch;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 3rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .identity-description {
+      display: grid;
+      gap: 0.8rem;
+      margin: 1.4rem 0 0;
+      max-width: 66ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .identity-description p {
+      margin: 0;
+    }
+
+    .identity-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: clamp(1.5rem, 3vw, 2.4rem);
+    }
+
+    .identity-card {
+      padding: 1.6rem;
+      border: 1px solid rgba(17, 32, 61, 0.08);
+      border-top: 4px solid var(--green);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 18px 44px rgba(8, 21, 52, 0.08);
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+    }
+
+    .identity-card:hover,
+    .identity-card:focus-within {
+      border-color: rgba(13, 114, 52, 0.22);
+      box-shadow: 0 24px 54px rgba(8, 21, 52, 0.13);
+      transform: translateY(-8px);
+    }
+
+    .identity-card-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 2.15rem;
+      height: 2.15rem;
+      margin-bottom: 1.1rem;
+      color: var(--green);
+    }
+
+    .identity-card-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke-width: 1.8;
+    }
+
+    .identity-card h4 {
+      margin: 0 0 0.75rem;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.18;
+    }
+
+    .identity-card strong {
+      display: block;
+      margin-bottom: 0.65rem;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .identity-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .milestones {
+      padding-top: 0.6rem;
+    }
+
+    .milestones h3 {
+      margin: 0 0 2.1rem;
+      color: var(--navy);
+      text-align: center;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.25rem;
+      line-height: 1.1;
+    }
+
+    .milestone-list {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1.1rem;
+      margin: 0;
+      padding: 2rem 0 0;
+      list-style: none;
+    }
+
+    .milestone-list::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 4%;
+      right: 4%;
+      height: 3px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(13, 114, 52, 0.16), var(--green), rgba(243, 194, 68, 0.35));
+    }
+
+    .milestone-item {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .milestone-item::before {
+      content: "";
+      position: absolute;
+      top: -2.45rem;
+      left: 50%;
+      width: 1rem;
+      height: 1rem;
+      border: 4px solid rgba(13, 114, 52, 0.25);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: inset 0 0 0 3px var(--green);
+      transform: translateX(-50%);
+    }
+
+    .milestone-year {
+      margin-bottom: 0.35rem;
+      color: var(--green);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .milestone-item h4 {
+      margin: 0 0 0.55rem;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.2;
+    }
+
+    .milestone-item p {
+      margin: 0;
+      max-width: 22ch;
+      color: var(--muted);
+      line-height: 1.45;
     }
 
     .college-campus {
@@ -768,44 +1054,161 @@
 
     .offer-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .offer-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(280px, 0.72fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 1.8rem;
+    }
+
+    .offer-intro h2 {
+      margin: 0;
+      max-width: 13ch;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.75rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .offer-intro h2 span {
+      color: var(--green);
+    }
+
+    .offer-intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.1rem;
     }
 
     .offer-panel {
-      padding: 1.6rem;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+      padding: 0;
+      border-radius: 14px;
+      background: var(--surface);
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+    }
+
+    .offer-panel:hover,
+    .offer-panel:focus-within {
+      border-color: rgba(13, 114, 52, 0.2);
+      box-shadow: 0 28px 58px rgba(8, 21, 52, 0.18);
+      transform: translateY(-9px);
+    }
+
+    .offer-panel-media {
+      position: relative;
+      height: clamp(220px, 19vw, 270px);
+      overflow: hidden;
+      border-bottom: 4px solid var(--offer-accent, var(--green));
+    }
+
+    .offer-panel-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.28s ease;
+    }
+
+    .offer-panel:hover .offer-panel-media img,
+    .offer-panel:focus-within .offer-panel-media img {
+      transform: scale(1.045);
+    }
+
+    .offer-panel-badge {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      margin: 0;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      color: var(--navy);
+      background: #fff;
+      box-shadow: 0 12px 26px rgba(8, 21, 52, 0.18);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1;
+      text-transform: none;
+    }
+
+    .offer-panel-body {
+      display: grid;
+      align-content: start;
+      min-height: 230px;
+      padding: 1.35rem;
+    }
+
+    .offer-label {
+      margin: 0 0 0.6rem;
+      color: var(--offer-accent, var(--green));
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .offer-panel-body h3 {
+      margin: 0 0 0.7rem;
+      color: var(--offer-accent, var(--green));
+      font-size: 1.35rem;
+      line-height: 1.15;
+    }
+
+    .offer-panel-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    .offer-panel-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+      color: var(--offer-accent, var(--green));
+      font-weight: 800;
+    }
+
+    .offer-panel-link svg {
+      width: 1rem;
+      height: 1rem;
+      transition: transform 0.22s ease;
+    }
+
+    .offer-panel-link:hover svg,
+    .offer-panel-link:focus-visible svg {
+      transform: translateX(4px);
     }
 
     .offer-panel.featured {
-      grid-column: span 2;
-      background:
-        linear-gradient(180deg, rgba(243, 194, 68, 0.08), rgba(243, 194, 68, 0)),
-        var(--surface);
+      --offer-accent: var(--gold);
     }
 
-    .specialty-groups {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1.1rem;
+    .offer-panel.academic {
+      --offer-accent: var(--navy);
     }
 
-    .specialty-group {
-      padding: 1rem;
-      border: 1px solid rgba(17, 32, 61, 0.08);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.62);
+    .offer-panel.national-plan {
+      --offer-accent: var(--green);
     }
 
-    .specialty-group strong {
-      display: block;
-      margin-bottom: 0.75rem;
-      color: var(--navy);
-      font-family: "Montserrat", Arial, sans-serif;
-      font-size: 0.92rem;
-    }
-
-    .offer-panel ul,
     .service-panel ul,
     .contact-card ul,
     .notice-panel ul,
@@ -818,11 +1221,6 @@
       gap: 0.65rem;
     }
 
-    .offer-panel .specialty-group ul {
-      margin-top: 0;
-    }
-
-    .offer-panel li,
     .service-panel li,
     .contact-card li,
     .notice-panel li,
@@ -833,7 +1231,6 @@
       color: var(--text);
     }
 
-    .offer-panel li::before,
     .service-panel li::before,
     .contact-card li::before,
     .notice-panel li::before,
@@ -1044,14 +1441,176 @@
         var(--surface);
     }
 
+    #contacto {
+      position: relative;
+      overflow: hidden;
+      background: #f4f6f8;
+    }
+
+    #contacto::after {
+      content: "";
+      position: absolute;
+      left: -5%;
+      right: -5%;
+      bottom: -4rem;
+      height: 8rem;
+      background: #fff;
+      transform: rotate(-4deg);
+      transform-origin: left center;
+    }
+
     .contact-layout {
-      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.92fr);
-      align-items: start;
+      position: relative;
+      z-index: 1;
+      grid-template-columns: minmax(0, 0.9fr) minmax(340px, 1.1fr);
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
     }
 
     .contact-form,
     .contact-card {
       padding: 1.8rem;
+    }
+
+    .contact-form {
+      grid-column: 1 / -1;
+    }
+
+    .contact-intro {
+      color: var(--text);
+    }
+
+    .contact-intro .section-tag {
+      display: none;
+    }
+
+    .contact-intro h2 {
+      margin: 0 0 2rem;
+      color: #20242b;
+      text-align: center;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.25rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .contact-intro h2 span {
+      position: relative;
+      display: inline-block;
+      font-weight: 800;
+    }
+
+    .contact-intro h2 span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.35rem;
+      height: 4px;
+      border-radius: 99px;
+      background: #5dd568;
+    }
+
+    .contact-quick-list {
+      display: grid;
+      gap: 1.15rem;
+    }
+
+    .contact-quick-item {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 1rem;
+      align-items: center;
+      min-height: 96px;
+      padding: 1.2rem 1.45rem;
+      border: 1px solid rgba(17, 32, 61, 0.08);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(8, 21, 52, 0.1);
+    }
+
+    .contact-quick-icon {
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      color: #06b85d;
+    }
+
+    .contact-quick-icon svg {
+      width: 1.85rem;
+      height: 1.85rem;
+      stroke-width: 1.8;
+    }
+
+    .contact-quick-item > div > span {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: #20242b;
+      font-size: 1.02rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-decoration: underline;
+      text-transform: none;
+    }
+
+    .contact-quick-item a,
+    .contact-quick-item strong {
+      color: #6f7885;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      text-decoration: underline;
+    }
+
+    .contact-quick-item a + a::before {
+      content: " / ";
+      color: #6f7885;
+      text-decoration: none;
+    }
+
+    .contact-map-card {
+      overflow: hidden;
+      padding: 0;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid rgba(17, 32, 61, 0.1);
+      box-shadow: 0 12px 28px rgba(8, 21, 52, 0.12);
+    }
+
+    .contact-map-card iframe {
+      width: 100%;
+      min-height: 450px;
+      border: 0;
+      display: block;
+    }
+
+    .contact-map-footer {
+      display: none;
+    }
+
+    .contact-map-footer strong {
+      display: block;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      line-height: 1.15;
+    }
+
+    .contact-map-footer span {
+      display: block;
+      margin-top: 0.18rem;
+      line-height: 1.35;
+    }
+
+    .map-link {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--green);
+      font-weight: 800;
+      white-space: nowrap;
     }
 
     .contact-form-grid {
@@ -1183,12 +1742,12 @@
 
     @media (max-width: 1120px) {
       :root {
-        --header-height: 96px;
+        --header-height: 116px;
       }
 
       .header-shell {
-        grid-template-columns: auto auto;
-        padding: 0.9rem 0;
+        grid-template-columns: auto auto auto;
+        padding: 0.7rem 0;
       }
 
       .nav-toggle {
@@ -1226,17 +1785,12 @@
 
       .site-nav a {
         padding: 0.2rem 0;
-      }
-
-      .header-contact {
-        grid-column: 1 / -1;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        padding-top: 0.1rem;
+        color: var(--navy);
       }
 
       .college-layout,
       .college-campus,
+      .identity-overview,
       .services-grid,
       .contact-layout,
       .footer-grid,
@@ -1257,6 +1811,18 @@
       .section-header {
         grid-template-columns: 1fr;
       }
+
+      .identity-content h3 {
+        font-size: 2.55rem;
+      }
+
+      .offer-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .offer-intro {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 760px) {
@@ -1265,16 +1831,38 @@
       }
 
       .brand-logo {
-        height: 70px;
-        max-width: 210px;
+        height: 58px;
+        max-width: 190px;
+      }
+
+      .header-top {
+        min-height: auto;
+        padding: 0.55rem 0;
       }
 
       .header-contact {
         gap: 0.7rem;
       }
 
+      .header-contact {
+        flex-wrap: wrap;
+      }
+
       .contact-separator {
         display: none;
+      }
+
+      .contact-link {
+        font-size: 0.82rem;
+      }
+
+      .header-social {
+        display: none;
+      }
+
+      .admissions-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.82rem;
       }
 
       .site-nav {
@@ -1310,16 +1898,38 @@
       .shortcut-strip,
       .service-stack,
       .institutional-points,
+      .identity-cards,
       .contact-form-grid {
         grid-template-columns: 1fr;
+      }
+
+      .contact-map-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .contact-map-card iframe {
+        min-height: 300px;
       }
 
       .offer-panel.featured {
         grid-column: span 1;
       }
 
-      .specialty-groups {
+      .offer-grid {
         grid-template-columns: 1fr;
+      }
+
+      .offer-intro h2 {
+        font-size: 2rem;
+      }
+
+      .offer-intro p {
+        font-size: 1rem;
+      }
+
+      .offer-panel-media {
+        height: 210px;
       }
 
       .college-campus {
@@ -1332,6 +1942,59 @@
 
       .college-campus-media img {
         height: 360px;
+      }
+
+      .identity-media {
+        min-height: 340px;
+      }
+
+      .identity-badge {
+        min-width: 156px;
+        padding: 0.9rem 1rem;
+      }
+
+      .identity-badge strong {
+        font-size: 2.45rem;
+      }
+
+      .identity-content h3 {
+        font-size: 2.05rem;
+      }
+
+      .milestones h3 {
+        text-align: left;
+        font-size: 1.75rem;
+      }
+
+      .milestone-list {
+        grid-template-columns: 1fr;
+        gap: 1.35rem;
+        padding: 0 0 0 1.4rem;
+      }
+
+      .milestone-list::before {
+        top: 0.2rem;
+        bottom: 0.2rem;
+        left: 0.28rem;
+        right: auto;
+        width: 3px;
+        height: auto;
+        background: linear-gradient(180deg, rgba(13, 114, 52, 0.16), var(--green), rgba(243, 194, 68, 0.35));
+      }
+
+      .milestone-item {
+        justify-items: start;
+        text-align: left;
+      }
+
+      .milestone-item::before {
+        top: 0.35rem;
+        left: -1.12rem;
+        transform: none;
+      }
+
+      .milestone-year {
+        font-size: 1.65rem;
       }
 
       .contact-form,
@@ -1366,17 +2029,47 @@
         <a href="#nuestro-colegio">Nuestro Colegio</a>
         <a href="#oferta-educativa">Oferta Educativa</a>
         <a href="#admision">Admision</a>
-        <a href="#comunidad-educativa">Servicios y Comunidad</a>
-        <a href="#informacion-avisos">Avisos</a>
         <a href="#contacto">Contacto</a>
       </nav>
 
+      <a href="#admision" class="admissions-btn">Admisiones</a>
+    </div>
+
+    <div class="container header-top">
       <div class="header-contact">
-        <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-link">ctp.ulloa@mep.go.cr</a>
-        <span class="contact-separator" aria-hidden="true"></span>
-        <a href="tel:+50622938390" class="contact-link">+506 2293 8390</a>
-        <span class="contact-separator" aria-hidden="true"></span>
-        <a href="#admision" class="admissions-btn">Admisiones</a>
+        <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16v16H4z" />
+            <path d="m22 6-10 7L2 6" />
+          </svg>
+          ctp.ulloa@mep.go.cr
+        </a>
+        <a href="tel:+50622938390" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.6 2.6a2 2 0 0 1-.45 2.11L8 9.69a16 16 0 0 0 6.31 6.31l1.26-1.26a2 2 0 0 1 2.11-.45c.83.28 1.7.48 2.6.6A2 2 0 0 1 22 16.92Z" />
+          </svg>
+          +506 2293 8390
+        </a>
+      </div>
+
+      <div class="header-social" aria-label="Redes sociales">
+        <a href="#" class="social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14 8h2V5h-2c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.4l.6-3h-3V9c0-.6.4-1 1-1Z" />
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="4" />
+            <circle cx="12" cy="12" r="3.2" />
+            <path d="M16.8 7.2h.01" />
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1A31 31 0 0 0 1.9 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM10 15.4V8.6l6 3.4-6 3.4Z" />
+          </svg>
+        </a>
       </div>
     </div>
   </header>
@@ -1395,11 +2088,7 @@
       <div class="container hero-welcome">
         <div class="hero-copy">
           <p class="eyebrow">Colegio Tecnico Profesional de Ulloa</p>
-          <h1>Bienvenidos a la familia del CTP Ulloa.</h1>
-          <p class="hero-lead">
-            Formamos estudiantes con bases tecnicas, academicas y humanas para responder con criterio, practica e
-            innovacion a los desafios del presente.
-          </p>
+          <h1>Bienvenidos a la familia del CTP Ulloa</h1>
 
           <div class="hero-actions">
             <a href="#admision" class="button-primary">Proceso de admision</a>
@@ -1481,10 +2170,6 @@
       <div class="container college-campus">
         <div class="college-campus-copy">
           <h3>Campus preparado para aprender, crear y convivir.</h3>
-          <p>
-            La infraestructura del CTP de Ulloa integra espacios academicos, tecnicos, deportivos y de convivencia para
-            acompanar la formacion integral del estudiantado.
-          </p>
           <ul class="campus-list">
             <li>+50 espacios entre aulas academicas y tecnicas</li>
             <li>Laboratorios especializados en tecnologia</li>
@@ -1500,153 +2185,170 @@
       </div>
 
       <div class="container college-layout">
-        <article class="narrative-panel">
-          <h3>Historia, proposito e identidad del colegio</h3>
-          <p>
-            El Colegio Tecnico Profesional de Ulloa tiene sus raices en la Escuela de Artes Industriales, creada en
-            1966, y fue consolidandose como una institucion tecnica hasta convertirse oficialmente en el Colegio
-            Tecnico Profesional de Ulloa en 1998. Su evolucion refleja una transicion desde la formacion artesanal hacia
-            una educacion tecnica profesional vinculada con las necesidades del mercado laboral.
-          </p>
-          <p style="margin-top: 1rem;">
-            La institucion promueve una formacion integral que combina conocimientos academicos, tecnicos,
-            tecnologicos, humanos y espirituales, con el proposito de preparar estudiantes capaces de enfrentar con
-            eficiencia las demandas de la sociedad actual.
-          </p>
-        </article>
+        <div class="identity-overview">
+          <figure class="identity-media">
+            <img src="assets/img/nuestro-colegio-arcos.jpg" alt="Arcos del Colegio Técnico Profesional de Ulloa" />
+          </figure>
 
-        <div class="institutional-points">
-          <article class="point">
-            <span>01</span>
-            <h3>Historia</h3>
-            <p>
-              Origen en 1966 como Escuela de Artes Industriales, consolidacion como institucion tecnica en 1978 y
-              cambio oficial de nombre a Colegio Tecnico Profesional de Ulloa en 1998.
-            </p>
-          </article>
-          <article class="point">
-            <span>02</span>
-            <h3>Servicios distintivos</h3>
-            <p>
-              Formacion tecnica profesional, talleres exploratorios, especialidades actualizadas, educacion
-              diversificada vocacional, orientacion estudiantil y vinculacion con el sector productivo.
-            </p>
-          </article>
-          <article class="point">
-            <span>03</span>
-            <h3>Instalaciones</h3>
-            <p>
-              La institucion cuenta con aulas, laboratorios de informatica, sala de robotica, biblioteca, comedor, soda,
-              enfermeria, cancha techada, talleres tecnicos y espacios acondicionados para la formacion academica y
-              tecnica.
-            </p>
-          </article>
-          <article class="point">
-            <span>04</span>
-            <h3>Vida estudiantil</h3>
-            <p>
-              La vida estudiantil integra formacion academica, tecnica, cultural, deportiva y vocacional, promoviendo
-              identidad institucional, trabajo en equipo, pensamiento critico, responsabilidad y sentido de pertenencia.
-            </p>
-          </article>
+          <div class="identity-content">
+            <p class="identity-eyebrow">Quiénes somos</p>
+            <div class="identity-description">
+              <p>
+                El Colegio Técnico Profesional de Ulloa es una institución pública del MEP con trayectoria en
+                formación técnica y académica, enfocada en el desarrollo integral y la inserción laboral de
+                sus estudiantes.
+              </p>
+            </div>
+
+            <div class="identity-cards">
+              <article class="identity-card">
+                <span class="identity-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <circle cx="12" cy="12" r="5" />
+                    <circle cx="12" cy="12" r="1.5" />
+                  </svg>
+                </span>
+                <h4>Misión</h4>
+                <p>
+                  Garantizar la formación integral del estudiante en educación diversificada y técnica, brindando
+                  condiciones académicas, tecnológicas y humanas que le permitan enfrentar con eficiencia las demandas
+                  de la sociedad.
+                </p>
+              </article>
+
+              <article class="identity-card">
+                <span class="identity-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+                    <circle cx="12" cy="12" r="2.5" />
+                  </svg>
+                </span>
+                <h4>Visión</h4>
+                <p>
+                  Ser una institución líder en educación técnica profesional, reconocida por su calidad académica,
+                  formación integral y capacidad de adaptación a los cambios del entorno social y productivo.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="milestones">
+          <h3>Hitos institucionales</h3>
+          <ol class="milestone-list">
+            <li class="milestone-item">
+              <span class="milestone-year">1966</span>
+              <h4>Origen institucional</h4>
+              <p>Inicio como Escuela de Artes Industriales.</p>
+            </li>
+            <li class="milestone-item">
+              <span class="milestone-year">1978</span>
+              <h4>Fundación técnica</h4>
+              <p>Creación oficial como institución técnica artesanal mediante decreto.</p>
+            </li>
+            <li class="milestone-item">
+              <span class="milestone-year">1998</span>
+              <h4>Transformación clave</h4>
+              <p>Se establece como Colegio Técnico Profesional de Ulloa, con enfoque en formación técnica moderna.</p>
+            </li>
+            <li class="milestone-item">
+              <span class="milestone-year">2012-2018</span>
+              <h4>Modernización de infraestructura</h4>
+              <p>Remodelación de espacios, construcción de comedor, soda y mejora de instalaciones.</p>
+            </li>
+            <li class="milestone-item">
+              <span class="milestone-year">Actualidad</span>
+              <h4>Innovación educativa</h4>
+              <p>Oferta técnica alineada al mercado laboral y fortalecimiento de la formación integral.</p>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
 
     <section class="section" id="oferta-educativa">
-      <div class="container section-header">
+      <div class="container offer-intro">
         <div>
           <p class="section-tag">Oferta Educativa</p>
-        </div>
 
+        </div>
       </div>
 
       <div class="container offer-grid">
         <article class="offer-panel featured">
-          <span>Especialidades tecnicas</span>
-          <h3>Base tecnica visible y bien priorizada</h3>
-          <p>
-            El colegio ofrece especialidades tecnicas actualizadas, alineadas con las demandas del mercado laboral y
-            enfocadas en el desarrollo de competencias profesionales.
-          </p>
-          <div class="specialty-groups">
-            <div class="specialty-group">
-              <strong>Area Comercial y Servicios</strong>
-              <ul>
-                <li>Diseno Publicitario</li>
-                <li>Diseno y Desarrollo Digital</li>
-                <li>Ejecutivo Comercial y de Servicio al Cliente</li>
-                <li>Secretariado Ejecutivo</li>
-              </ul>
-            </div>
-            <div class="specialty-group">
-              <strong>Area Industrial</strong>
-              <ul>
-                <li>Electronica Industrial</li>
-                <li>Electromecanica</li>
-                <li>Dibujo y Modelado de Edificaciones</li>
-                <li>Configuracion y Soporte de Redes de Comunicacion y Sistemas Operativos</li>
-              </ul>
-            </div>
+          <div class="offer-panel-media">
+            <img
+              src="assets/img/programa-especialidades-tecnicas.png"
+              alt="Estudiantes del programa de especialidades técnicas del CTP de Ulloa"
+            />
+            <span class="offer-panel-badge">Técnica</span>
+          </div>
+          <div class="offer-panel-body">
+            <h3>Especialidades técnicas</h3>
+            <p>
+              Áreas comerciales, digitales e industriales orientadas al desarrollo de competencias profesionales y
+              empleabilidad.
+            </p>
+            <a href="#contacto" class="offer-panel-link">
+              Ver detalles
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
           </div>
         </article>
 
-        <article class="offer-panel">
-          <span>Area academica</span>
-          <h3>Ruta comun y acompanamiento curricular</h3>
-          <p>
-            El area academica comprende la formacion general del estudiante en asignaturas base del sistema educativo,
-            complementadas con orientacion educativa y seguimiento del proceso formativo integral.
-          </p>
-          <ul>
-            <li>Espanol</li>
-            <li>Matematica</li>
-            <li>Ciencias</li>
-            <li>Estudios Sociales</li>
-            <li>Ingles y Frances</li>
-            <li>Educacion Fisica</li>
-            <li>Educacion Musical</li>
-            <li>Educacion Religiosa</li>
-            <li>Orientacion</li>
-          </ul>
+        <article class="offer-panel academic">
+          <div class="offer-panel-media">
+            <img
+              src="assets/img/programa-area-academica.png"
+              alt="Estudiantes en actividades del área académica del CTP de Ulloa"
+            />
+            <span class="offer-panel-badge">Académica</span>
+          </div>
+          <div class="offer-panel-body">
+            <h3>Área académica</h3>
+            <p>
+              Asignaturas esenciales del currículo nacional con acompañamiento, orientación y seguimiento del proceso
+              integral.
+            </p>
+            <a href="#contacto" class="offer-panel-link">
+              Ver detalles
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </article>
 
-        <article class="offer-panel">
-          <span>Plan Nacional</span>
-          <h3>Formacion base y desarrollo integral</h3>
-          <p>
-            El Plan Nacional incluye asignaturas formativas complementarias que fortalecen habilidades practicas,
-            personales y sociales en los estudiantes.
-          </p>
-          <ul>
-            <li>Educacion para el Hogar</li>
-            <li>Artes Industriales</li>
-            <li>Dibujo Tecnico</li>
-            <li>Artes Plasticas</li>
-            <li>Educacion Especial</li>
-            <li>Ingles como eje transversal</li>
-          </ul>
-        </article>
-
-        <article class="offer-panel">
-          <span>Programas complementarios</span>
-          <h3>Capas de valor mas alla del aula</h3>
-          <p>
-            Programas que fortalecen la formacion integral mediante experiencias practicas, desarrollo de habilidades
-            blandas, tecnologia, emprendedurismo y proyeccion profesional.
-          </p>
-          <ul>
-            <li>Ingles Conversacional</li>
-            <li>Talleres exploratorios de III ciclo</li>
-            <li>Emprendedurismo</li>
-            <li>Proyectos tecnicos</li>
-            <li>Vinculacion con empresas</li>
-            <li>Actividades culturales y deportivas</li>
-          </ul>
+        <article class="offer-panel national-plan">
+          <div class="offer-panel-media">
+            <img
+              src="assets/img/programa-plan-nacional.png"
+              alt="Materiales y recursos del Plan Nacional del CTP de Ulloa"
+            />
+            <span class="offer-panel-badge">Integral</span>
+          </div>
+          <div class="offer-panel-body">
+            <h3>Plan Nacional</h3>
+            <p>
+              Espacios formativos que fortalecen creatividad, habilidades prácticas, convivencia y desarrollo personal
+              del estudiantado.
+            </p>
+            <a href="#contacto" class="offer-panel-link">
+              Ver detalles
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </article>
       </div>
     </section>
-
     <section class="section admission-section" id="admision">
       <div class="container admission-wrap">
         <div class="admission-copy">
@@ -1680,81 +2382,14 @@
         </div>
       </div>
 
-      <div class="container admission-grid">
-        <article class="admission-card">
-          <h3>Requisitos</h3>
-          <ul class="admission-checklist">
-            <li>Documentos de identificacion del estudiante y de la persona encargada.</li>
-            <li>Certificaciones o constancias academicas solicitadas para el proceso.</li>
-            <li>Informacion de contacto actualizada para recibir avisos y seguimiento.</li>
-          </ul>
-        </article>
-
-        <article class="admission-card">
-          <h3>Proceso de admision</h3>
-          <p>
-            El colegio comparte las indicaciones oficiales para cada periodo. La familia debe revisar los requisitos,
-            completar la informacion solicitada y mantenerse atenta a las respuestas del centro educativo.
-          </p>
-        </article>
-
-        <article class="admission-card">
-          <h3>Fechas importantes</h3>
-          <ul class="admission-checklist">
-            <li>Las fechas de apertura se anuncian por medios oficiales del colegio.</li>
-            <li>Los recordatorios del proceso se publican en redes sociales institucionales.</li>
-            <li>Los cambios o avisos especiales deben revisarse antes de presentar documentos.</li>
-          </ul>
-        </article>
-      </div>
     </section>
-
-    <section class="section" id="comunidad-educativa">
-      <div class="container section-header">
-        <div>
-          <p class="section-tag">Servicios y Comunidad Educativa</p>
-        </div>
-
-      </div>
-
-      <div class="container community-grid">
-        <article class="community-panel image-panel" id="cooperativa">
-          <span>Cooperativa estudiantil</span>
-          <img
-            src="assets/img/comunidad-educativa-cooperativa-estudiantes.png"
-            alt="Cooperativa estudiantil"
-          />
-        </article>
-
-        <article class="community-panel image-panel">
-          <span>Junta Administrativa</span>
-          <img
-            src="assets/img/comunidad-educativa-junta-administrativa.png"
-            alt="Junta Administrativa"
-          />
-        </article>
-
-        <article class="community-panel image-panel" id="bolsa-empleo">
-          <span>Bolsa de empleo</span>
-          <img
-            src="assets/img/comunidad-educativa-bolsa-empleo.png"
-            alt="Bolsa de empleo"
-          />
-        </article>
-      </div>
-    </section>
-
-
+<!--
     <section class="section" id="informacion-avisos">
       <div class="container section-header">
         <div>
           <p class="section-tag">Informacion y Avisos</p>
-          <h2>La comunicacion oficial se separa por funcion para que cada contenido encuentre su lugar.</h2>
         </div>
-        <p class="section-lead">
-          Carteles, noticias y comunicados dejan de competir con otras secciones y se convierten en un bloque coherente
-          de informacion oficial.
-        </p>
+
       </div>
 
       <div class="container notices-grid">
@@ -1791,70 +2426,92 @@
           </ul>
         </article>
       </div>
-    </section>
+    </section> -->
 
     <section class="section" id="contacto">
-      <div class="container section-header">
-        <div>
-          <p class="section-tag">Contacto</p>
-          <h2>Cierre util: formulario, ubicacion, datos institucionales y accesos directos.</h2>
-        </div>
-        <p class="section-lead">
-          La seccion final resuelve lo operativo: consulta, ubicacion, telefono, correo institucional y botones de apoyo.
-        </p>
-      </div>
-
       <div class="container contact-layout">
-        <form class="contact-form">
-          <h3>Formulario de contacto</h3>
-          <p>Este bloque puede conectar luego con correo, CRM o cualquier flujo de atencion institucional.</p>
-
-          <div class="contact-form-grid">
-            <label>
-              Nombre
-              <input type="text" name="nombre" placeholder="Nombre completo" />
-            </label>
-            <label>
-              Correo electronico
-              <input type="email" name="correo" placeholder="persona@correo.com" />
-            </label>
-            <label class="full">
-              Asunto
-              <input type="text" name="asunto" placeholder="Consulta general, matricula, servicios..." />
-            </label>
-            <label class="full">
-              Mensaje
-              <textarea name="mensaje" placeholder="Escribe aqui tu consulta."></textarea>
-            </label>
-          </div>
-
-          <button type="submit" class="button-primary form-submit">Enviar consulta</button>
-        </form>
-
         <div class="contact-side">
-          <article class="contact-card">
-            <h3>Datos institucionales</h3>
-            <ul>
-              <li>Correo: <a href="mailto:ctp.ulloa@mep.go.cr">ctp.ulloa@mep.go.cr</a></li>
-              <li>Telefono: <a href="tel:+50622938390">+506 2293 8390</a></li>
-              <li>Ubicacion: Ulloa, Heredia, Costa Rica</li>
-              <li>Horario de atencion segun publicacion institucional</li>
-            </ul>
+          <div class="contact-intro">
+            <p class="section-tag">Contacto</p>
+            <h2>Se parte de la familia <span>CTP Ulloa</span></h2>
 
-            <div class="contact-actions">
-              <a href="#sicai" class="contact-action">Acceso a SICAI</a>
-              <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-action">Espacio para comunicarse</a>
+            <div class="contact-quick-list">
+              <div class="contact-quick-item">
+                <span class="contact-quick-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 18 9 21l-5-3V6l5 3 5-3 6 3v12l-6-3Z" />
+                    <path d="M9 9v12" />
+                    <path d="M14 6v12" />
+                  </svg>
+                </span>
+                <div>
+                  <span>Dirección:</span>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Colegio%20T%C3%A9cnico%20Profesional%20de%20Ulloa%2C%20Barreal%2C%20Ulloa%2C%20Heredia%2C%20Costa%20Rica"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Barreal, Ulloa, Heredia, Costa Rica
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-quick-item">
+                <span class="contact-quick-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.6 2.6a2 2 0 0 1-.45 2.11L8 9.69a16 16 0 0 0 6.31 6.31l1.26-1.26a2 2 0 0 1 2.11-.45c.83.28 1.7.48 2.6.6A2 2 0 0 1 22 16.92Z" />
+                  </svg>
+                </span>
+                <div>
+                  <span>Contactos:</span>
+                  <a href="tel:+50622938390">+506 2293 8390</a>
+                  <a href="mailto:ctp.ulloa@mep.go.cr">ctp.ulloa@mep.go.cr</a>
+                </div>
+              </div>
+
+              <div class="contact-quick-item">
+                <span class="contact-quick-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 4h8" />
+                    <path d="M9 2h6v4H9z" />
+                    <path d="M7 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1" />
+                    <path d="M8 12h8" />
+                    <path d="M8 16h5" />
+                  </svg>
+                </span>
+                <div>
+                  <span>Iniciar proceso de admisiones</span>
+                  <a href="#admision">Ver proceso de admisión</a>
+                </div>
+              </div>
             </div>
-          </article>
-
-          <article class="contact-card">
-            <h3>Canales recomendados</h3>
-            <p>
-              Cuando el sitio crezca, este bloque puede sumar mapa, horarios, redes oficiales y trazabilidad de consultas
-              por tipo de solicitud.
-            </p>
-          </article>
+          </div>
         </div>
+
+        <article class="contact-map-card" aria-label="Mapa de ubicacion del CTP de Ulloa">
+          <iframe
+            title="Mapa del Colegio Técnico Profesional de Ulloa"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Colegio%20T%C3%A9cnico%20Profesional%20de%20Ulloa%2C%20Barreal%2C%20Ulloa%2C%20Heredia%2C%20Costa%20Rica&output=embed"
+          ></iframe>
+          <div class="contact-map-footer">
+            <div>
+              <strong>Colegio Técnico Profesional de Ulloa</strong>
+              <span>Barreal, Ulloa, Heredia, Costa Rica</span>
+            </div>
+            <a
+              class="map-link"
+              href="https://www.google.com/maps/search/?api=1&query=Colegio%20T%C3%A9cnico%20Profesional%20de%20Ulloa%2C%20Barreal%2C%20Ulloa%2C%20Heredia%2C%20Costa%20Rica"
+              target="_blank"
+              rel="noopener"
+            >
+              Abrir mapa
+              <span aria-hidden="true">-></span>
+            </a>
+          </div>
+        </article>
+
       </div>
     </section>
   </main>
@@ -1863,28 +2520,12 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <h3>CTP de Ulloa</h3>
-        <p>
-          Propuesta de index2.html con enfoque UX/UI institucional: navegacion corta, jerarquia clara, accesos rapidos
-          y separacion entre contenido publico e interno.
-        </p>
-        <p class="footer-note">
-          No se expone en el menu principal el acceso privado; queda reservado para autenticacion y capas internas del
-          sistema.
-        </p>
       </div>
 
-      <div class="internal-panel" id="acceso-interno">
-        <h4>Acceso interno</h4>
-        <p>Secciones especiales reservadas para login institucional o gestion interna.</p>
-        <ul class="internal-links">
-          <li>Panel Junta Administrativa para carga de documentos.</li>
-          <li>Gestion interna para personal docente o administrativo.</li>
-        </ul>
-      </div>
     </div>
 
     <div class="container footer-bottom">
-      <p>&copy; 2026 Colegio Tecnico Profesional de Ulloa. Propuesta institucional de estructura web.</p>
+      <p>&copy; 2026 Colegio Tecnico Profesional de Ulloa.</p>
     </div>
   </footer>
   <a href="#inicio" class="back-to-top" aria-label="Volver al inicio">
