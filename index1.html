@@ -83,17 +83,29 @@
       position: sticky;
       top: 0;
       z-index: 60;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--text);
       backdrop-filter: blur(18px);
+      border-top: 3px solid var(--green);
       border-bottom: 1px solid rgba(17, 32, 61, 0.08);
+      box-shadow: 0 14px 36px rgba(8, 21, 52, 0.08);
+    }
+
+    .header-top {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(17, 32, 61, 0.1);
     }
 
     .header-shell {
-      min-height: var(--header-height);
+      min-height: calc(var(--header-height) - 44px);
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
-      gap: 1.5rem;
+      gap: 2rem;
       position: relative;
     }
 
@@ -105,7 +117,7 @@
     }
 
     .brand-logo {
-      height: 86px;
+      height: 72px;
       width: auto;
       max-width: 250px;
       object-fit: contain;
@@ -115,7 +127,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.45rem;
       min-width: 0;
       flex-wrap: nowrap;
     }
@@ -150,16 +162,27 @@
     .header-contact {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 0.9rem;
+      justify-content: flex-start;
+      gap: 1.1rem;
       min-width: 0;
     }
 
     .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
       color: var(--muted);
-      font-size: 0.98rem;
-      font-weight: 700;
+      font-size: 0.9rem;
+      font-weight: 600;
       white-space: nowrap;
+    }
+
+    .contact-link svg,
+    .social-link svg {
+      width: 1rem;
+      height: 1rem;
+      color: var(--gold);
+      stroke-width: 1.9;
     }
 
     .contact-separator {
@@ -167,6 +190,26 @@
       height: 24px;
       background: rgba(17, 32, 61, 0.12);
       flex: 0 0 auto;
+    }
+
+    .header-social {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.65rem;
+      min-width: 0;
+    }
+
+    .social-link {
+      display: inline-grid;
+      place-items: center;
+      width: 1.55rem;
+      height: 1.55rem;
+      color: var(--muted);
+    }
+
+    .social-link svg {
+      color: currentColor;
     }
 
     .admissions-btn,
@@ -186,14 +229,13 @@
     }
 
     .admissions-btn {
-      padding: 0.85rem 1.3rem;
-      background: linear-gradient(135deg, var(--green), var(--green-deep));
-      color: white;
+      padding: 0.88rem 1.65rem;
+      background: linear-gradient(135deg, var(--gold), #ffd86f);
+      color: var(--navy-deep);
       font-size: 0.92rem;
       font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      box-shadow: 0 18px 36px rgba(13, 114, 52, 0.2);
+      letter-spacing: 0.01em;
+      box-shadow: 0 18px 36px rgba(243, 194, 68, 0.22);
       white-space: nowrap;
     }
 
@@ -211,8 +253,8 @@
       height: 52px;
       border: 0;
       border-radius: 16px;
-      background: var(--surface-alt);
-      color: var(--navy);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
       cursor: pointer;
       justify-content: center;
       align-items: center;
@@ -1399,14 +1441,176 @@
         var(--surface);
     }
 
+    #contacto {
+      position: relative;
+      overflow: hidden;
+      background: #f4f6f8;
+    }
+
+    #contacto::after {
+      content: "";
+      position: absolute;
+      left: -5%;
+      right: -5%;
+      bottom: -4rem;
+      height: 8rem;
+      background: #fff;
+      transform: rotate(-4deg);
+      transform-origin: left center;
+    }
+
     .contact-layout {
-      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.92fr);
-      align-items: start;
+      position: relative;
+      z-index: 1;
+      grid-template-columns: minmax(0, 0.9fr) minmax(340px, 1.1fr);
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
     }
 
     .contact-form,
     .contact-card {
       padding: 1.8rem;
+    }
+
+    .contact-form {
+      grid-column: 1 / -1;
+    }
+
+    .contact-intro {
+      color: var(--text);
+    }
+
+    .contact-intro .section-tag {
+      display: none;
+    }
+
+    .contact-intro h2 {
+      margin: 0 0 2rem;
+      color: #20242b;
+      text-align: center;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.25rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .contact-intro h2 span {
+      position: relative;
+      display: inline-block;
+      font-weight: 800;
+    }
+
+    .contact-intro h2 span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.35rem;
+      height: 4px;
+      border-radius: 99px;
+      background: #5dd568;
+    }
+
+    .contact-quick-list {
+      display: grid;
+      gap: 1.15rem;
+    }
+
+    .contact-quick-item {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 1rem;
+      align-items: center;
+      min-height: 96px;
+      padding: 1.2rem 1.45rem;
+      border: 1px solid rgba(17, 32, 61, 0.08);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(8, 21, 52, 0.1);
+    }
+
+    .contact-quick-icon {
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      color: #06b85d;
+    }
+
+    .contact-quick-icon svg {
+      width: 1.85rem;
+      height: 1.85rem;
+      stroke-width: 1.8;
+    }
+
+    .contact-quick-item > div > span {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: #20242b;
+      font-size: 1.02rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-decoration: underline;
+      text-transform: none;
+    }
+
+    .contact-quick-item a,
+    .contact-quick-item strong {
+      color: #6f7885;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      text-decoration: underline;
+    }
+
+    .contact-quick-item a + a::before {
+      content: " / ";
+      color: #6f7885;
+      text-decoration: none;
+    }
+
+    .contact-map-card {
+      overflow: hidden;
+      padding: 0;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid rgba(17, 32, 61, 0.1);
+      box-shadow: 0 12px 28px rgba(8, 21, 52, 0.12);
+    }
+
+    .contact-map-card iframe {
+      width: 100%;
+      min-height: 450px;
+      border: 0;
+      display: block;
+    }
+
+    .contact-map-footer {
+      display: none;
+    }
+
+    .contact-map-footer strong {
+      display: block;
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+      line-height: 1.15;
+    }
+
+    .contact-map-footer span {
+      display: block;
+      margin-top: 0.18rem;
+      line-height: 1.35;
+    }
+
+    .map-link {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--green);
+      font-weight: 800;
+      white-space: nowrap;
     }
 
     .contact-form-grid {
@@ -1538,12 +1742,12 @@
 
     @media (max-width: 1120px) {
       :root {
-        --header-height: 96px;
+        --header-height: 116px;
       }
 
       .header-shell {
-        grid-template-columns: auto auto;
-        padding: 0.9rem 0;
+        grid-template-columns: auto auto auto;
+        padding: 0.7rem 0;
       }
 
       .nav-toggle {
@@ -1581,13 +1785,7 @@
 
       .site-nav a {
         padding: 0.2rem 0;
-      }
-
-      .header-contact {
-        grid-column: 1 / -1;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        padding-top: 0.1rem;
+        color: var(--navy);
       }
 
       .college-layout,
@@ -1633,16 +1831,38 @@
       }
 
       .brand-logo {
-        height: 70px;
-        max-width: 210px;
+        height: 58px;
+        max-width: 190px;
+      }
+
+      .header-top {
+        min-height: auto;
+        padding: 0.55rem 0;
       }
 
       .header-contact {
         gap: 0.7rem;
       }
 
+      .header-contact {
+        flex-wrap: wrap;
+      }
+
       .contact-separator {
         display: none;
+      }
+
+      .contact-link {
+        font-size: 0.82rem;
+      }
+
+      .header-social {
+        display: none;
+      }
+
+      .admissions-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.82rem;
       }
 
       .site-nav {
@@ -1681,6 +1901,15 @@
       .identity-cards,
       .contact-form-grid {
         grid-template-columns: 1fr;
+      }
+
+      .contact-map-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .contact-map-card iframe {
+        min-height: 300px;
       }
 
       .offer-panel.featured {
@@ -1784,6 +2013,44 @@
 </head>
 <body>
   <header class="site-header" id="top">
+    <div class="container header-top">
+      <div class="header-contact">
+        <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16v16H4z" />
+            <path d="m22 6-10 7L2 6" />
+          </svg>
+          ctp.ulloa@mep.go.cr
+        </a>
+        <a href="tel:+50622938390" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.6 2.6a2 2 0 0 1-.45 2.11L8 9.69a16 16 0 0 0 6.31 6.31l1.26-1.26a2 2 0 0 1 2.11-.45c.83.28 1.7.48 2.6.6A2 2 0 0 1 22 16.92Z" />
+          </svg>
+          +506 2293 8390
+        </a>
+      </div>
+
+      <div class="header-social" aria-label="Redes sociales">
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14 8h2V5h-2c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.4l.6-3h-3V9c0-.6.4-1 1-1Z" />
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="4" />
+            <circle cx="12" cy="12" r="3.2" />
+            <path d="M16.8 7.2h.01" />
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1A31 31 0 0 0 1.9 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM10 15.4V8.6l6 3.4-6 3.4Z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
     <div class="container header-shell">
       <a href="#inicio" class="brand" aria-label="Inicio CTP de Ulloa">
         <img src="assets/img/logo-web-ctpulloa-2026.png" alt="Colegio Tecnico Profesional de Ulloa" class="brand-logo" />
@@ -1800,18 +2067,10 @@
         <a href="#nuestro-colegio">Nuestro Colegio</a>
         <a href="#oferta-educativa">Oferta Educativa</a>
         <a href="#admision">Admision</a>
-        <a href="#comunidad-educativa">Servicios y Comunidad</a>
-        <a href="#informacion-avisos">Avisos</a>
         <a href="#contacto">Contacto</a>
       </nav>
 
-      <div class="header-contact">
-        <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-link">ctp.ulloa@mep.go.cr</a>
-        <span class="contact-separator" aria-hidden="true"></span>
-        <a href="tel:+50622938390" class="contact-link">+506 2293 8390</a>
-        <span class="contact-separator" aria-hidden="true"></span>
-        <a href="#admision" class="admissions-btn">Admisiones</a>
-      </div>
+      <a href="#admision" class="admissions-btn">Admisiones</a>
     </div>
   </header>
 
@@ -2123,81 +2382,14 @@
         </div>
       </div>
 
-      <div class="container admission-grid">
-        <article class="admission-card">
-          <h3>Requisitos</h3>
-          <ul class="admission-checklist">
-            <li>Documentos de identificacion del estudiante y de la persona encargada.</li>
-            <li>Certificaciones o constancias academicas solicitadas para el proceso.</li>
-            <li>Informacion de contacto actualizada para recibir avisos y seguimiento.</li>
-          </ul>
-        </article>
-
-        <article class="admission-card">
-          <h3>Proceso de admision</h3>
-          <p>
-            El colegio comparte las indicaciones oficiales para cada periodo. La familia debe revisar los requisitos,
-            completar la informacion solicitada y mantenerse atenta a las respuestas del centro educativo.
-          </p>
-        </article>
-
-        <article class="admission-card">
-          <h3>Fechas importantes</h3>
-          <ul class="admission-checklist">
-            <li>Las fechas de apertura se anuncian por medios oficiales del colegio.</li>
-            <li>Los recordatorios del proceso se publican en redes sociales institucionales.</li>
-            <li>Los cambios o avisos especiales deben revisarse antes de presentar documentos.</li>
-          </ul>
-        </article>
-      </div>
     </section>
-
-    <section class="section" id="comunidad-educativa">
-      <div class="container section-header">
-        <div>
-          <p class="section-tag">Servicios y Comunidad Educativa</p>
-        </div>
-
-      </div>
-
-      <div class="container community-grid">
-        <article class="community-panel image-panel" id="cooperativa">
-          <span>Cooperativa estudiantil</span>
-          <img
-            src="assets/img/comunidad-educativa-cooperativa-estudiantes.png"
-            alt="Cooperativa estudiantil"
-          />
-        </article>
-
-        <article class="community-panel image-panel">
-          <span>Junta Administrativa</span>
-          <img
-            src="assets/img/comunidad-educativa-junta-administrativa.png"
-            alt="Junta Administrativa"
-          />
-        </article>
-
-        <article class="community-panel image-panel" id="bolsa-empleo">
-          <span>Bolsa de empleo</span>
-          <img
-            src="assets/img/comunidad-educativa-bolsa-empleo.png"
-            alt="Bolsa de empleo"
-          />
-        </article>
-      </div>
-    </section>
-
-
+<!--
     <section class="section" id="informacion-avisos">
       <div class="container section-header">
         <div>
           <p class="section-tag">Informacion y Avisos</p>
-          <h2>La comunicacion oficial se separa por funcion para que cada contenido encuentre su lugar.</h2>
         </div>
-        <p class="section-lead">
-          Carteles, noticias y comunicados dejan de competir con otras secciones y se convierten en un bloque coherente
-          de informacion oficial.
-        </p>
+
       </div>
 
       <div class="container notices-grid">
@@ -2234,70 +2426,92 @@
           </ul>
         </article>
       </div>
-    </section>
+    </section> -->
 
     <section class="section" id="contacto">
-      <div class="container section-header">
-        <div>
-          <p class="section-tag">Contacto</p>
-          <h2>Cierre util: formulario, ubicacion, datos institucionales y accesos directos.</h2>
-        </div>
-        <p class="section-lead">
-          La seccion final resuelve lo operativo: consulta, ubicacion, telefono, correo institucional y botones de apoyo.
-        </p>
-      </div>
-
       <div class="container contact-layout">
-        <form class="contact-form">
-          <h3>Formulario de contacto</h3>
-          <p>Este bloque puede conectar luego con correo, CRM o cualquier flujo de atencion institucional.</p>
-
-          <div class="contact-form-grid">
-            <label>
-              Nombre
-              <input type="text" name="nombre" placeholder="Nombre completo" />
-            </label>
-            <label>
-              Correo electronico
-              <input type="email" name="correo" placeholder="persona@correo.com" />
-            </label>
-            <label class="full">
-              Asunto
-              <input type="text" name="asunto" placeholder="Consulta general, matricula, servicios..." />
-            </label>
-            <label class="full">
-              Mensaje
-              <textarea name="mensaje" placeholder="Escribe aqui tu consulta."></textarea>
-            </label>
-          </div>
-
-          <button type="submit" class="button-primary form-submit">Enviar consulta</button>
-        </form>
-
         <div class="contact-side">
-          <article class="contact-card">
-            <h3>Datos institucionales</h3>
-            <ul>
-              <li>Correo: <a href="mailto:ctp.ulloa@mep.go.cr">ctp.ulloa@mep.go.cr</a></li>
-              <li>Telefono: <a href="tel:+50622938390">+506 2293 8390</a></li>
-              <li>Ubicacion: Ulloa, Heredia, Costa Rica</li>
-              <li>Horario de atencion segun publicacion institucional</li>
-            </ul>
+          <div class="contact-intro">
+            <p class="section-tag">Contacto</p>
+            <h2>Se parte de la familia <span>CTP Ulloa</span></h2>
 
-            <div class="contact-actions">
-              <a href="#sicai" class="contact-action">Acceso a SICAI</a>
-              <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-action">Espacio para comunicarse</a>
+            <div class="contact-quick-list">
+              <div class="contact-quick-item">
+                <span class="contact-quick-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 18 9 21l-5-3V6l5 3 5-3 6 3v12l-6-3Z" />
+                    <path d="M9 9v12" />
+                    <path d="M14 6v12" />
+                  </svg>
+                </span>
+                <div>
+                  <span>Dirección:</span>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Colegio%20T%C3%A9cnico%20Profesional%20de%20Ulloa%2C%20Barreal%2C%20Ulloa%2C%20Heredia%2C%20Costa%20Rica"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Barreal, Ulloa, Heredia, Costa Rica
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-quick-item">
+                <span class="contact-quick-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.6 2.6a2 2 0 0 1-.45 2.11L8 9.69a16 16 0 0 0 6.31 6.31l1.26-1.26a2 2 0 0 1 2.11-.45c.83.28 1.7.48 2.6.6A2 2 0 0 1 22 16.92Z" />
+                  </svg>
+                </span>
+                <div>
+                  <span>Contactos:</span>
+                  <a href="tel:+50622938390">+506 2293 8390</a>
+                  <a href="mailto:ctp.ulloa@mep.go.cr">ctp.ulloa@mep.go.cr</a>
+                </div>
+              </div>
+
+              <div class="contact-quick-item">
+                <span class="contact-quick-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 4h8" />
+                    <path d="M9 2h6v4H9z" />
+                    <path d="M7 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1" />
+                    <path d="M8 12h8" />
+                    <path d="M8 16h5" />
+                  </svg>
+                </span>
+                <div>
+                  <span>Iniciar proceso de admisiones</span>
+                  <a href="#admision">Ver proceso de admisión</a>
+                </div>
+              </div>
             </div>
-          </article>
-
-          <article class="contact-card">
-            <h3>Canales recomendados</h3>
-            <p>
-              Cuando el sitio crezca, este bloque puede sumar mapa, horarios, redes oficiales y trazabilidad de consultas
-              por tipo de solicitud.
-            </p>
-          </article>
+          </div>
         </div>
+
+        <article class="contact-map-card" aria-label="Mapa de ubicacion del CTP de Ulloa">
+          <iframe
+            title="Mapa del Colegio Técnico Profesional de Ulloa"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Colegio%20T%C3%A9cnico%20Profesional%20de%20Ulloa%2C%20Barreal%2C%20Ulloa%2C%20Heredia%2C%20Costa%20Rica&output=embed"
+          ></iframe>
+          <div class="contact-map-footer">
+            <div>
+              <strong>Colegio Técnico Profesional de Ulloa</strong>
+              <span>Barreal, Ulloa, Heredia, Costa Rica</span>
+            </div>
+            <a
+              class="map-link"
+              href="https://www.google.com/maps/search/?api=1&query=Colegio%20T%C3%A9cnico%20Profesional%20de%20Ulloa%2C%20Barreal%2C%20Ulloa%2C%20Heredia%2C%20Costa%20Rica"
+              target="_blank"
+              rel="noopener"
+            >
+              Abrir mapa
+              <span aria-hidden="true">-></span>
+            </a>
+          </div>
+        </article>
+
       </div>
     </section>
   </main>
@@ -2306,28 +2520,12 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <h3>CTP de Ulloa</h3>
-        <p>
-          Propuesta de index2.html con enfoque UX/UI institucional: navegacion corta, jerarquia clara, accesos rapidos
-          y separacion entre contenido publico e interno.
-        </p>
-        <p class="footer-note">
-          No se expone en el menu principal el acceso privado; queda reservado para autenticacion y capas internas del
-          sistema.
-        </p>
       </div>
 
-      <div class="internal-panel" id="acceso-interno">
-        <h4>Acceso interno</h4>
-        <p>Secciones especiales reservadas para login institucional o gestion interna.</p>
-        <ul class="internal-links">
-          <li>Panel Junta Administrativa para carga de documentos.</li>
-          <li>Gestion interna para personal docente o administrativo.</li>
-        </ul>
-      </div>
     </div>
 
     <div class="container footer-bottom">
-      <p>&copy; 2026 Colegio Tecnico Profesional de Ulloa. Propuesta institucional de estructura web.</p>
+      <p>&copy; 2026 Colegio Tecnico Profesional de Ulloa.</p>
     </div>
   </footer>
   <a href="#inicio" class="back-to-top" aria-label="Volver al inicio">

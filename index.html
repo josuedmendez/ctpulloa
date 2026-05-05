@@ -408,7 +408,8 @@
       text-transform: uppercase;
     }
 
-    .eyebrow::before {
+    .eyebrow::before,
+    .eyebrow::after {
       content: "";
       width: 44px;
       height: 1px;
@@ -607,12 +608,23 @@
     }
 
     .section-tag {
-      margin: 0 0 0.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 0 0 0.75rem;
       color: var(--green);
-      font-size: 0.88rem;
+      font-size: 1.18rem;
       font-weight: 800;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+    }
+
+    .section-tag::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--green);
     }
 
     .section-header h2,
@@ -707,7 +719,7 @@
       gap: 0.7rem;
       margin: 0 0 0.75rem;
       color: var(--green);
-      font-size: 0.86rem;
+      font-size: 1.18rem;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -961,6 +973,15 @@
       border-radius: 28px;
       background: white;
       box-shadow: 0 20px 50px rgba(8, 21, 52, 0.12);
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
+    }
+
+    .college-campus-media:hover,
+    .college-campus-media:focus-visible {
+      box-shadow: 0 28px 62px rgba(8, 21, 52, 0.18);
+      transform: translateY(-8px);
     }
 
     .college-campus-media img {
@@ -1086,6 +1107,12 @@
       font-size: 1.1rem;
     }
 
+    .offer-intro .section-tag {
+      margin: 0 0 0.75rem;
+      color: var(--green);
+      font-size: 1.18rem;
+    }
+
     .offer-panel {
       display: grid;
       grid-template-rows: auto 1fr;
@@ -1202,7 +1229,7 @@
     }
 
     .offer-panel.academic {
-      --offer-accent: var(--navy);
+      --offer-accent: #0b009e;
     }
 
     .offer-panel.national-plan {
@@ -1269,6 +1296,13 @@
       max-width: 52ch;
       color: var(--muted);
       font-size: 1.06rem;
+    }
+
+    .admission-copy .section-tag {
+      max-width: none;
+      margin: 0 0 0.75rem;
+      color: var(--green);
+      font-size: 1.18rem;
     }
 
     .admission-copy h2 {
@@ -2076,14 +2110,14 @@
 
   <main>
     <section class="hero-section" id="inicio">
-      <div class="hero-video-band" aria-label="Video institucional del CTP Ulloa">
+      <!-- <div class="hero-video-band" aria-label="Video institucional del CTP Ulloa">
         <video autoplay muted loop playsinline preload="metadata" poster="assets/img/logo-web-ctpulloa-2026.png">
           <source src="assets/video/video-institucional.mp4" type="video/mp4" />
         </video>
         <div class="hero-video-fallback" aria-hidden="true">
           <img src="assets/img/logo-web-ctpulloa-2026.png" alt="" />
         </div>
-      </div>
+      </div> -->
 
       <div class="container hero-welcome">
         <div class="hero-copy">
@@ -2179,9 +2213,15 @@
             <li>Amplias zonas verdes para recreacion y convivencia</li>
           </ul>
         </div>
-        <div class="college-campus-media">
+        <a
+          class="college-campus-media"
+          href="https://www.google.com/maps/search/?api=1&query=Colegio%20T%C3%A9cnico%20Profesional%20de%20Ulloa%2C%20Barreal%2C%20Ulloa%2C%20Heredia%2C%20Costa%20Rica"
+          target="_blank"
+          rel="noopener"
+          aria-label="Abrir ubicacion del CTP de Ulloa en Google Maps"
+        >
           <img src="assets/img/mapa-ctpulloa.png" alt="Mapa del campus del Colegio Tecnico Profesional de Ulloa" />
-        </div>
+        </a>
       </div>
 
       <div class="container college-layout">
@@ -2353,7 +2393,7 @@
       <div class="container admission-wrap">
         <div class="admission-copy">
           <p class="section-tag tag-light">Admision</p>
-          <h2>Proceso de admision.</h2>
+          <h2>Proceso de admision</h2>
 
 
           <div class="admission-actions">
