@@ -83,10 +83,12 @@
       position: sticky;
       top: 0;
       z-index: 60;
-      background: var(--navy);
-      color: white;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--text);
+      backdrop-filter: blur(18px);
       border-top: 3px solid var(--green);
-      box-shadow: 0 14px 36px rgba(8, 21, 52, 0.16);
+      border-bottom: 1px solid rgba(17, 32, 61, 0.08);
+      box-shadow: 0 14px 36px rgba(8, 21, 52, 0.08);
     }
 
     .header-top {
@@ -95,7 +97,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      border-bottom: 1px solid rgba(17, 32, 61, 0.1);
     }
 
     .header-shell {
@@ -134,7 +136,7 @@
       position: relative;
       font-size: 0.96rem;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.92);
+      color: var(--navy);
       letter-spacing: 0.01em;
       white-space: nowrap;
     }
@@ -169,7 +171,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--muted);
       font-size: 0.9rem;
       font-weight: 600;
       white-space: nowrap;
@@ -186,7 +188,7 @@
     .contact-separator {
       width: 1px;
       height: 24px;
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(17, 32, 61, 0.12);
       flex: 0 0 auto;
     }
 
@@ -203,7 +205,7 @@
       place-items: center;
       width: 1.55rem;
       height: 1.55rem;
-      color: rgba(255, 255, 255, 0.78);
+      color: var(--muted);
     }
 
     .social-link svg {
