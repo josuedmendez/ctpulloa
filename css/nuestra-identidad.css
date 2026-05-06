@@ -1,0 +1,113 @@
+.identity-page {
+  background: #fbfcff;
+}
+
+.identity-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(340px, 46vw, 520px);
+  display: grid;
+  align-items: end;
+  padding: clamp(3.4rem, 7vw, 6rem) 0 clamp(4.6rem, 8vw, 7rem);
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(9, 19, 45, 0.78), rgba(13, 114, 52, 0.46)),
+    url("../assets/img/nuestro-colegio-arcos.jpg") center / cover;
+}
+
+.identity-hero::after {
+  content: "";
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  bottom: -4.5rem;
+  height: 8rem;
+  background: #fbfcff;
+  transform: rotate(-3deg);
+  transform-origin: left center;
+}
+
+.identity-hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.identity-hero .eyebrow {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.identity-hero .eyebrow::before,
+.identity-hero .eyebrow::after {
+  background: var(--gold);
+}
+
+.identity-hero h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(2.7rem, 6vw, 5.3rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.identity-hero h1 span {
+  position: relative;
+  display: inline-block;
+  font-weight: 800;
+}
+
+.identity-hero h1 span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.14em;
+  height: 0.12em;
+  border-radius: 99px;
+  background: var(--gold);
+}
+
+.identity-section {
+  padding-top: clamp(2.4rem, 5vw, 4.8rem);
+}
+
+.identity-page .college-layout {
+  margin-top: 0;
+}
+
+.identity-page .identity-media {
+  min-height: clamp(380px, 42vw, 560px);
+}
+
+.identity-page .identity-overview {
+  align-items: stretch;
+}
+
+.identity-page .identity-content {
+  align-self: center;
+}
+
+@media (max-width: 960px) {
+  .identity-hero {
+    min-height: 360px;
+  }
+
+  .identity-page .identity-overview {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .identity-hero {
+    min-height: 320px;
+    padding: 3rem 0 4.6rem;
+  }
+
+  .identity-hero h1 {
+    font-size: 2.65rem;
+  }
+
+  .identity-page .identity-media {
+    min-height: 340px;
+  }
+}
