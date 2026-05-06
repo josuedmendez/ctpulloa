@@ -393,9 +393,12 @@ section[id] {
 .hero-section {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   background:
-    linear-gradient(135deg, #f7fbff 0%, #edf6f1 58%, #fff7df 100%);
-  color: var(--text);
+    linear-gradient(180deg, rgba(8, 16, 36, 0.06) 0%, rgba(8, 16, 36, 0.34) 72%, rgba(8, 16, 36, 0.5) 100%),
+    linear-gradient(90deg, rgba(9, 19, 45, 0.48), rgba(9, 19, 45, 0.3)),
+    url("../assets/img/portada-colegio.jpg") center / cover;
+  color: white;
 }
 
 .hero-video-band {
@@ -446,11 +449,11 @@ section[id] {
 
 .hero-welcome {
   position: relative;
-  padding: 4.8rem 0 4rem;
+  display: grid;
+  place-items: center;
+  min-height: clamp(560px, 72vh, 760px);
+  padding: clamp(5rem, 9vw, 8rem) 0 clamp(8rem, 12vw, 11rem);
   text-align: center;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.56)),
-    linear-gradient(135deg, rgba(13, 114, 52, 0.1), rgba(243, 194, 68, 0.18));
 }
 
 .hero-copy {
@@ -483,10 +486,12 @@ section[id] {
   font-family: "Montserrat", Arial, sans-serif;
   font-size: clamp(2.65rem, 5vw, 5rem);
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   max-width: 14ch;
   margin-inline: auto;
-  color: var(--navy);
+  color: white;
+  text-wrap: balance;
+  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.26);
 }
 
 .hero-lead {
@@ -525,11 +530,24 @@ section[id] {
   color: white;
 }
 
+.hero-section .eyebrow {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.hero-section .eyebrow::before,
+.hero-section .eyebrow::after {
+  background: rgba(243, 194, 68, 0.88);
+}
+
 .hero-actions .button-secondary {
-  border: 1px solid rgba(13, 114, 52, 0.22);
-  background: white;
-  color: var(--green-deep);
-  box-shadow: 0 14px 34px rgba(8, 21, 52, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  box-shadow: 0 14px 34px rgba(8, 21, 52, 0.12);
+}
+
+.hero-actions .button-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .shortcut-strip {
@@ -542,9 +560,11 @@ section[id] {
 
 .hero-shortcuts {
   position: relative;
+  z-index: 1;
+  margin-top: clamp(-5.5rem, -7vw, -4rem);
   padding: 0 0 3.4rem;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(237, 246, 241, 0.72));
+    linear-gradient(180deg, transparent 0, transparent 44%, #fbfcff 44%, #fbfcff 100%);
 }
 
 .shortcut {
@@ -2009,11 +2029,19 @@ textarea {
   }
 
   .hero-welcome {
-    padding: 3.5rem 0 3rem;
+    min-height: 520px;
+    padding: 4rem 0 6.5rem;
   }
 
   .hero-copy h1 {
     max-width: 11ch;
+  }
+
+  .hero-shortcuts {
+    margin-top: -3.75rem;
+    padding-bottom: 2.6rem;
+    background:
+      linear-gradient(180deg, transparent 0, transparent 5rem, #fbfcff 5rem, #fbfcff 100%);
   }
 
   .hero-lead {

@@ -59,7 +59,7 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
   const slides = Array.from(carousel.querySelectorAll('.carousel-person'));
   const dotsWrap = carousel.querySelector('.carousel-dots');
   const intervalDuration = 1500;
-  let autoplay;
+  let autoplay = null;
   let current = slides.findIndex(slide => slide.classList.contains('is-active'));
 
   if (!slides.length || !dotsWrap) return;
@@ -87,11 +87,12 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
     current = index;
     const prev = getPrevIndex(current);
     const next = getNextIndex(current);
+    const hasSiblings = slides.length > 1;
 
     slides.forEach((slide, slideIndex) => {
       slide.classList.toggle('is-active', slideIndex === current);
-      slide.classList.toggle('is-prev', slideIndex === prev);
-      slide.classList.toggle('is-next', slideIndex === next);
+      slide.classList.toggle('is-prev', hasSiblings && slideIndex === prev);
+      slide.classList.toggle('is-next', hasSiblings && slideIndex === next);
       slide.setAttribute('aria-pressed', String(slideIndex === current));
     });
 
@@ -102,11 +103,16 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
   }
 
   function startAutoplay() {
+    if (slides.length < 2) return;
+    stopAutoplay();
     autoplay = window.setInterval(showNextSlide, intervalDuration);
   }
 
   function stopAutoplay() {
+    if (!autoplay) return;
+
     window.clearInterval(autoplay);
+    autoplay = null;
   }
 
   function restartAutoplay() {
@@ -121,8 +127,6 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
     });
   });
 
-  carousel.addEventListener('mouseenter', stopAutoplay);
-  carousel.addEventListener('mouseleave', startAutoplay);
   carousel.addEventListener('focusin', stopAutoplay);
   carousel.addEventListener('focusout', startAutoplay);
 
