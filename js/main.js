@@ -46,9 +46,14 @@ if (backToTop) {
   const toggleBackToTop = () => {
     const sectionTop = collegeSection
       ? collegeSection.getBoundingClientRect().top + window.scrollY
-      : 320;
-    backToTop.classList.toggle('is-visible', window.scrollY >= sectionTop - 120);
+      : 140;
+    backToTop.classList.toggle('is-visible', window.scrollY >= Math.max(80, sectionTop - 120));
   };
+
+  backToTop.addEventListener('click', event => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   toggleBackToTop();
   window.addEventListener('scroll', toggleBackToTop, { passive: true });

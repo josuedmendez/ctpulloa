@@ -72,6 +72,19 @@
         <a href="#inicio">Inicio</a>
         <div class="nav-item has-submenu">
           <button class="nav-submenu-toggle" type="button" aria-expanded="false">
+            Oferta Educativa
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="#especialidades-tecnicas">Especialidades Técnicas</a>
+            <a href="#area-academica">Área Académica</a>
+            <a href="#plan-nacional">Plan Nacional</a>
+          </div>
+        </div>
+        <div class="nav-item has-submenu">
+          <button class="nav-submenu-toggle" type="button" aria-expanded="false">
             Sobre el CTP Ulloa
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="m6 9 6 6 6-6" />
@@ -82,9 +95,7 @@
             <a href="nuestro-equipo.html">Nuestro Equipo</a>
           </div>
         </div>
-        <a href="#oferta-educativa">Oferta Educativa</a>
-        <a href="#admision">Admision</a>
-        <a href="#contacto">Contacto</a>
+        <a href="junta-administrativa.html">Junta Administrativa</a>
       </nav>
 
       <a href="#admision" class="admissions-btn">Admisiones</a>
@@ -144,6 +155,20 @@
             <span class="shortcut-description">Entrada directa al ecosistema academico institucional.</span>
             <span class="shortcut-action">Ingresar al sistema -></span>
           </a>
+          <a href="junta-administrativa.html" class="shortcut acceso-rapido-junta-administrativa">
+            <span class="shortcut-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18" />
+                <path d="M5 21V9l7-5 7 5v12" />
+                <path d="M9 21v-6h6v6" />
+                <path d="M9 10h6" />
+              </svg>
+            </span>
+            <span class="shortcut-number" aria-hidden="true">03</span>
+            <strong>Junta Administrativa</strong>
+            <span class="shortcut-description">Acceso a informacion y gestion institucional administrativa.</span>
+            <span class="shortcut-action">Ver informacion -></span>
+          </a>
           <a href="#bolsa-empleo" class="shortcut acceso-rapido-bolsa-empleo">
             <span class="shortcut-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -153,7 +178,7 @@
                 <path d="M10 12v2h4v-2" />
               </svg>
             </span>
-            <span class="shortcut-number" aria-hidden="true">03</span>
+            <span class="shortcut-number" aria-hidden="true">04</span>
             <strong>Bolsa de empleo</strong>
             <span class="shortcut-description">Vinculo con oportunidades laborales y seguimiento.</span>
             <span class="shortcut-action">Ver oportunidades -></span>
@@ -167,7 +192,7 @@
                 <path d="M17 11h6" />
               </svg>
             </span>
-            <span class="shortcut-number" aria-hidden="true">04</span>
+            <span class="shortcut-number" aria-hidden="true">05</span>
             <strong>Cooperativa</strong>
             <span class="shortcut-description">Espacio visible para iniciativas y participacion estudiantil.</span>
             <span class="shortcut-action">Conocer iniciativas -></span>
@@ -217,7 +242,7 @@
       </div>
 
       <div class="container offer-grid">
-        <article class="offer-panel featured">
+        <article class="offer-panel featured" id="especialidades-tecnicas">
           <div class="offer-panel-media">
             <img
               src="assets/img/programa-especialidades-tecnicas.png"
@@ -241,7 +266,7 @@
           </div>
         </article>
 
-        <article class="offer-panel academic">
+        <article class="offer-panel academic" id="area-academica">
           <div class="offer-panel-media">
             <img
               src="assets/img/programa-area-academica.png"
@@ -265,7 +290,7 @@
           </div>
         </article>
 
-        <article class="offer-panel national-plan">
+        <article class="offer-panel national-plan" id="plan-nacional">
           <div class="offer-panel-media">
             <img
               src="assets/img/programa-plan-nacional.png"
@@ -377,7 +402,12 @@
             <h2>Se parte de la familia <span>CTP Ulloa</span></h2>
 
             <div class="contact-quick-list">
-              <div class="contact-quick-item">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Colegio%20T%C3%A9cnico%20Profesional%20de%20Ulloa%2C%20Barreal%2C%20Ulloa%2C%20Heredia%2C%20Costa%20Rica"
+                target="_blank"
+                rel="noopener"
+                class="contact-quick-item"
+              >
                 <span class="contact-quick-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M14 18 9 21l-5-3V6l5 3 5-3 6 3v12l-6-3Z" />
@@ -387,17 +417,13 @@
                 </span>
                 <div>
                   <span>Dirección:</span>
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=Colegio%20T%C3%A9cnico%20Profesional%20de%20Ulloa%2C%20Barreal%2C%20Ulloa%2C%20Heredia%2C%20Costa%20Rica"
-                    target="_blank"
-                    rel="noopener"
-                  >
+                  <strong class="contact-quick-value">
                     Barreal, Ulloa, Heredia, Costa Rica
-                  </a>
+                  </strong>
                 </div>
-              </div>
+              </a>
 
-              <div class="contact-quick-item">
+              <a href="tel:+50622938390" class="contact-quick-item">
                 <span class="contact-quick-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.6 2.6a2 2 0 0 1-.45 2.11L8 9.69a16 16 0 0 0 6.31 6.31l1.26-1.26a2 2 0 0 1 2.11-.45c.83.28 1.7.48 2.6.6A2 2 0 0 1 22 16.92Z" />
@@ -405,12 +431,11 @@
                 </span>
                 <div>
                   <span>Contactos:</span>
-                  <a href="tel:+50622938390">+506 2293 8390</a>
-                  <a href="mailto:ctp.ulloa@mep.go.cr">ctp.ulloa@mep.go.cr</a>
+                  <strong class="contact-quick-value">+506 2293 8390 / ctp.ulloa@mep.go.cr</strong>
                 </div>
-              </div>
+              </a>
 
-              <div class="contact-quick-item">
+              <a href="#admision" class="contact-quick-item">
                 <span class="contact-quick-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M8 4h8" />
@@ -422,9 +447,9 @@
                 </span>
                 <div>
                   <span>Iniciar proceso de admisiones</span>
-                  <a href="#admision">Ver proceso de admisión</a>
+                  <strong class="contact-quick-value">Ver proceso de admisión</strong>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -469,7 +494,7 @@
       <p>&copy; 2026 Colegio Tecnico Profesional de Ulloa.</p>
     </div>
   </footer>
-  <a href="#inicio" class="back-to-top" aria-label="Volver al inicio">
+  <a href="#top" class="back-to-top" aria-label="Volver al inicio">
     <span aria-hidden="true">↑</span>
   </a>
   <script src="js/main.js"></script>

@@ -5,35 +5,23 @@
 .identity-hero {
   position: relative;
   overflow: hidden;
-  min-height: clamp(340px, 46vw, 520px);
   display: grid;
-  align-items: end;
-  padding: clamp(3.4rem, 7vw, 6rem) 0 clamp(4.6rem, 8vw, 7rem);
-  color: white;
-  background:
-    linear-gradient(90deg, rgba(9, 19, 45, 0.78), rgba(13, 114, 52, 0.46)),
-    url("../assets/img/nuestro-colegio-arcos.jpg") center / cover;
-}
-
-.identity-hero::after {
-  content: "";
-  position: absolute;
-  left: -5%;
-  right: -5%;
-  bottom: -4.5rem;
-  height: 8rem;
+  align-items: center;
+  padding: clamp(3.4rem, 7vw, 6rem) 0;
   background: #fbfcff;
-  transform: rotate(-3deg);
-  transform-origin: left center;
+  color: var(--navy-deep);
+  text-align: center;
 }
 
 .identity-hero-copy {
   position: relative;
   z-index: 1;
+  display: grid;
+  justify-items: center;
 }
 
 .identity-hero .eyebrow {
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--green);
 }
 
 .identity-hero .eyebrow::before,
@@ -42,29 +30,30 @@
 }
 
 .identity-hero h1 {
-  max-width: 12ch;
+  position: relative;
   margin: 0;
   font-family: "Montserrat", Arial, sans-serif;
-  font-size: clamp(2.7rem, 6vw, 5.3rem);
-  line-height: 0.98;
+  font-size: clamp(1.9rem, 3vw, 2.45rem);
+  font-weight: 800;
+  line-height: 1.18;
   letter-spacing: 0;
 }
 
 .identity-hero h1 span {
-  position: relative;
   display: inline-block;
   font-weight: 800;
 }
 
-.identity-hero h1 span::after {
+.identity-hero h1::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.14em;
-  height: 0.12em;
+  left: 50%;
+  bottom: -0.62rem;
+  width: 96px;
+  height: 3px;
   border-radius: 99px;
-  background: var(--gold);
+  background: linear-gradient(90deg, rgba(17, 32, 61, 0.22), var(--gold), rgba(17, 32, 61, 0.22));
+  transform: translateX(-50%);
 }
 
 .identity-section {
@@ -88,10 +77,6 @@
 }
 
 @media (max-width: 960px) {
-  .identity-hero {
-    min-height: 360px;
-  }
-
   .identity-page .identity-overview {
     grid-template-columns: 1fr;
   }
@@ -99,12 +84,11 @@
 
 @media (max-width: 760px) {
   .identity-hero {
-    min-height: 320px;
-    padding: 3rem 0 4.6rem;
+    padding: 3rem 0;
   }
 
   .identity-hero h1 {
-    font-size: 2.65rem;
+    font-size: 1.9rem;
   }
 
   .identity-page .identity-media {

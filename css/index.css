@@ -365,6 +365,7 @@ section[id] {
 .back-to-top.is-visible {
   opacity: 1;
   visibility: visible;
+  transform: translateY(0);
   pointer-events: auto;
   animation: backToTopFloat 2.4s ease-in-out infinite;
 }
@@ -554,7 +555,7 @@ section[id] {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -1643,6 +1644,25 @@ section[id] {
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 10px 24px rgba(8, 21, 52, 0.1);
+  text-decoration: none;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.contact-quick-item:hover,
+.contact-quick-item:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(13, 114, 52, 0.2);
+  box-shadow:
+    0 16px 34px rgba(8, 21, 52, 0.14),
+    0 4px 14px rgba(8, 21, 52, 0.08);
+}
+
+.contact-quick-item:focus-visible {
+  outline: 3px solid rgba(13, 114, 52, 0.24);
+  outline-offset: 3px;
 }
 
 .contact-quick-icon {
@@ -1671,19 +1691,13 @@ section[id] {
   text-transform: none;
 }
 
-.contact-quick-item a,
-.contact-quick-item strong {
+.contact-quick-value {
+  display: block;
   color: #6f7885;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.35;
   text-decoration: underline;
-}
-
-.contact-quick-item a + a::before {
-  content: " / ";
-  color: #6f7885;
-  text-decoration: none;
 }
 
 .contact-map-card {

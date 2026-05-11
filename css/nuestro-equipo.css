@@ -6,23 +6,9 @@
   position: relative;
   overflow: hidden;
   padding: clamp(3.4rem, 7vw, 6.5rem) 0 clamp(4.8rem, 9vw, 8rem);
-  background:
-    linear-gradient(135deg, rgba(13, 114, 52, 0.96), rgba(79, 190, 99, 0.88)),
-    var(--green);
-  color: white;
-  text-align: center;
-}
-
-.team-hero::after {
-  content: "";
-  position: absolute;
-  left: -5%;
-  right: -5%;
-  bottom: -4.5rem;
-  height: 8rem;
   background: #fbfcff;
-  transform: rotate(-3deg);
-  transform-origin: left center;
+  color: var(--navy-deep);
+  text-align: center;
 }
 
 .team-hero-copy {
@@ -34,45 +20,46 @@
 
 .team-hero .eyebrow {
   margin-bottom: 0.65rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--green);
 }
 
 .team-hero .eyebrow::before,
 .team-hero .eyebrow::after {
-  background: rgba(255, 255, 255, 0.68);
+  background: var(--gold);
 }
 
 .team-hero h1 {
+  position: relative;
   margin: 0;
   font-family: "Montserrat", Arial, sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4.6rem);
-  line-height: 1;
+  font-size: clamp(1.9rem, 3vw, 2.45rem);
+  font-weight: 800;
+  line-height: 1.18;
   letter-spacing: 0;
 }
 
-.team-hero h1 span,
-.team-department h2 span {
+.team-hero h1 span {
   position: relative;
   display: inline-block;
   font-weight: 800;
 }
 
-.team-hero h1 span::after,
-.team-department h2 span::after {
+.team-hero h1::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.18em;
-  height: 0.14em;
+  left: 50%;
+  bottom: -0.62rem;
+  width: 96px;
+  height: 3px;
   border-radius: 99px;
-  background: var(--gold);
+  background: linear-gradient(90deg, rgba(17, 32, 61, 0.22), var(--gold), rgba(17, 32, 61, 0.22));
+  transform: translateX(-50%);
 }
 
 .team-hero p:not(.eyebrow) {
   max-width: 54ch;
   margin: 1rem 0 0;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--muted);
   font-size: 1.08rem;
   line-height: 1.45;
 }
@@ -92,8 +79,8 @@
   margin: clamp(0.8rem, 2vw, 1.4rem) 0 0;
   color: var(--navy-deep);
   font-family: "Montserrat", Arial, sans-serif;
-  font-size: clamp(1.9rem, 3vw, 2.6rem);
-  line-height: 1.08;
+  font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+  line-height: 1.16;
   letter-spacing: 0;
 }
 
@@ -142,13 +129,29 @@
   margin: 0;
   color: #242a32;
   font-family: "Montserrat", Arial, sans-serif;
-  font-size: clamp(1.8rem, 3vw, 2.35rem);
-  line-height: 1.1;
+  font-size: clamp(1.28rem, 2vw, 1.68rem);
+  line-height: 1.18;
   letter-spacing: 0;
 }
 
-.team-department h2 span::after {
-  background: #48ca6d;
+.team-department h2 span {
+  display: inline-block;
+  padding: 0 0.08em;
+  margin: 0 -0.08em;
+  border-radius: 0.08em;
+  background:
+    linear-gradient(#48ca6d, #48ca6d) left bottom / 100% 0.14em no-repeat;
+  color: inherit;
+  font-weight: 800;
+  transition:
+    background-size 0.28s ease,
+    color 0.22s ease;
+}
+
+.team-department:hover h2 span,
+.team-department:focus-within h2 span {
+  background-size: 100% 100%;
+  color: white;
 }
 
 .department-copy {
