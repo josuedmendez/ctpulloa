@@ -125,7 +125,14 @@
             <p>
               Formación orientada al soporte técnico, administración de redes, sistemas operativos y atención de infraestructura tecnológica.
             </p>
-            <a href="index.html#contacto" class="specialty-link">Leer Más <span aria-hidden="true">→</span></a>
+            <a
+              href="especialidad-redes.html"
+              class="specialty-link"
+              data-specialty-popup
+              data-specialty-title="Configuración y Soporte a Redes"
+            >
+              Leer Más <span aria-hidden="true">→</span>
+            </a>
           </div>
         </article>
 
@@ -212,6 +219,23 @@
     </section>
   </main>
 
+  <div class="specialty-modal" id="specialty-modal" role="dialog" aria-modal="true" aria-labelledby="specialty-modal-title" hidden>
+    <div class="specialty-modal-backdrop" data-specialty-close></div>
+    <article class="specialty-modal-card">
+      <div class="specialty-modal-bar">
+        <h2 id="specialty-modal-title">Especialidad técnica</h2>
+        <button class="specialty-modal-close" type="button" aria-label="Cerrar especialidad" data-specialty-close>×</button>
+      </div>
+      <iframe
+        class="specialty-modal-frame"
+        title="Detalle de la especialidad técnica"
+        src="about:blank"
+        loading="lazy"
+        data-specialty-frame
+      ></iframe>
+    </article>
+  </div>
+
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
@@ -227,5 +251,6 @@
     <span aria-hidden="true">↑</span>
   </a>
   <script src="js/main.js"></script>
+  <script src="js/especialidades-tecnicas.js"></script>
 </body>
 </html>

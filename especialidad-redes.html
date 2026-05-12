@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Especialidad de Configuracion y Soporte a Redes de Comunicacion y Sistemas Operativos del Colegio Tecnico Profesional de Ulloa."
+  />
+  <title>Configuración y Soporte a Redes | CTP de Ulloa</title>
+  <script>
+    if (new URLSearchParams(window.location.search).get('popup') === '1') {
+      document.documentElement.classList.add('popup-view');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/especialidad-redes.css" />
+  <link rel="icon" type="image/png" href="assets/img/logo-web-ctpulloa-2026.png">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-top">
+      <div class="header-contact">
+        <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16v16H4z" />
+            <path d="m22 6-10 7L2 6" />
+          </svg>
+          ctp.ulloa@mep.go.cr
+        </a>
+        <a href="tel:+50622938390" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.6 2.6a2 2 0 0 1-.45 2.11L8 9.69a16 16 0 0 0 6.31 6.31l1.26-1.26a2 2 0 0 1 2.11-.45c.83.28 1.7.48 2.6.6A2 2 0 0 1 22 16.92Z" />
+          </svg>
+          +506 2293 8390
+        </a>
+      </div>
+
+      <div class="header-social" aria-label="Redes sociales">
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14 8h2V5h-2c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.4l.6-3h-3V9c0-.6.4-1 1-1Z" />
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="4" />
+            <circle cx="12" cy="12" r="3.2" />
+            <path d="M16.8 7.2h.01" />
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1A31 31 0 0 0 1.9 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM10 15.4V8.6l6 3.4-6 3.4Z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="container header-shell">
+      <a href="index.html#inicio" class="brand" aria-label="Inicio CTP de Ulloa">
+        <img src="assets/img/logo-web-ctpulloa-2026.png" alt="Colegio Tecnico Profesional de Ulloa" class="brand-logo" />
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#inicio">Inicio</a>
+        <div class="nav-item has-submenu">
+          <button class="nav-submenu-toggle" type="button" aria-expanded="false">
+            Oferta Educativa
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="especialidades-tecnicas.html" aria-current="page">Especialidades Técnicas</a>
+            <a href="index.html#area-academica">Área Académica</a>
+            <a href="index.html#plan-nacional">Plan Nacional</a>
+          </div>
+        </div>
+        <div class="nav-item has-submenu">
+          <button class="nav-submenu-toggle" type="button" aria-expanded="false">
+            Sobre el CTP Ulloa
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="nuestra-identidad.html">Nuestra Identidad</a>
+            <a href="nuestro-equipo.html">Nuestro Equipo</a>
+          </div>
+        </div>
+        <a href="junta-administrativa.html">Junta Administrativa</a>
+      </nav>
+
+      <a href="index.html#admision" class="admissions-btn">Admisiones</a>
+    </div>
+  </header>
+
+  <main class="network-page">
+    <section class="network-hero">
+      <div class="container network-hero-grid">
+        <div class="network-hero-copy">
+          <p class="eyebrow">Especialidad Técnica</p>
+          <h1>Configuración y Soporte a Redes de Comunicación y Sistemas Operativos</h1>
+          <p>
+            Formación para diagnosticar, instalar, configurar y brindar soporte a infraestructura tecnológica,
+            redes de comunicación y sistemas operativos en entornos educativos, empresariales y de servicio.
+          </p>
+          <div class="network-hero-actions" aria-label="Secciones principales">
+            <a href="#descripcion" class="network-button primary">Descripción</a>
+            <a href="#malla" class="network-button secondary">Malla curricular</a>
+          </div>
+        </div>
+
+        <figure class="network-hero-media">
+          <img src="assets/img/especialidad-redes.png" alt="Estudiantes de la especialidad de redes de comunicacion" />
+          <figcaption>Infraestructura, soporte técnico y conectividad.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="network-section" id="descripcion" aria-labelledby="descripcion-title">
+      <div class="container section-header network-section-header">
+        <div>
+          <p class="section-tag">Descripción</p>
+          <h2 id="descripcion-title">Una ruta técnica para construir y sostener conectividad.</h2>
+        </div>
+        <p class="section-lead">
+          La especialidad integra fundamentos de redes, administración de sistemas operativos, soporte al usuario,
+          mantenimiento preventivo y prácticas de seguridad para responder a necesidades reales de infraestructura.
+        </p>
+      </div>
+
+      <div class="container description-grid">
+        <article class="description-card">
+          <span>01</span>
+          <h3>Redes de comunicación</h3>
+          <p>Configuración de dispositivos, cableado estructurado, direccionamiento IP, conectividad local y servicios de red.</p>
+        </article>
+        <article class="description-card">
+          <span>02</span>
+          <h3>Sistemas operativos</h3>
+          <p>Instalación, administración, mantenimiento y soporte de sistemas de escritorio y servidores.</p>
+        </article>
+        <article class="description-card">
+          <span>03</span>
+          <h3>Soporte técnico</h3>
+          <p>Diagnóstico de fallas, atención a usuarios, documentación técnica y resolución ordenada de incidentes.</p>
+        </article>
+        <article class="description-card">
+          <span>04</span>
+          <h3>Seguridad y continuidad</h3>
+          <p>Buenas prácticas para proteger equipos, servicios, datos e infraestructura frente a riesgos cotidianos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="profile-section" aria-label="Perfiles de la especialidad">
+      <div class="container profile-grid">
+        <article class="profile-panel" id="perfil-ingreso">
+          <p class="section-tag">Perfil de ingreso</p>
+          <h2>Para estudiantes con curiosidad técnica y actitud de servicio.</h2>
+          <ul class="profile-list">
+            <li>Interés por la tecnología, la conectividad y el funcionamiento de los equipos.</li>
+            <li>Disposición para resolver problemas con paciencia, orden y pensamiento lógico.</li>
+            <li>Capacidad para trabajar en equipo, comunicar hallazgos y seguir procedimientos.</li>
+            <li>Responsabilidad en el uso de herramientas, información y recursos tecnológicos.</li>
+          </ul>
+        </article>
+
+        <article class="profile-panel highlight" id="perfil-salida">
+          <p class="section-tag">Perfil de salida</p>
+          <h2>Una persona egresada preparada para operar y apoyar infraestructura digital.</h2>
+          <ul class="profile-list">
+            <li>Instala, configura y verifica redes cableadas e inalámbricas de acuerdo con requerimientos técnicos.</li>
+            <li>Administra sistemas operativos, usuarios, recursos compartidos y servicios básicos de red.</li>
+            <li>Diagnostica fallas en equipos, periféricos, conectividad y servicios tecnológicos.</li>
+            <li>Documenta procesos, atiende usuarios y aplica buenas prácticas de seguridad informática.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="feature-image-section" aria-labelledby="imagen-title">
+      <div class="container feature-image-card">
+        <div class="feature-image-copy">
+          <p class="section-tag">Imagen</p>
+          <h2 id="imagen-title">Ambiente técnico de aprendizaje.</h2>
+          <p>
+            Un vistazo al trabajo práctico, al uso responsable de herramientas tecnológicas y a la formación
+            aplicada que caracteriza el área de redes y soporte.
+          </p>
+        </div>
+        <figure class="feature-image-media">
+          <!-- Reemplazar por la imagen oficial cuando este disponible. -->
+          <img src="assets/img/especialidad-redes.png" alt="Imagen principal de la especialidad de redes" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="network-section curriculum-section" id="malla" aria-labelledby="malla-title">
+      <div class="container section-header network-section-header">
+        <div>
+          <p class="section-tag">Malla curricular</p>
+          <h2 id="malla-title">Formación progresiva por nivel.</h2>
+        </div>
+        <p class="section-lead">
+          Ruta de aprendizaje organizada por año lectivo para visualizar el avance técnico de la especialidad.
+        </p>
+      </div>
+
+      <div class="container curriculum-grid">
+        <article class="curriculum-card">
+          <span class="curriculum-year">10°</span>
+          <h3>Fundamentos técnicos</h3>
+          <ul>
+            <li>Arquitectura de computadoras</li>
+            <li>Introducción a redes</li>
+            <li>Sistemas operativos de escritorio</li>
+            <li>Soporte y mantenimiento preventivo</li>
+          </ul>
+        </article>
+        <article class="curriculum-card">
+          <span class="curriculum-year">11°</span>
+          <h3>Servicios e infraestructura</h3>
+          <ul>
+            <li>Direccionamiento y configuración de red</li>
+            <li>Servicios de red y servidores</li>
+            <li>Sistemas operativos de servidor</li>
+            <li>Seguridad, respaldo y documentación</li>
+          </ul>
+        </article>
+        <article class="curriculum-card">
+          <span class="curriculum-year">12°</span>
+          <h3>Integración y soporte</h3>
+          <ul>
+            <li>Administración de infraestructura</li>
+            <li>Diagnóstico y soporte empresarial</li>
+            <li>Proyecto técnico integrado</li>
+            <li>Práctica profesional supervisada</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="media-section" id="video" aria-labelledby="video-title">
+      <div class="container media-layout">
+        <div class="media-copy">
+          <p class="section-tag">Video</p>
+          <h2 id="video-title">La especialidad en acción.</h2>
+          <p>
+            Un espacio audiovisual para compartir prácticas, recorridos, testimonios y proyectos desarrollados
+            por estudiantes del área de redes y soporte.
+          </p>
+        </div>
+        <div class="video-frame">
+          <video controls poster="assets/img/especialidad-redes.png">
+            <!-- Reemplazar por el video oficial de la especialidad cuando este disponible. -->
+            <source src="assets/video/video-institucional.mp4" type="video/mp4" />
+            Su navegador no permite reproducir video HTML5.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section" aria-labelledby="galeria-title">
+      <div class="container gallery-heading">
+        <p class="section-tag">Galería</p>
+        <h2 id="galeria-title">Momentos de aprendizaje técnico.</h2>
+      </div>
+
+      <div class="container gallery-grid">
+        <figure class="gallery-item">
+          <img src="assets/img/especialidad-redes.png" alt="Practica de redes y soporte tecnico" loading="lazy" />
+          <figcaption>Laboratorio de redes</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="assets/img/programa-especialidades-tecnicas.png" alt="Estudiantes de especialidades tecnicas" loading="lazy" />
+          <figcaption>Trabajo técnico</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="assets/img/nuestro-colegio-arcos.jpg" alt="Instalaciones del CTP de Ulloa" loading="lazy" />
+          <figcaption>Entorno institucional</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="assets/img/portada-colegio.jpg" alt="Comunidad educativa del CTP de Ulloa" loading="lazy" />
+          <figcaption>Comunidad CTP</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>CTP de Ulloa</h3>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Colegio Tecnico Profesional de Ulloa.</p>
+    </div>
+  </footer>
+  <a href="#top" class="back-to-top" aria-label="Volver al inicio">
+    <span aria-hidden="true">↑</span>
+  </a>
+  <script src="js/main.js"></script>
+</body>
+</html>
