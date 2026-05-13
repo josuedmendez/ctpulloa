@@ -121,24 +121,28 @@
   overflow: hidden;
   border: 1px solid rgba(17, 32, 61, 0.1);
   border-radius: 8px;
-  background: white;
-  box-shadow: 0 28px 72px rgba(8, 21, 52, 0.16);
+  background: linear-gradient(135deg, #f8fbff, #ffffff 58%, #eef5f2);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.74),
+    0 22px 58px rgba(8, 21, 52, 0.22),
+    0 0 48px rgba(8, 21, 52, 0.2);
+  animation: network-logo-float 5s ease-in-out infinite;
 }
 
 .network-hero-media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, transparent 42%, rgba(8, 21, 52, 0.62)),
-    linear-gradient(90deg, rgba(13, 114, 52, 0.14), transparent 62%);
+  background: linear-gradient(90deg, rgba(13, 114, 52, 0.1), transparent 62%);
   pointer-events: none;
 }
 
 .network-hero-media img {
   width: 100%;
-  height: clamp(360px, 45vw, 560px);
-  object-fit: cover;
+  height: clamp(330px, 39vw, 500px);
+  padding: clamp(1rem, 3vw, 2rem);
+  object-fit: contain;
+  object-position: center;
 }
 
 .network-hero-media figcaption {
@@ -152,12 +156,39 @@
   text-shadow: 0 10px 28px rgba(0, 0, 0, 0.26);
 }
 
+@keyframes network-logo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .network-hero-media {
+    animation: none;
+  }
+}
+
 .network-section,
 .profile-section,
 .feature-image-section,
 .media-section,
 .gallery-section {
   padding: clamp(3.2rem, 6vw, 5rem) 0;
+}
+
+.network-section-header {
+  grid-template-columns: 1fr;
+  gap: 0.7rem;
+  align-items: start;
+}
+
+.network-section-header .section-lead {
+  max-width: none;
 }
 
 .network-section-header h2,
@@ -407,7 +438,26 @@
 }
 
 .gallery-heading {
+  display: grid;
+  gap: 0.85rem;
   margin-bottom: 1.5rem;
+}
+
+.gallery-heading p:not(.section-tag) {
+  max-width: 72ch;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.56;
+}
+
+.gallery-video {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(1.5rem, 4vw, 2.4rem);
+}
+
+.gallery-video .video-frame {
+  width: min(100%, 860px);
 }
 
 .gallery-grid {
