@@ -293,14 +293,41 @@ section[id] {
 
 .admissions-btn {
   justify-self: end;
-  padding: 0.88rem 1.65rem;
-  background: linear-gradient(135deg, var(--gold), #ffd86f);
-  color: var(--navy-deep);
-  font-size: 0.92rem;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-  box-shadow: 0 18px 36px rgba(243, 194, 68, 0.22);
+  gap: 0.44rem;
+  min-height: 48px;
+  padding: 0.28rem 0.72rem 0.28rem 0.32rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 58% 52%, rgba(255, 255, 255, 0.18), transparent 34%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 18%, transparent 44%, rgba(255, 255, 255, 0.06), transparent 48%),
+    linear-gradient(135deg, #070a31 0%, var(--navy-deep) 48%, #172b62 100%);
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 2.04rem;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.62),
+    0 0 20px rgba(141, 163, 255, 0.28);
+  text-transform: uppercase;
+  box-shadow:
+    0 18px 36px rgba(18, 33, 74, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   white-space: nowrap;
+}
+
+.admissions-btn::before {
+  content: "";
+  width: 2.28rem;
+  height: 2.28rem;
+  flex: 0 0 auto;
+  border-radius: 7px;
+  background: url("../assets/img/sicai-icon.webp") center / cover no-repeat;
+  box-shadow:
+    0 0 14px rgba(126, 42, 255, 0.34),
+    0 10px 20px rgba(9, 19, 45, 0.28);
 }
 
 .admissions-btn:hover,
@@ -1870,7 +1897,13 @@ textarea {
   }
 
   .admissions-btn {
-    padding-inline: 1.1rem;
+    padding: 0.3rem 0.68rem 0.3rem 0.32rem;
+    font-size: 1.82rem;
+  }
+
+  .admissions-btn::before {
+    width: 2.12rem;
+    height: 2.12rem;
   }
 }
 
@@ -2072,8 +2105,15 @@ textarea {
 
   .admissions-btn {
     min-height: 46px;
-    padding: 0.72rem 1rem;
-    font-size: 0.82rem;
+    gap: 0.34rem;
+    padding: 0.28rem 0.62rem 0.28rem 0.3rem;
+    font-size: 1.52rem;
+  }
+
+  .admissions-btn::before {
+    width: 1.95rem;
+    height: 1.95rem;
+    border-radius: 6px;
   }
 
   .nav-toggle {

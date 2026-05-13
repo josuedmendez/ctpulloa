@@ -198,6 +198,10 @@ body.modal-is-open {
     border-color 0.22s ease;
 }
 
+.junta-post-card[hidden] {
+  display: none;
+}
+
 .junta-post-card:hover,
 .junta-post-card:focus-within {
   border-color: rgba(13, 114, 52, 0.26);
@@ -224,6 +228,53 @@ body.modal-is-open {
 
 .junta-post-card p {
   margin: 0.75rem 0 0;
+}
+
+.junta-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: clamp(2rem, 5vw, 3.2rem);
+}
+
+.junta-page-control,
+.junta-page-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.35rem;
+  min-height: 2.35rem;
+  padding: 0 0.85rem;
+  border: 1px solid rgba(17, 32, 61, 0.08);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--navy-deep);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(8, 21, 52, 0.08);
+}
+
+.junta-page-number.is-active,
+.junta-page-control:hover,
+.junta-page-number:hover {
+  border-color: var(--green);
+  background: var(--green);
+  color: #ffffff;
+}
+
+.junta-page-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.junta-page-control:disabled:hover {
+  border-color: rgba(17, 32, 61, 0.08);
+  background: #ffffff;
+  color: var(--navy-deep);
 }
 
 .junta-management-section {

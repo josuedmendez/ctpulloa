@@ -1,7 +1,84 @@
 const publicationModal = document.querySelector('#publication-modal');
 const publishForm = document.querySelector('#junta-publish-form');
 const postGrid = document.querySelector('#junta-post-grid');
+const juntaPagination = document.querySelector('[data-junta-pagination]');
 const fallbackImage = 'assets/img/comunidad-educativa-junta-administrativa.png';
+const juntaItemsPerPage = 3;
+
+let juntaItems = Array.from(document.querySelectorAll('[data-junta-item]'));
+let juntaCurrentPage = 1;
+
+const createPaginationButton = (label, className, page, isActive = false) => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = className;
+  button.textContent = label;
+  button.dataset.page = String(page);
+
+  if (isActive) {
+    button.classList.add('is-active');
+    button.setAttribute('aria-current', 'page');
+  }
+
+  return button;
+};
+
+const renderJuntaPagination = () => {
+  if (!juntaPagination || !juntaItems.length) {
+    return;
+  }
+
+  const totalPages = Math.ceil(juntaItems.length / juntaItemsPerPage);
+  juntaPagination.replaceChildren();
+
+  if (totalPages <= 1) {
+    return;
+  }
+
+  const previous = createPaginationButton('Anterior', 'junta-page-control', juntaCurrentPage - 1);
+  previous.disabled = juntaCurrentPage === 1;
+  juntaPagination.append(previous);
+
+  for (let page = 1; page <= totalPages; page += 1) {
+    juntaPagination.append(
+      createPaginationButton(String(page), 'junta-page-number', page, page === juntaCurrentPage)
+    );
+  }
+
+  const next = createPaginationButton('Siguiente', 'junta-page-control', juntaCurrentPage + 1);
+  next.disabled = juntaCurrentPage === totalPages;
+  juntaPagination.append(next);
+};
+
+const showJuntaPage = page => {
+  if (!juntaItems.length) {
+    return;
+  }
+
+  const totalPages = Math.ceil(juntaItems.length / juntaItemsPerPage);
+  juntaCurrentPage = Math.min(Math.max(page, 1), totalPages);
+
+  juntaItems.forEach((item, index) => {
+    const itemPage = Math.floor(index / juntaItemsPerPage) + 1;
+    item.hidden = itemPage !== juntaCurrentPage;
+  });
+
+  renderJuntaPagination();
+};
+
+if (juntaItems.length && juntaPagination) {
+  juntaPagination.addEventListener('click', event => {
+    const button = event.target.closest('button[data-page]');
+
+    if (!button || button.disabled) {
+      return;
+    }
+
+    showJuntaPage(Number(button.dataset.page));
+  });
+
+  showJuntaPage(1);
+}
 
 if (publicationModal) {
   const modalImage = publicationModal.querySelector('.publication-modal-image');
@@ -20,10 +97,10 @@ if (publicationModal) {
     const { category, title, date, image, detail } = trigger.dataset;
 
     modalImage.src = image || fallbackImage;
-    modalImage.alt = title || 'Imagen de publicacion';
-    modalCategory.textContent = category || 'Publicacion';
+    modalImage.alt = title || 'Imagen de publicación';
+    modalCategory.textContent = category || 'Publicación';
     modalDate.textContent = date || '';
-    modalTitle.textContent = title || 'Publicacion';
+    modalTitle.textContent = title || 'Publicación';
     modalDetail.textContent = detail || '';
 
     publicationModal.hidden = false;
@@ -65,6 +142,7 @@ if (publishForm && postGrid) {
 
     const card = document.createElement('article');
     card.className = 'junta-post-card';
+    card.dataset.juntaItem = '';
     card.innerHTML = `
       <img src="${image}" alt="">
       <div class="junta-post-card-body">
@@ -75,7 +153,7 @@ if (publishForm && postGrid) {
           <span>Junta Administrativa</span>
           <time></time>
         </div>
-        <button class="junta-link publication-trigger" type="button">Ver publicacion</button>
+        <button class="junta-link publication-trigger" type="button">Ver publicación</button>
       </div>
     `;
 
@@ -93,6 +171,8 @@ if (publishForm && postGrid) {
     trigger.dataset.detail = detail;
 
     postGrid.prepend(card);
+    juntaItems = Array.from(document.querySelectorAll('[data-junta-item]'));
+    showJuntaPage(1);
     publishForm.reset();
   });
 }
