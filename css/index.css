@@ -1751,58 +1751,151 @@ section[id] {
 .blue-flag-plant {
   position: absolute;
   z-index: 3;
-  right: 5%;
-  bottom: 15%;
-  width: 142px;
-  height: 178px;
+  right: 4%;
+  bottom: 13%;
+  width: 174px;
+  height: 198px;
 }
 
 .plant-stem {
   position: absolute;
-  left: 48%;
-  bottom: 28px;
-  width: 6px;
-  height: 118px;
+  z-index: 1;
+  bottom: 46px;
+  width: 7px;
   border-radius: 99px;
   background: linear-gradient(180deg, #34ba63, #0d7234);
-  transform: rotate(-6deg);
   transform-origin: bottom center;
+  box-shadow: inset -2px 0 0 rgba(7, 79, 38, 0.16);
+}
+
+.plant-stem-main {
+  left: 50%;
+  height: 124px;
+  transform: rotate(-3deg);
+}
+
+.plant-stem-left {
+  left: 48%;
+  height: 88px;
+  transform: rotate(-23deg);
+}
+
+.plant-stem-right {
+  left: 52%;
+  height: 104px;
+  transform: rotate(25deg);
 }
 
 .plant-leaf {
   position: absolute;
-  width: 70px;
-  height: 42px;
+  z-index: 2;
+  width: 72px;
+  height: 44px;
   border-radius: 90% 0 90% 0;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.52), transparent 38%),
-    linear-gradient(135deg, #90db62 0%, #18a65b 100%);
+    radial-gradient(circle at 26% 24%, rgba(255, 255, 255, 0.55), transparent 24%),
+    linear-gradient(135deg, #a6e460 0%, #33bd60 54%, #0d8f45 100%);
   box-shadow: 0 14px 28px rgba(13, 114, 52, 0.18);
   animation: blueFlagLeafPulse 3.2s ease-in-out infinite;
 }
 
-.plant-leaf-left {
-  left: 4px;
-  top: 56px;
-  transform: rotate(-34deg);
+.plant-leaf::after {
+  content: "";
+  position: absolute;
+  left: 16%;
+  right: 13%;
+  top: 49%;
+  height: 2px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.54);
+  transform: rotate(-13deg);
 }
 
-.plant-leaf-right {
-  right: 8px;
-  top: 26px;
-  transform: scaleX(-1) rotate(-30deg);
+.plant-leaf-left-large {
+  left: 14px;
+  top: 76px;
+  transform: rotate(-38deg);
+}
+
+.plant-leaf-right-large {
+  right: 6px;
+  top: 36px;
+  width: 80px;
+  height: 50px;
+  transform: scaleX(-1) rotate(-32deg);
   animation-delay: -1.4s;
 }
 
-.plant-soil {
+.plant-leaf-left-small {
+  left: 44px;
+  top: 36px;
+  width: 48px;
+  height: 30px;
+  transform: rotate(-25deg);
+  animation-delay: -0.8s;
+}
+
+.plant-leaf-right-small {
+  right: 34px;
+  top: 82px;
+  width: 54px;
+  height: 34px;
+  transform: scaleX(-1) rotate(-28deg);
+  animation-delay: -2s;
+}
+
+.plant-bud {
   position: absolute;
-  left: 16px;
-  right: 6px;
-  bottom: 10px;
-  height: 28px;
+  z-index: 2;
+  left: 84px;
+  top: 18px;
+  width: 23px;
+  height: 18px;
+  border-radius: 70% 0 70% 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.42), transparent 42%),
+    linear-gradient(135deg, #b7ec74, #35bb62);
+  transform: rotate(28deg);
+  box-shadow: 0 10px 22px rgba(13, 114, 52, 0.16);
+  animation: blueFlagLeafPulse 3.2s ease-in-out infinite;
+  animation-delay: -1s;
+}
+
+.plant-pot {
+  position: absolute;
+  z-index: 3;
+  left: 42px;
+  right: 28px;
+  bottom: 14px;
+  height: 44px;
+  border-radius: 0 0 28px 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 42%),
+    linear-gradient(135deg, #b87535, #7a4c23);
+  box-shadow: 0 16px 28px rgba(93, 61, 28, 0.19);
+}
+
+.plant-pot::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  right: -10px;
+  top: -13px;
+  height: 24px;
   border-radius: 50%;
-  background: linear-gradient(180deg, #9a6b35, #6f4a22);
-  box-shadow: 0 16px 28px rgba(93, 61, 28, 0.2);
+  background: linear-gradient(180deg, #a46a32, #71451f);
+}
+
+.plant-shadow {
+  position: absolute;
+  z-index: 0;
+  left: 28px;
+  right: 14px;
+  bottom: 0;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(8, 21, 52, 0.11);
+  filter: blur(2px);
 }
 
 .blue-flag-mini-flag {
@@ -1871,12 +1964,12 @@ section[id] {
   left: 9px;
   z-index: 2;
   display: flex;
-  gap: 5px;
+  gap: 4px;
 }
 
 .mini-flag-stars span {
-  width: 10px;
-  height: 10px;
+  width: 9.5px;
+  height: 9.5px;
   background: #fff;
   clip-path: polygon(50% 0, 61% 34%, 98% 34%, 68% 55%, 79% 91%, 50% 69%, 21% 91%, 32% 55%, 2% 34%, 39% 34%);
   filter: drop-shadow(0 2px 3px rgba(8, 21, 52, 0.18));
@@ -1885,50 +1978,20 @@ section[id] {
 .mini-flag-seal {
   position: absolute;
   left: 50%;
-  top: 28px;
+  top: 24px;
   z-index: 2;
-  width: 48px;
+  width: 56px;
   aspect-ratio: 1;
-  overflow: hidden;
-  border: 7px solid #fff;
   border-radius: 50%;
-  background: #fff;
+  background: transparent;
   box-shadow: 0 8px 14px rgba(8, 21, 52, 0.18);
   transform: translateX(-50%);
 }
 
-.mini-seal-hill {
-  position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 10%;
-  height: 54%;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0da94e, #8ccc46);
-}
-
-.mini-seal-hill::after {
-  content: "";
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: -18%;
-  height: 44%;
-  background:
-    radial-gradient(58% 98% at 28% 102%, #fff 0 42%, transparent 43%),
-    radial-gradient(68% 110% at 73% 104%, #fff 0 47%, transparent 48%);
-}
-
-.mini-seal-waves {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: 13%;
-  height: 18px;
-  background:
-    radial-gradient(8px 5px at 8px 6px, transparent 5px, #0e77b5 5.4px 7px, transparent 7.4px) repeat-x 0 0 / 16px 6px,
-    radial-gradient(8px 5px at 8px 6px, transparent 5px, #0e77b5 5.4px 7px, transparent 7.4px) repeat-x 8px 6px / 16px 6px,
-    radial-gradient(8px 5px at 8px 6px, transparent 5px, #0e77b5 5.4px 7px, transparent 7.4px) repeat-x 0 12px / 16px 6px;
+.mini-flag-logo {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .mini-flag-name,
@@ -1943,7 +2006,7 @@ section[id] {
 }
 
 .mini-flag-name {
-  top: 76px;
+  top: 80px;
   font-family: "Montserrat", Arial, sans-serif;
   font-size: 0.54rem;
   font-weight: 800;
@@ -1951,8 +2014,8 @@ section[id] {
 }
 
 .mini-flag-sub {
-  top: 88px;
-  font-size: 0.37rem;
+  top: 89px;
+  font-size: 0.42rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   line-height: 1;
@@ -2902,6 +2965,7 @@ textarea {
   .floating-leaf,
   .badge-waves span,
   .plant-leaf,
+  .plant-bud,
   .mini-flag-cloth {
     animation: none;
   }
