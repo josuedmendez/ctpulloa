@@ -1583,14 +1583,21 @@ section[id] {
 }
 
 .blue-flag-stars li::before {
-  content: "";
+  content: "\2605";
   display: block;
-  width: 1.1rem;
-  height: 1.1rem;
+  width: max-content;
+  height: auto;
   margin-bottom: 0.65rem;
-  background: var(--gold);
-  clip-path: polygon(50% 0, 61% 34%, 98% 34%, 68% 55%, 79% 91%, 50% 69%, 21% 91%, 32% 55%, 2% 34%, 39% 34%);
+  color: var(--gold);
+  font-size: 1.1rem;
+  line-height: 1;
+  letter-spacing: 0.12rem;
   filter: drop-shadow(0 8px 12px rgba(243, 194, 68, 0.3));
+}
+
+.blue-flag-stars li:nth-child(1)::before,
+.blue-flag-stars li:nth-child(3)::before {
+  content: "\2605\2605";
 }
 
 .blue-flag-stars strong {
@@ -1644,43 +1651,27 @@ section[id] {
 .blue-flag-badge {
   position: relative;
   z-index: 2;
-  width: clamp(210px, 28vw, 310px);
-  aspect-ratio: 1;
+  width: clamp(255px, 28.9vw, 357px);
+  aspect-ratio: 358 / 204;
   overflow: hidden;
-  border: 10px solid #5fc8ef;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.92) 0 67%, transparent 68%),
-    linear-gradient(135deg, #71d4f4 0%, #1fa5df 100%);
-  box-shadow:
-    0 30px 66px rgba(8, 21, 52, 0.18),
-    inset 0 0 0 7px rgba(255, 255, 255, 0.76);
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: 0 28px 48px rgba(8, 21, 52, 0.13);
 }
 
 .blue-flag-badge::before {
-  content: "";
-  position: absolute;
-  inset: 9px;
-  z-index: 4;
-  border: 7px solid rgba(255, 255, 255, 0.96);
-  border-radius: 50%;
-  box-shadow: inset 0 0 32px rgba(35, 170, 222, 0.14);
-  pointer-events: none;
+  content: none;
 }
 
 .blue-flag-badge::after {
-  content: "Centros Educativos";
-  position: absolute;
-  left: 50%;
-  bottom: 0.85rem;
-  z-index: 5;
-  color: #0877ad;
-  font-size: 0.7rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transform: translateX(-50%);
-  white-space: nowrap;
+  content: none;
+}
+
+.blue-flag-badge-logo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
 }
 
 .badge-hill {
@@ -2867,7 +2858,7 @@ textarea {
   }
 
   .blue-flag-badge {
-    width: min(72vw, 250px);
+    width: min(70vw, 306px);
   }
 
   .blue-flag-plant {
