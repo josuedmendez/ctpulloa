@@ -67,6 +67,38 @@
   line-height: 1.55;
 }
 
+.cooperative-home-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 48px;
+  margin-top: 1.2rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-weight: 800;
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.cooperative-home-button:hover,
+.cooperative-home-button:focus-visible {
+  border-color: rgba(255, 255, 255, 0.52);
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.cooperative-home-button svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke-width: 2;
+}
+
 .cooperative-intro,
 .cooperative-framework,
 .cooperative-next {

@@ -107,13 +107,43 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
-  margin-top: 2rem;
+  margin-top: 1.6rem;
 }
 
-.plan-hero-actions .button-secondary {
-  border: 2px solid rgba(255, 255, 255, 0.78);
-  background: rgba(255, 255, 255, 0.08);
+.plan-hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: var(--gold);
+  color: var(--navy-deep);
+  font-weight: 800;
+  box-shadow: 0 16px 34px rgba(8, 21, 52, 0.18);
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.plan-hero-button.secondary {
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
+  box-shadow: none;
+}
+
+.plan-hero-button:hover,
+.plan-hero-button:focus-visible {
+  transform: translateY(-2px);
+}
+
+.plan-hero-button svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke-width: 2;
 }
 
 .plan-jumpbar {
