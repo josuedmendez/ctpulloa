@@ -47,6 +47,17 @@ img {
   display: block;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 button,
 input,
 textarea {
@@ -1009,6 +1020,60 @@ section[id] {
   line-height: 1.45;
 }
 
+#nuestro-colegio {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(5rem, 7vw, 7rem) 0;
+  background: #f9fcf8;
+}
+
+#nuestro-colegio::before {
+  content: "";
+  position: absolute;
+  left: -8vw;
+  right: -8vw;
+  top: 2.4rem;
+  bottom: 2.2rem;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.2), transparent 26%),
+    linear-gradient(115deg, #1fa862 0%, #5bc77f 46%, #c3df7a 100%);
+  background-size: 180% 180%;
+  clip-path: polygon(0 9%, 100% 0, 100% 87%, 72% 94%, 0 100%);
+  animation: collegeGreenDrift 12s ease-in-out infinite alternate;
+}
+
+#nuestro-colegio::after {
+  content: "";
+  position: absolute;
+  left: -28%;
+  top: 18%;
+  z-index: 0;
+  width: 156%;
+  height: 46%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 18%, rgba(255, 255, 255, 0.18), transparent 78%);
+  filter: blur(12px);
+  transform: rotate(-4deg) translateX(-22%);
+  animation: collegeLightSweep 10s ease-in-out infinite;
+}
+
+#nuestro-colegio .section-header,
+#nuestro-colegio .college-campus {
+  position: relative;
+  z-index: 1;
+}
+
+#nuestro-colegio .section-tag {
+  color: rgba(255, 255, 255, 0.94);
+}
+
+#nuestro-colegio .section-tag::before {
+  background: rgba(255, 255, 255, 0.7);
+}
+
 .college-campus {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
@@ -1101,6 +1166,46 @@ section[id] {
   border-radius: 22px;
   object-fit: contain;
   background: #f7f9fc;
+  animation: campusMapFloat 4.8s ease-in-out infinite;
+}
+
+@keyframes campusMapFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes collegeGreenDrift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes collegeLightSweep {
+  0%,
+  28% {
+    opacity: 0;
+    transform: rotate(-4deg) translateX(-28%);
+  }
+
+  48% {
+    opacity: 1;
+  }
+
+  72%,
+  100% {
+    opacity: 0;
+    transform: rotate(-4deg) translateX(24%);
+  }
 }
 
 .narrative-panel,
@@ -1482,6 +1587,244 @@ section[id] {
 .admission-card p,
 .admission-card li {
   color: var(--muted);
+}
+
+.partner-carousel-section {
+  padding: 1.00rem 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.partner-carousel-header {
+  text-align: center;
+}
+
+.partner-carousel-header .section-tag {
+  margin-inline: auto;
+}
+
+.partner-carousel-header h2 {
+  max-width: 760px;
+  margin: 0 auto 2.2rem;
+  color: var(--navy);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  line-height: 1.15;
+}
+
+.partner-carousel {
+  position: relative;
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 1rem 0;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.partner-carousel.is-dragging {
+  cursor: grabbing;
+}
+
+.partner-carousel::before,
+.partner-carousel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: min(16vw, 140px);
+  height: 100%;
+  pointer-events: none;
+}
+
+.partner-carousel::before {
+  left: 0;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0));
+}
+
+.partner-carousel::after {
+  right: 0;
+  background: linear-gradient(270deg, #fff, rgba(255, 255, 255, 0));
+}
+
+.partner-carousel-track {
+  display: flex;
+  width: max-content;
+  animation: partnerLogoSlide 16s linear infinite;
+  will-change: transform;
+}
+
+.partner-carousel.is-user-controlled .partner-carousel-track {
+  animation: none;
+  transform: translateX(var(--partner-drag-x, 0px));
+}
+
+.partner-carousel-section.is-modal-open .partner-carousel-track {
+  animation-play-state: paused;
+}
+
+.partner-logo {
+  flex: 0 0 clamp(160px, 18vw, 230px);
+  display: grid;
+  place-items: center;
+  height: 96px;
+  padding: 0.8rem 1.6rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.partner-logo:hover,
+.partner-logo:focus-visible {
+  filter: drop-shadow(0 10px 18px rgba(8, 21, 52, 0.12));
+  transform: translateY(-3px);
+}
+
+.partner-logo:focus-visible {
+  outline: 3px solid rgba(13, 114, 52, 0.24);
+  outline-offset: -0.35rem;
+}
+
+.partner-logo img {
+  max-width: 100%;
+  max-height: 58px;
+  object-fit: contain;
+  filter: saturate(0.92);
+  pointer-events: none;
+}
+
+.partner-modal {
+  width: min(calc(100% - 2rem), 520px);
+  padding: 2rem;
+  border: 1px solid rgba(17, 32, 61, 0.12);
+  border-radius: 18px;
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 28px 70px rgba(8, 21, 52, 0.28);
+}
+
+.partner-modal::backdrop {
+  background: rgba(9, 19, 45, 0.46);
+  backdrop-filter: blur(3px);
+}
+
+.partner-modal-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(13, 114, 52, 0.09);
+  color: var(--green-deep);
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.partner-modal-close:hover,
+.partner-modal-close:focus-visible {
+  background: var(--green);
+  color: #fff;
+}
+
+.partner-modal-kicker {
+  margin: 0 0 0.5rem;
+  color: var(--green);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.partner-modal h3 {
+  margin: 0 2.5rem 1rem 0;
+  color: var(--navy);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  line-height: 1.15;
+}
+
+.partner-modal-brand {
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+  margin: 0 2.5rem 1.1rem 0;
+}
+
+.partner-modal-brand img {
+  max-width: 180px;
+  max-height: 68px;
+  object-fit: contain;
+}
+
+.partner-modal-message {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.06rem;
+  line-height: 1.6;
+}
+
+.partner-modal-signature {
+  margin: 1.4rem 0 0;
+  color: var(--navy);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+@keyframes partnerLogoSlide {
+  0%,
+  10% {
+    transform: translateX(0);
+  }
+
+  12.5%,
+  22.5% {
+    transform: translateX(-6.25%);
+  }
+
+  25%,
+  35% {
+    transform: translateX(-12.5%);
+  }
+
+  37.5%,
+  47.5% {
+    transform: translateX(-18.75%);
+  }
+
+  50%,
+  60% {
+    transform: translateX(-25%);
+  }
+
+  62.5%,
+  72.5% {
+    transform: translateX(-31.25%);
+  }
+
+  75%,
+  85% {
+    transform: translateX(-37.5%);
+  }
+
+  87.5%,
+  97.5% {
+    transform: translateX(-43.75%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .blue-flag-section {
@@ -2692,6 +3035,20 @@ textarea {
     font-size: 2rem;
   }
 
+  .partner-carousel-header h2 {
+    margin-bottom: 1.3rem;
+  }
+
+  .partner-logo {
+    flex-basis: 140px;
+    height: 82px;
+    padding-inline: 1rem;
+  }
+
+  .partner-logo img {
+    max-height: 48px;
+  }
+
   .offer-intro p {
     font-size: 1rem;
   }
@@ -2814,6 +3171,10 @@ textarea {
   .back-to-top.is-visible,
   .floating-leaf,
   .badge-waves span,
+  .college-campus-media img,
+  #nuestro-colegio::before,
+  #nuestro-colegio::after,
+  .partner-carousel-track,
   .mini-flag-cloth {
     animation: none;
   }

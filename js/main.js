@@ -155,3 +155,220 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
   updateCarousel(current);
   startAutoplay();
 });
+
+const partnerMessages = {
+  amazon: {
+    title: 'Amazon',
+    logo: 'assets/img/empresa-amazon.png',
+    message:
+      'Amazon ha representado una puerta de aprendizaje real para estudiantes del CTP Ulloa, especialmente en áreas donde la disciplina, el servicio y la tecnología se encuentran. Varias prácticas profesionales han fortalecido la confianza de nuestros jóvenes para incorporarse a ambientes laborales exigentes y con visión global.',
+    signature: '-- Lic. Josué Méndez, Jefe de TI',
+  },
+  microsoft: {
+    title: 'Microsoft',
+    logo: 'assets/img/empresa-microsoft.png',
+    message:
+      'La relación con Microsoft inspira a nuestra comunidad educativa a mirar la tecnología como una herramienta para crear, resolver y colaborar. Su presencia motiva a estudiantes a fortalecer competencias digitales que luego aplican en sus prácticas, proyectos y primeros pasos profesionales.',
+    signature: '-- M.Sc. Valeria Solano, Coordinadora Académica',
+  },
+  eminsa: {
+    title: 'Grupo Eminsa',
+    logo: 'assets/img/empresa-eminsa.png',
+    message:
+      'Grupo Eminsa ha sido un aliado cercano para que estudiantes vivan procesos de práctica profesional con acompañamiento, responsabilidad y sentido de pertenencia. Esa apertura ha permitido que jóvenes del colegio descubran sus fortalezas y proyecten una carrera con mayor seguridad.',
+    signature: '-- Ing. Roberto Cordero, Enlace Empresarial',
+  },
+  zurcher: {
+    title: 'Zurcher',
+    logo: 'assets/img/empresa-zurcher.png',
+    message:
+      'Zurcher ha mantenido una relación positiva con el CTP Ulloa al valorar el talento joven, la puntualidad y el compromiso de nuestros estudiantes. Cada experiencia compartida confirma que la formación técnica puede convertirse en una oportunidad concreta de crecimiento laboral.',
+    signature: '-- Licda. Mariana Rojas, Orientadora Vocacional',
+  },
+  cisco: {
+    title: 'Cisco',
+    logo: 'assets/img/empresa-cisco.png',
+    message:
+      'Cisco ha sido un referente importante para estudiantes interesados en redes, conectividad y soluciones tecnológicas. Su vínculo con la formación técnica del CTP Ulloa impulsa a los jóvenes a pensar en certificaciones, práctica profesional y empleabilidad con estándares internacionales.',
+    signature: '-- Prof. Daniel Vargas, Docente de Redes',
+  },
+  intel: {
+    title: 'Intel',
+    logo: 'assets/img/empresa-intel.png',
+    message:
+      'Intel simboliza innovación, excelencia y futuro para muchos estudiantes del CTP Ulloa. La buena relación con esta empresa refuerza el valor de prepararse bien, cuidar los detalles y asumir la práctica profesional como una etapa decisiva para abrir nuevas posibilidades.',
+    signature: '-- Ing. Natalia Araya, Gestora de Innovación',
+  },
+  garnier: {
+    title: 'Garnier',
+    logo: 'assets/img/empresa-garnier.png',
+    message:
+      'Garnier ha brindado espacios donde estudiantes pueden comprender la importancia del diseño, la comunicación y el trabajo con clientes reales. Esa cercanía con el mundo profesional fortalece la creatividad y ayuda a que nuestros jóvenes lleguen mejor preparados a sus retos laborales.',
+    signature: '-- Lic. Andrés Calderón, Coordinador de Diseño',
+  },
+  eaton: {
+    title: 'Eaton',
+    logo: 'assets/img/empresa-eaton.png',
+    message:
+      'Eaton ha sido una empresa clave para que estudiantes técnicos visualicen oportunidades en entornos industriales modernos. La experiencia de práctica y la posibilidad de crecimiento dentro de la empresa han dejado una huella muy positiva en la comunidad del CTP Ulloa.',
+    signature: '-- Ing. Karla Benavides, Coordinadora Técnica',
+  },
+};
+
+const partnerModal = document.querySelector('.partner-modal');
+const partnerModalTitle = partnerModal?.querySelector('#partner-modal-title');
+const partnerModalMessage = partnerModal?.querySelector('.partner-modal-message');
+const partnerModalBrand = partnerModal?.querySelector('.partner-modal-brand img');
+const partnerModalSignature = partnerModal?.querySelector('.partner-modal-signature');
+const partnerModalClose = partnerModal?.querySelector('.partner-modal-close');
+const partnerCarouselSection = partnerModal?.closest('.partner-carousel-section');
+const partnerCarousel = partnerCarouselSection?.querySelector('.partner-carousel');
+const partnerCarouselTrack = partnerCarousel?.querySelector('.partner-carousel-track');
+let partnerDragMoved = false;
+let partnerPressedButton = null;
+
+const getTranslateX = element => {
+  const transform = window.getComputedStyle(element).transform;
+
+  if (!transform || transform === 'none') return 0;
+
+  const matrix = new DOMMatrixReadOnly(transform);
+  return matrix.m41;
+};
+
+const normalizePartnerDragX = value => {
+  if (!partnerCarouselTrack) return value;
+
+  const loopWidth = partnerCarouselTrack.scrollWidth / 2;
+  if (!loopWidth) return value;
+
+  let nextValue = value;
+
+  while (nextValue > 0) {
+    nextValue -= loopWidth;
+  }
+
+  while (nextValue <= -loopWidth) {
+    nextValue += loopWidth;
+  }
+
+  return nextValue;
+};
+
+if (partnerModal && partnerModalTitle && partnerModalMessage && partnerModalBrand && partnerModalSignature) {
+  const openPartnerModal = partnerKey => {
+    const partner = partnerMessages[partnerKey];
+
+    if (!partner) return;
+
+    partnerModalTitle.textContent = partner.title;
+    partnerModalMessage.textContent = partner.message;
+    partnerModalBrand.src = partner.logo;
+    partnerModalBrand.alt = `Logo de ${partner.title}`;
+    partnerModalSignature.textContent = partner.signature;
+    partnerCarouselSection?.classList.add('is-modal-open');
+
+    if (typeof partnerModal.showModal === 'function') {
+      partnerModal.showModal();
+      partnerModalClose?.focus();
+    } else {
+      partnerModal.setAttribute('open', '');
+    }
+  };
+
+  partnerCarousel?.addEventListener('click', event => {
+    if (partnerDragMoved) {
+      event.preventDefault();
+      partnerPressedButton = null;
+      return;
+    }
+
+    const clickedButton = event.target.closest('[data-partner]') || partnerPressedButton;
+
+    if (!clickedButton) return;
+
+    openPartnerModal(clickedButton.dataset.partner);
+    partnerPressedButton = null;
+  });
+
+  partnerModalClose?.addEventListener('click', () => {
+    partnerModal.close();
+  });
+
+  partnerModal.addEventListener('click', event => {
+    if (event.target === partnerModal) {
+      partnerModal.close();
+    }
+  });
+
+  partnerModal.addEventListener('close', () => {
+    partnerCarouselSection?.classList.remove('is-modal-open');
+    partnerCarousel?.classList.remove('is-user-controlled', 'is-dragging');
+    partnerCarousel?.style.removeProperty('--partner-drag-x');
+  });
+}
+
+if (partnerCarousel && partnerCarouselTrack) {
+  let dragStartX = 0;
+  let dragStartTranslateX = 0;
+  let activePointerId = null;
+
+  partnerCarousel.addEventListener('pointerdown', event => {
+    if (event.button !== undefined && event.button !== 0) return;
+
+    activePointerId = event.pointerId;
+    dragStartX = event.clientX;
+    dragStartTranslateX = getTranslateX(partnerCarouselTrack);
+    partnerDragMoved = false;
+    partnerPressedButton = event.target.closest('[data-partner]');
+
+    partnerCarousel.classList.add('is-user-controlled', 'is-dragging');
+    partnerCarousel.style.setProperty('--partner-drag-x', `${normalizePartnerDragX(dragStartTranslateX)}px`);
+    partnerCarousel.setPointerCapture(activePointerId);
+  });
+
+  partnerCarousel.addEventListener('pointermove', event => {
+    if (activePointerId !== event.pointerId) return;
+
+    const dragDistance = event.clientX - dragStartX;
+
+    if (Math.abs(dragDistance) > 6) {
+      partnerDragMoved = true;
+    }
+
+    if (!partnerDragMoved) return;
+
+    partnerCarousel.style.setProperty(
+      '--partner-drag-x',
+      `${normalizePartnerDragX(dragStartTranslateX + dragDistance)}px`
+    );
+  });
+
+  const finishPartnerDrag = event => {
+    if (activePointerId !== event.pointerId) return;
+
+    const wasDrag = partnerDragMoved;
+
+    partnerCarousel.classList.remove('is-dragging');
+
+    if (partnerCarousel.hasPointerCapture(activePointerId)) {
+      partnerCarousel.releasePointerCapture(activePointerId);
+    }
+
+    activePointerId = null;
+
+    if (!wasDrag) {
+      partnerCarousel.classList.remove('is-user-controlled');
+      partnerCarousel.style.removeProperty('--partner-drag-x');
+    } else {
+      partnerPressedButton = null;
+    }
+
+    window.setTimeout(() => {
+      partnerDragMoved = false;
+    }, 0);
+  };
+
+  partnerCarousel.addEventListener('pointerup', finishPartnerDrag);
+  partnerCarousel.addEventListener('pointercancel', finishPartnerDrag);
+}
