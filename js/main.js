@@ -372,3 +372,74 @@ if (partnerCarousel && partnerCarouselTrack) {
   partnerCarousel.addEventListener('pointerup', finishPartnerDrag);
   partnerCarousel.addEventListener('pointercancel', finishPartnerDrag);
 }
+
+const admissionModal = document.querySelector('.admission-modal');
+const admissionModalImage = admissionModal?.querySelector('.admission-modal-image');
+const admissionModalTitle = admissionModal?.querySelector('#admission-modal-title');
+const admissionModalClose = admissionModal?.querySelector('.admission-modal-close');
+
+if (admissionModal && admissionModalImage && admissionModalTitle) {
+  document.querySelectorAll('.admission-poster').forEach(poster => {
+    poster.addEventListener('click', () => {
+      const image = poster.dataset.admissionImage;
+      const title = poster.dataset.admissionTitle;
+
+      if (!image || !title) return;
+
+      admissionModalImage.src = image;
+      admissionModalImage.alt = title;
+      admissionModalTitle.textContent = title;
+
+      if (typeof admissionModal.showModal === 'function') {
+        admissionModal.showModal();
+        admissionModalClose?.focus();
+      } else {
+        admissionModal.setAttribute('open', '');
+      }
+    });
+  });
+
+  admissionModalClose?.addEventListener('click', () => {
+    admissionModal.close();
+  });
+
+  admissionModal.addEventListener('click', event => {
+    if (event.target === admissionModal) {
+      admissionModal.close();
+    }
+  });
+}
+
+const galleryModal = document.querySelector('.gallery-modal');
+const galleryModalImage = galleryModal?.querySelector('.gallery-modal-image');
+const galleryModalClose = galleryModal?.querySelector('.gallery-modal-close');
+
+if (galleryModal && galleryModalImage) {
+  document.querySelectorAll('.gallery-zoom-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const sourceImage = trigger.querySelector('img');
+
+      if (!sourceImage) return;
+
+      galleryModalImage.src = sourceImage.currentSrc || sourceImage.src;
+      galleryModalImage.alt = sourceImage.alt;
+
+      if (typeof galleryModal.showModal === 'function') {
+        galleryModal.showModal();
+        galleryModalClose?.focus();
+      } else {
+        galleryModal.setAttribute('open', '');
+      }
+    });
+  });
+
+  galleryModalClose?.addEventListener('click', () => {
+    galleryModal.close();
+  });
+
+  galleryModal.addEventListener('click', event => {
+    if (event.target === galleryModal) {
+      galleryModal.close();
+    }
+  });
+}

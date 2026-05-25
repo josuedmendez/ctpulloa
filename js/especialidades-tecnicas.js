@@ -28,7 +28,7 @@ if (specialtyPopupLinks.length && specialtyModal) {
     lastFocusedElement = document.activeElement;
 
     if (modalTitle) {
-      modalTitle.textContent = link.dataset.specialtyTitle || 'Especialidad técnica';
+      modalTitle.textContent = link.dataset.specialtyTitle || 'Carrera técnica';
     }
 
     if (specialtyFrame) {

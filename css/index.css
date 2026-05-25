@@ -1489,6 +1489,92 @@ section[id] {
   background: var(--gold);
 }
 
+.services-section {
+  background: var(--surface);
+}
+
+.services-header {
+  margin-bottom: clamp(2.2rem, 4vw, 3.3rem);
+  text-align: center;
+}
+
+.services-header h2 {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding-bottom: 0.45rem;
+  color: var(--navy);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(2.35rem, 4vw, 3.35rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.services-header h2::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--green);
+}
+
+.service-circles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(140px, 180px));
+  justify-content: center;
+  gap: clamp(1.25rem, 3vw, 2.65rem);
+  max-width: 1120px;
+}
+
+.service-circle {
+  text-align: center;
+}
+
+.service-circle-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  margin: 0 auto 1.15rem;
+  padding: 0.42rem;
+  overflow: hidden;
+  border: 4px solid var(--green);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 10px 20px rgba(8, 21, 52, 0.08);
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease;
+}
+
+.service-circle:hover .service-circle-photo {
+  box-shadow: 0 18px 30px rgba(8, 21, 52, 0.15);
+  transform: translateY(-7px);
+}
+
+.service-circle-photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.service-circle h3 {
+  max-width: 12rem;
+  margin: 0 auto;
+  color: var(--muted);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 1.06rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-decoration-color: rgba(13, 114, 52, 0.55);
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.27rem;
+}
+
 .admission-section {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(247, 251, 255, 0.74)),
@@ -1537,6 +1623,121 @@ section[id] {
   background: white;
   color: var(--green-deep);
   box-shadow: 0 14px 34px rgba(8, 21, 52, 0.08);
+}
+
+.admission-posters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 224px));
+  justify-content: start;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.admission-poster {
+  display: grid;
+  gap: 0.42rem;
+  padding: 0.35rem;
+  border: 1px solid rgba(13, 114, 52, 0.14);
+  border-radius: 13px;
+  background: white;
+  box-shadow: 0 16px 34px rgba(8, 21, 52, 0.1);
+  color: var(--green-deep);
+  cursor: pointer;
+  animation: admissionPosterFloat 4.8s ease-in-out infinite;
+}
+
+.admission-poster:nth-child(2) {
+  animation-delay: -2.4s;
+}
+
+.admission-poster:hover,
+.admission-poster:focus-visible {
+  border-color: rgba(13, 114, 52, 0.36);
+  box-shadow: 0 22px 42px rgba(8, 21, 52, 0.16);
+}
+
+.admission-poster:focus-visible {
+  outline: 3px solid rgba(13, 114, 52, 0.3);
+  outline-offset: 3px;
+}
+
+.admission-poster img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 9px;
+  object-fit: contain;
+}
+
+.admission-poster span {
+  padding: 0 0.15rem 0.15rem;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.admission-modal {
+  width: fit-content;
+  max-width: calc(100% - 2rem);
+  max-height: calc(100vh - 2rem);
+  margin: auto;
+  padding: 0.7rem;
+  border: 0;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 28px 70px rgba(8, 21, 52, 0.32);
+  overflow: visible;
+}
+
+.admission-modal::backdrop {
+  background: rgba(9, 19, 45, 0.68);
+  backdrop-filter: blur(4px);
+}
+
+.admission-modal-close {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.75rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 8px 18px rgba(8, 21, 52, 0.24);
+  color: white;
+  cursor: pointer;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.admission-modal-close:hover,
+.admission-modal-close:focus-visible {
+  background: var(--navy);
+}
+
+.admission-modal-image {
+  display: block;
+  width: auto;
+  max-width: min(calc(100vw - 3.4rem), 1024px);
+  height: auto;
+  max-height: calc(100vh - 3.4rem);
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+@keyframes admissionPosterFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .admission-steps {
@@ -2791,7 +2992,8 @@ section[id] {
   animation: nubiPhotoGesture 9s ease-in-out infinite;
 }
 
-.nubi-character img {
+.nubi-character img,
+.nubi-character video {
   display: block;
   width: 100%;
   height: auto;
@@ -3562,6 +3764,11 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .service-circles {
+    grid-template-columns: repeat(3, minmax(140px, 180px));
+    row-gap: 2.5rem;
+  }
+
   .identity-content h3 {
     font-size: 2.55rem;
   }
@@ -3695,6 +3902,30 @@ textarea {
     align-items: stretch;
   }
 
+  .admission-posters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+    margin-top: 0.9rem;
+  }
+
+  .admission-poster {
+    padding: 0.3rem;
+    border-radius: 12px;
+  }
+
+  .admission-poster img {
+    border-radius: 10px;
+  }
+
+  .admission-modal {
+    padding: 0.4rem;
+  }
+
+  .admission-modal-close {
+    top: 0.65rem;
+    right: 0.65rem;
+  }
+
   .offer-grid,
   .community-grid,
   .notices-grid,
@@ -3747,6 +3978,29 @@ textarea {
 
   .offer-intro p {
     font-size: 1rem;
+  }
+
+  .services-section {
+    padding: 3.7rem 0;
+  }
+
+  .services-header {
+    margin-bottom: 2rem;
+  }
+
+  .service-circles {
+    max-width: 326px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.1rem 1rem;
+  }
+
+  .service-circle-photo {
+    margin-bottom: 0.85rem;
+    padding: 0.32rem;
+  }
+
+  .service-circle h3 {
+    font-size: 0.96rem;
   }
 
   .offer-panel-media {
@@ -3956,6 +4210,18 @@ textarea {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .service-circle-photo {
+    transition: none;
+  }
+
+  .service-circle:hover .service-circle-photo {
+    transform: none;
+  }
+
+  .admission-poster {
+    animation: none;
+  }
+
   .back-to-top.is-visible,
   .floating-leaf,
   .badge-waves span,

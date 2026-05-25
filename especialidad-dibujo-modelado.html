@@ -84,7 +84,7 @@
             </svg>
           </button>
           <div class="nav-submenu">
-            <a href="especialidades-tecnicas.html" aria-current="page">Especialidades Técnicas</a>
+            <a href="especialidades-tecnicas.html" aria-current="page">Carreras Técnicas</a>
             <a href="index.html#area-academica">Área Académica</a>
             <a href="plan-nacional.html">Plan Nacional</a>
             <a href="https://dual.mep.go.cr/" target="_blank" rel="noopener noreferrer">Educación dual</a>
@@ -113,7 +113,7 @@
     <section class="network-hero">
       <div class="container network-hero-grid">
         <div class="network-hero-copy">
-          <p class="eyebrow">Especialidad Técnica</p>
+          <p class="eyebrow">Carrera Técnica</p>
           <h1>Dibujo y Modelado de Edificaciones</h1>
           <p>
             Formación en diseño, representación y modelado de proyectos arquitectónicos y constructivos mediante
@@ -133,7 +133,7 @@
           <p class="section-tag" id="descripcion-label">Descripción</p>
         </div>
         <p class="section-lead">
-          La especialidad fortalece el dibujo técnico, modelado 3D, renderizado, diseño arquitectónico, urbanismo,
+          La carrera fortalece el dibujo técnico, modelado 3D, renderizado, diseño arquitectónico, urbanismo,
           procesos constructivos, instalaciones eléctricas y mecánicas, metodologías BIM y software especializado.
         </p>
       </div>
@@ -264,7 +264,7 @@
         <div class="video-frame">
           <video controls poster="assets/img/especialidad-dibujo.png">
             <!-- Reemplazar por el video oficial de la especialidad cuando esté disponible. -->
-            <source src="assets/video/video-institucional.mp4" type="video/mp4" />
+            <source src="assets/video/carrera-dibujo.mp4" type="video/mp4" />
             Su navegador no permite reproducir video HTML5.
           </video>
         </div>
@@ -272,22 +272,35 @@
 
       <div class="container gallery-grid">
         <figure class="gallery-item">
-          <img src="assets/img/especialidad-dibujo.png" alt="Especialidad de Dibujo y Modelado de Edificaciones" loading="lazy" />
-          <figcaption>Modelado arquitectónico</figcaption>
+          <button class="gallery-zoom-trigger" type="button" aria-label="Ampliar imagen de Dibujo y Modelado de Edificaciones">
+            <img src="assets/img/carrea-dibujo-1.jpeg" alt="Especialidad de Dibujo y Modelado de Edificaciones" loading="lazy" />
+          </button>
+          <!-- <figcaption>Modelado arquitectónico</figcaption> -->
         </figure>
         <figure class="gallery-item">
-          <img src="assets/img/programa-especialidades-tecnicas.png" alt="Estudiantes de especialidades técnicas" loading="lazy" />
-          <figcaption>Trabajo técnico</figcaption>
+          <button class="gallery-zoom-trigger" type="button" aria-label="Ampliar imagen de estudiantes de carreras técnicas">
+            <img src="assets/img/carrea-dibujo-2.jpeg" alt="Estudiantes de carreras técnicas" loading="lazy" />
+          </button>
+          <!-- <figcaption>Trabajo técnico</figcaption> -->
         </figure>
         <figure class="gallery-item">
-          <img src="assets/img/nuestro-colegio-arcos.jpg" alt="Instalaciones del CTP de Ulloa" loading="lazy" />
-          <figcaption>Entorno institucional</figcaption>
+          <button class="gallery-zoom-trigger" type="button" aria-label="Ampliar imagen de instalaciones del CTP de Ulloa">
+            <img src="assets/img/carrea-dibujo-3.jpeg" alt="Instalaciones del CTP de Ulloa" loading="lazy" />
+          </button>
+          <!-- <figcaption>Entorno institucional</figcaption> -->
         </figure>
         <figure class="gallery-item">
-          <img src="assets/img/portada-colegio.jpg" alt="Comunidad educativa del CTP de Ulloa" loading="lazy" />
-          <figcaption>Comunidad CTP</figcaption>
+          <button class="gallery-zoom-trigger" type="button" aria-label="Ampliar imagen de la comunidad educativa del CTP de Ulloa">
+            <img src="assets/img/carrea-dibujo-4.jpeg" alt="Comunidad educativa del CTP de Ulloa" loading="lazy" />
+          </button>
+          <!-- <figcaption>Comunidad CTP</figcaption> -->
         </figure>
       </div>
+
+      <dialog class="gallery-modal" aria-label="Imagen ampliada de la galería">
+        <button class="gallery-modal-close" type="button" aria-label="Cerrar imagen ampliada">×</button>
+        <img class="gallery-modal-image" src="" alt="" />
+      </dialog>
     </section>
   </main>
 

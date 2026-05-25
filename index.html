@@ -78,7 +78,7 @@
             </svg>
           </button>
           <div class="nav-submenu">
-            <a href="especialidades-tecnicas.html">Especialidades Técnicas</a>
+            <a href="especialidades-tecnicas.html">Carreras Técnicas</a>
             <a href="#area-academica">Área Académica</a>
             <a href="plan-nacional.html">Plan Nacional</a>
             <a href="https://dual.mep.go.cr/" target="_blank" rel="noopener noreferrer">Educación dual</a>
@@ -257,12 +257,12 @@
           <div class="offer-panel-media">
             <img
               src="assets/img/programa-especialidades-tecnicas.png"
-              alt="Estudiantes del programa de especialidades técnicas del CTP de Ulloa"
+              alt="Estudiantes del programa de carreras técnicas del CTP de Ulloa"
             />
             <span class="offer-panel-badge">Técnica</span>
           </div>
           <div class="offer-panel-body">
-            <h3>Especialidades técnicas</h3>
+            <h3>Carreras técnicas</h3>
             <p>
               Áreas comerciales, digitales e industriales orientadas al desarrollo de competencias profesionales y
               empleabilidad.
@@ -557,6 +557,7 @@
               <path d="m12 5 7 7-7 7" />
             </svg>
           </a>
+
           <!-- <div
             class="nubi-greeting"
             aria-label="Nubi saluda en español, inglés y francés de forma cíclica"
@@ -574,6 +575,69 @@
       </div> -->
     </section>
 
+    <section class="section services-section" id="servicios" aria-labelledby="servicios-title">
+      <div class="container services-header">
+        <h2 id="servicios-title">Servicios</h2>
+      </div>
+
+      <div class="container service-circles">
+        <article class="service-circle">
+          <div class="service-circle-photo">
+            <img
+              src="assets/img/servicios-orientacion-vocacional.png"
+              alt="Orientación vocacional para estudiantes del CTP de Ulloa"
+              loading="lazy"
+            />
+          </div>
+          <h3>Orientación vocacional</h3>
+        </article>
+
+        <article class="service-circle">
+          <div class="service-circle-photo">
+            <img
+              src="assets/img/servicios-biblioteca.png"
+              alt="Biblioteca del CTP de Ulloa"
+              loading="lazy"
+            />
+          </div>
+          <h3>Biblioteca</h3>
+        </article>
+
+        <article class="service-circle">
+          <div class="service-circle-photo">
+            <img
+              src="assets/img/servicios-comedor.png"
+              alt="Comedor estudiantil del CTP de Ulloa"
+              loading="lazy"
+            />
+          </div>
+          <h3>Comedor estudiantil</h3>
+        </article>
+
+        <article class="service-circle">
+          <div class="service-circle-photo">
+            <img
+              src="assets/img/servicios-transporte.png"
+              alt="Transporte para estudiantes del CTP de Ulloa"
+              loading="lazy"
+            />
+          </div>
+          <h3>Transporte</h3>
+        </article>
+
+        <article class="service-circle">
+          <div class="service-circle-photo">
+            <img
+              src="assets/img/servicios-deportes.png"
+              alt="Actividades deportivas del CTP de Ulloa"
+              loading="lazy"
+            />
+          </div>
+          <h3>Deportes</h3>
+        </article>
+      </div>
+    </section>
+
     <section class="section admission-section" id="admision">
       <div class="container admission-wrap">
         <div class="admission-copy">
@@ -582,12 +646,11 @@
 
 
           <div class="admission-actions">
-            <a href="#contacto" class="button-primary">Solicitar información</a>
-            <a href="mailto:ctp.ulloa@mep.go.cr" class="button-secondary">Escribir a admisiones</a>
+            <a href="mailto:ctpulloa.procesodeadmision@gmail.com" class="button-primary">Escribir a admisiones</a>
           </div>
         </div>
 
-        <div class="admission-steps">
+        <!-- <div class="admission-steps">
           <div class="step">
             <strong>Paso 1</strong>
             Consultar la apertura del período de admisión y las publicaciones oficiales del colegio.
@@ -604,9 +667,46 @@
             <strong>Paso 4</strong>
             Verificar fechas importantes, comunicados y recordatorios en las redes sociales institucionales.
           </div>
+        </div> -->
+
+        <div class="admission-posters" aria-label="Cronogramas del proceso de admisión">
+          <button
+            class="admission-poster"
+            type="button"
+            data-admission-image="assets/img/admision-setimo.jpg"
+            data-admission-title="Cronograma de admisión para séptimo año"
+            aria-haspopup="dialog"
+          >
+            <img
+              src="assets/img/admision-setimo.jpg"
+              alt="Cronograma del proceso de admisión para séptimo año, curso lectivo 2027"
+              loading="lazy"
+            />
+            <span>Sétimo año</span>
+          </button>
+
+          <button
+            class="admission-poster"
+            type="button"
+            data-admission-image="assets/img/admision-decimo.jpg"
+            data-admission-title="Cronograma de admisión para décimo año"
+            aria-haspopup="dialog"
+          >
+            <img
+              src="assets/img/admision-decimo.jpg"
+              alt="Cronograma del proceso de admisión para décimo año, curso lectivo 2027"
+              loading="lazy"
+            />
+            <span>Décimo año</span>
+          </button>
         </div>
       </div>
 
+      <dialog class="admission-modal" aria-labelledby="admission-modal-title">
+        <button class="admission-modal-close" type="button" aria-label="Cerrar cronograma ampliado">×</button>
+        <h3 id="admission-modal-title" class="sr-only"></h3>
+        <img class="admission-modal-image" src="" alt="" />
+      </dialog>
     </section>
 
     <section class="section partner-carousel-section" aria-label="Empresas aliadas">
