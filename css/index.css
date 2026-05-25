@@ -2764,6 +2764,15 @@ section[id] {
   min-height: 1.55rem;
 }
 
+.language-note-card .language-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 1.66rem;
+  height: 1.66rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .language-flag {
   position: relative;
   display: inline-block;
