@@ -373,6 +373,31 @@ if (partnerCarousel && partnerCarouselTrack) {
   partnerCarousel.addEventListener('pointercancel', finishPartnerDrag);
 }
 
+const exchangeModal = document.querySelector('.exchange-modal');
+const exchangeModalTrigger = document.querySelector('.exchange-modal-trigger');
+const exchangeModalClose = exchangeModal?.querySelector('.exchange-modal-close');
+
+if (exchangeModal && exchangeModalTrigger) {
+  exchangeModalTrigger.addEventListener('click', () => {
+    if (typeof exchangeModal.showModal === 'function') {
+      exchangeModal.showModal();
+      exchangeModalClose?.focus();
+    } else {
+      exchangeModal.setAttribute('open', '');
+    }
+  });
+
+  exchangeModalClose?.addEventListener('click', () => {
+    exchangeModal.close();
+  });
+
+  exchangeModal.addEventListener('click', event => {
+    if (event.target === exchangeModal) {
+      exchangeModal.close();
+    }
+  });
+}
+
 const admissionModal = document.querySelector('.admission-modal');
 const admissionModalImage = admissionModal?.querySelector('.admission-modal-image');
 const admissionModalTitle = admissionModal?.querySelector('#admission-modal-title');

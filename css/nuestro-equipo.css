@@ -136,22 +136,8 @@
 
 .team-department h2 span {
   display: inline-block;
-  padding: 0 0.08em;
-  margin: 0 -0.08em;
-  border-radius: 0.08em;
-  background:
-    linear-gradient(#48ca6d, #48ca6d) left bottom / 100% 0.14em no-repeat;
   color: inherit;
   font-weight: 800;
-  transition:
-    background-size 0.28s ease,
-    color 0.22s ease;
-}
-
-.team-department:hover h2 span,
-.team-department:focus-within h2 span {
-  background-size: 100% 100%;
-  color: white;
 }
 
 .department-copy {

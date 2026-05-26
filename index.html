@@ -550,13 +550,18 @@
         </article>
 
         <div class="language-card-action">
-          <a href="#contacto" class="language-cta">
+          <button
+            class="language-cta exchange-modal-trigger"
+            type="button"
+            aria-haspopup="dialog"
+            aria-controls="exchange-modal"
+          >
             Programas de intercambio
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M5 12h14" />
               <path d="m12 5 7 7-7 7" />
             </svg>
-          </a>
+          </button>
 
           <!-- <div
             class="nubi-greeting"
@@ -570,9 +575,113 @@
               <img src="assets/img/nubi-multilinguismo.png" alt="" width="560" height="687" />
               <span class="nubi-photo-mouth"></span>
             </div>
-          </div>
+          </div> -->
         </div>
-      </div> -->
+      </div>
+
+      <dialog
+        class="exchange-modal"
+        id="exchange-modal"
+        aria-labelledby="exchange-modal-title"
+      >
+        <article class="exchange-modal-card">
+          <button class="exchange-modal-close" type="button" aria-label="Cerrar información del intercambio">&times;</button>
+          <h2 id="exchange-modal-title" class="sr-only">Programa de intercambio Costa Rica - Wisconsin 2026 - 2027</h2>
+
+          <div class="exchange-modal-hero" role="img" aria-label="Programa de intercambio Costa Rica - Wisconsin 2026 - 2027"></div>
+
+          <div class="exchange-modal-body">
+            <section class="exchange-highlights" aria-label="Características principales del programa">
+              <article class="exchange-highlight">
+                <span class="exchange-highlight-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M3 12h18" />
+                    <path d="M12 3a14 14 0 0 1 0 18" />
+                    <path d="M12 3a14 14 0 0 0 0 18" />
+                  </svg>
+                </span>
+                <h3>Inmersión en inglés</h3>
+                <p>El objetivo central es practicar el idioma en situaciones reales y conocer la cultura anglosajona.</p>
+              </article>
+
+              <article class="exchange-highlight">
+                <span class="exchange-highlight-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m3 11 9-8 9 8" />
+                    <path d="M5 10v10h14V10" />
+                    <path d="M10 20v-6h4v6" />
+                  </svg>
+                </span>
+                <h3>Familias anfitrionas</h3>
+                <p>Los estudiantes se hospedan con familias y comparten actividades con un colegio hermano.</p>
+              </article>
+
+              <article class="exchange-highlight">
+                <span class="exchange-highlight-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3v18" />
+                    <path d="M3 12h18" />
+                    <path d="m5.6 5.6 12.8 12.8" />
+                    <path d="M18.4 5.6 5.6 18.4" />
+                  </svg>
+                </span>
+                <h3>Experiencia invernal</h3>
+                <p>El programa integra recorridos culturales, actividades deportivas y vivencias propias del invierno.</p>
+              </article>
+            </section>
+
+            <section class="exchange-itinerary" aria-labelledby="exchange-itinerary-title">
+              <div class="exchange-section-heading">
+                <p>Itinerario destacado</p>
+                <h3 id="exchange-itinerary-title">Dos semanas para aprender y descubrir</h3>
+              </div>
+
+              <ol class="exchange-timeline">
+                <li>
+                  <span>Días 1 - 2</span>
+                  <strong>Traslado y Chicago</strong>
+                  <p>Hospedaje inicial y visita a Hancock Tower, The Tilt, Millennium Park y Navy Pier.</p>
+                </li>
+                <li>
+                  <span>Días 3 - 7</span>
+                  <strong>Familia, Milwaukee y colegio</strong>
+                  <p>Días familiares, actividades deportivas, museos en Milwaukee, tubing y School Day.</p>
+                </li>
+                <li>
+                  <span>Días 8 - 12</span>
+                  <strong>Vida escolar y Madison</strong>
+                  <p>Capitolio, Universidad de Wisconsin, presentaciones escolares y Zoológico de Madison.</p>
+                </li>
+                <li>
+                  <span>Días 13 - 15</span>
+                  <strong>Comunidad y despedida</strong>
+                  <p>Visitas a estaciones de bomberos y policía, fiesta de despedida y regreso a Costa Rica.</p>
+                </li>
+              </ol>
+            </section>
+
+            <section class="exchange-gallery" aria-label="Información visual del programa de intercambio">
+              <div class="exchange-photo-grid">
+                <figure class="exchange-photo-slot has-image">
+                  <img
+                    src="assets/img/Intercambio-1.jpeg"
+                    alt="Afiche del programa de intercambio Costa Rica - Wisconsin 2026 - 2027"
+                    loading="lazy"
+                  />
+                </figure>
+                <figure class="exchange-photo-slot has-image">
+                  <img
+                    src="assets/img/intercambio-2.jpeg"
+                    alt="Información para familias anfitrionas durante el intercambio de estudiantes de Estados Unidos"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+            </section>
+          </div>
+        </article>
+      </dialog>
     </section>
 
     <section class="section services-section" id="servicios" aria-labelledby="servicios-title">

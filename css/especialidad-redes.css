@@ -12,6 +12,10 @@
   scroll-margin-top: 24px;
 }
 
+.popup-view .page-home-button {
+  display: none;
+}
+
 .network-page {
   overflow: hidden;
   background:

@@ -302,6 +302,48 @@ section[id] {
     border-color 0.22s ease;
 }
 
+.page-home-button {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.48rem;
+  margin-top: 1.65rem;
+  padding: 0.72rem 1.05rem;
+  border: 1px solid rgba(18, 33, 74, 0.17);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--navy-deep);
+  font-weight: 800;
+  box-shadow: 0 12px 28px rgba(8, 21, 52, 0.07);
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.page-home-button:hover,
+.page-home-button:focus-visible {
+  border-color: rgba(13, 114, 52, 0.4);
+  background: #f9fcf8;
+  box-shadow: 0 16px 34px rgba(8, 21, 52, 0.11);
+  transform: translateY(-2px);
+}
+
+.page-home-button:focus-visible {
+  outline: 3px solid rgba(13, 114, 52, 0.2);
+  outline-offset: 2px;
+}
+
+.page-home-button svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 auto;
+  stroke-width: 2;
+}
+
 .admissions-btn {
   justify-self: end;
   gap: 0.44rem;
@@ -3083,12 +3125,14 @@ section[id] {
   min-width: 0;
   min-height: 3.05rem;
   padding: 0.78rem 1.3rem;
+  border: 0;
   border-radius: 999px;
   background: linear-gradient(135deg, #ffce21, #f4b500);
   color: #063f27;
   font-size: 0.92rem;
   font-weight: 900;
   line-height: 1.1;
+  cursor: pointer;
   box-shadow: 0 18px 34px rgba(8, 21, 52, 0.15);
   transition:
     transform 0.22s ease,
@@ -3110,6 +3154,342 @@ section[id] {
   width: 1.25rem;
   height: 1.25rem;
   stroke-width: 2.2;
+}
+
+.exchange-modal {
+  --exchange-green: #0a6a35;
+  --exchange-green-bright: #57ad24;
+  --exchange-gold: #f4bb00;
+  width: min(calc(100% - 2rem), 1110px);
+  max-width: 1110px;
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 28px;
+  background: #ffffff;
+  color: #17253d;
+  box-shadow: 0 30px 86px rgba(4, 25, 18, 0.32);
+}
+
+.exchange-modal[open] {
+  animation: exchangeModalIn 0.24s ease-out;
+}
+
+.exchange-modal::backdrop {
+  background: rgba(5, 23, 18, 0.68);
+  backdrop-filter: blur(5px);
+}
+
+.exchange-modal-card {
+  position: relative;
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 100% 100%, rgba(87, 173, 36, 0.08), transparent 28rem),
+    #ffffff;
+}
+
+.exchange-modal-close {
+  position: sticky;
+  top: 1rem;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  margin: 1rem 1rem -3.8rem auto;
+  border: 1px solid rgba(255, 255, 255, 0.33);
+  border-radius: 50%;
+  background: rgba(7, 26, 57, 0.54);
+  color: #ffffff;
+  font-size: 1.85rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.exchange-modal-close:hover,
+.exchange-modal-close:focus-visible {
+  background: #ffffff;
+  color: var(--exchange-green);
+  transform: scale(1.06);
+}
+
+.exchange-modal-close:focus-visible {
+  outline: 3px solid rgba(244, 187, 0, 0.8);
+  outline-offset: 2px;
+}
+
+.exchange-modal-hero {
+  min-height: clamp(18rem, 34vw, 23rem);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+    url("../assets/img/intercambio-3.png") center / cover no-repeat;
+}
+
+.exchange-modal-body {
+  display: grid;
+  gap: clamp(1.45rem, 2.6vw, 2rem);
+  padding: clamp(1.35rem, 3.2vw, 2.35rem);
+}
+
+.exchange-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.exchange-highlight {
+  padding: 1.2rem 1.1rem;
+  border: 1px solid rgba(10, 106, 53, 0.1);
+  border-radius: 17px;
+  background: #f5faf4;
+}
+
+.exchange-highlight-icon {
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  margin-bottom: 0.85rem;
+  border-radius: 12px;
+  background: rgba(10, 106, 53, 0.11);
+  color: var(--exchange-green);
+}
+
+.exchange-highlight-icon svg {
+  width: 1.42rem;
+  height: 1.42rem;
+  stroke-width: 1.8;
+}
+
+.exchange-highlight h3 {
+  margin: 0 0 0.35rem;
+  color: #103a26;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.2;
+}
+
+.exchange-highlight p {
+  margin: 0;
+  color: #596879;
+  font-size: 0.92rem;
+  line-height: 1.42;
+}
+
+.exchange-itinerary {
+  padding: clamp(1.1rem, 2.7vw, 1.65rem);
+  border-radius: 22px;
+  background: #f7f9fd;
+}
+
+.exchange-section-heading p {
+  margin: 0 0 0.3rem;
+  color: var(--exchange-green);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.exchange-section-heading h3 {
+  margin: 0;
+  color: #12243d;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.46rem);
+  line-height: 1.2;
+}
+
+.exchange-section-heading > span {
+  display: block;
+  margin-top: 0.35rem;
+  color: #697688;
+  font-size: 0.96rem;
+}
+
+.exchange-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exchange-timeline li {
+  position: relative;
+  min-height: 11.4rem;
+  padding: 1.05rem 0.85rem 0.9rem;
+  border: 1px solid rgba(17, 32, 61, 0.08);
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 6px 17px rgba(8, 21, 52, 0.04);
+}
+
+.exchange-timeline li::before {
+  content: "";
+  display: block;
+  width: 2.75rem;
+  height: 3px;
+  margin-bottom: 0.72rem;
+  border-radius: 999px;
+  background: var(--exchange-gold);
+}
+
+.exchange-timeline li:nth-child(even)::before {
+  background: var(--exchange-green-bright);
+}
+
+.exchange-timeline span {
+  display: block;
+  margin-bottom: 0.28rem;
+  color: var(--exchange-green);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.exchange-timeline strong {
+  display: block;
+  color: #152c49;
+  font-size: 0.98rem;
+  line-height: 1.24;
+}
+
+.exchange-timeline p {
+  margin: 0.45rem 0 0;
+  color: #697688;
+  font-size: 0.85rem;
+  line-height: 1.38;
+}
+
+.exchange-gallery {
+  padding: clamp(0.9rem, 2vw, 1.2rem);
+  border: 1px solid rgba(10, 106, 53, 0.11);
+  border-radius: 22px;
+  background: linear-gradient(125deg, #fbfdfb, #f3faf1);
+}
+
+.exchange-photo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  align-items: center;
+}
+
+.exchange-photo-slot {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  min-height: 9.1rem;
+  padding: 1rem;
+  border: 2px dashed rgba(10, 106, 53, 0.23);
+  border-radius: 16px;
+  background: #ffffff;
+  color: #738090;
+  text-align: center;
+}
+
+.exchange-photo-slot svg {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.42rem;
+  color: var(--exchange-green-bright);
+  stroke-width: 1.6;
+}
+
+.exchange-photo-slot strong {
+  color: #274237;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 0.88rem;
+}
+
+.exchange-photo-slot span {
+  font-size: 0.85rem;
+}
+
+.exchange-photo-slot.has-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  margin: 0;
+  padding: 0.5rem;
+  border-style: solid;
+  background: #ffffff;
+  box-shadow: 0 10px 26px rgba(8, 21, 52, 0.09);
+}
+
+.exchange-photo-slot.has-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 11px;
+  object-fit: contain;
+}
+
+.exchange-photo-slot.has-image:first-child img {
+  width: min(100%, 46rem);
+}
+
+@keyframes exchangeModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 850px) {
+  .exchange-highlights,
+  .exchange-timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .exchange-modal {
+    width: calc(100% - 1rem);
+    max-height: calc(100dvh - 1rem);
+    border-radius: 19px;
+  }
+
+  .exchange-modal-card {
+    max-height: calc(100dvh - 1rem);
+  }
+
+  .exchange-modal-close {
+    top: 0.65rem;
+    width: 2.55rem;
+    height: 2.55rem;
+    margin: 0.65rem 0.65rem -3.2rem auto;
+  }
+
+  .exchange-modal-hero {
+    min-height: clamp(8rem, 34vw, 12rem);
+    background-position: center top;
+  }
+
+  .exchange-highlights,
+  .exchange-timeline,
+  .exchange-photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exchange-timeline li {
+    min-height: 0;
+  }
 }
 
 .language-watermark {
