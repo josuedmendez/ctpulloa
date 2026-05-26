@@ -80,8 +80,16 @@ if (backToTop) {
 document.querySelectorAll('[data-carousel]').forEach(carousel => {
   const slides = Array.from(carousel.querySelectorAll('.carousel-person'));
   const dotsWrap = carousel.querySelector('.carousel-dots');
+  const profileCard = carousel.querySelector('[data-profile-card]');
+  const profileImage = profileCard?.querySelector('[data-profile-image]');
+  const profileImagePlaceholder = profileCard?.querySelector('[data-profile-image-placeholder]');
+  const profileName = profileCard?.querySelector('[data-profile-name]');
+  const profileEmail = profileCard?.querySelector('[data-profile-email]');
+  const profileClose = profileCard?.querySelector('[data-profile-close]');
+  const profileGroup = profileCard?.dataset.profileGroup || 'equipo institucional';
   const intervalDuration = 1500;
   let autoplay = null;
+  let isProfileOpen = false;
   let current = slides.findIndex(slide => slide.classList.contains('is-active'));
 
   if (!slides.length || !dotsWrap) return;
@@ -95,7 +103,12 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
     dot.setAttribute('aria-label', `Ver persona ${index + 1}`);
     dot.addEventListener('click', () => {
       updateCarousel(index);
-      restartAutoplay();
+
+      if (isProfileOpen) {
+        openProfile(slides[index]);
+      } else {
+        restartAutoplay();
+      }
     });
     dotsWrap.appendChild(dot);
     return dot;
@@ -125,7 +138,7 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
   }
 
   function startAutoplay() {
-    if (slides.length < 2) return;
+    if (slides.length < 2 || isProfileOpen) return;
     stopAutoplay();
     autoplay = window.setInterval(showNextSlide, intervalDuration);
   }
@@ -142,12 +155,65 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
     startAutoplay();
   }
 
+  function openProfile(slide) {
+    if (!profileCard || !profileImage || !profileName || !profileEmail) return;
+
+    const sourceImage = slide.querySelector('img');
+    const name = slide.dataset.profileName;
+    const email = slide.dataset.profileEmail;
+    const initials = slide.dataset.profileInitials;
+
+    if ((!sourceImage && !initials) || !name || !email) return;
+
+    isProfileOpen = true;
+    stopAutoplay();
+    carousel.classList.add('is-profile-open');
+
+    if (sourceImage) {
+      profileImage.src = sourceImage.currentSrc || sourceImage.src;
+      profileImage.alt = `Perfil de ${name}, integrante del ${profileGroup}`;
+      profileImage.hidden = false;
+
+      if (profileImagePlaceholder) {
+        profileImagePlaceholder.hidden = true;
+      }
+    } else if (profileImagePlaceholder) {
+      profileImage.removeAttribute('src');
+      profileImage.alt = '';
+      profileImage.hidden = true;
+      profileImagePlaceholder.textContent = initials;
+      profileImagePlaceholder.hidden = false;
+    }
+
+    profileName.textContent = name;
+    profileEmail.textContent = email;
+    profileEmail.href = `mailto:${email}`;
+    profileCard.hidden = false;
+  }
+
+  function closeProfile() {
+    if (!profileCard) return;
+
+    isProfileOpen = false;
+    profileCard.hidden = true;
+    carousel.classList.remove('is-profile-open');
+    slides[current]?.focus();
+    startAutoplay();
+  }
+
   slides.forEach((slide, index) => {
     slide.addEventListener('click', () => {
       updateCarousel(index);
-      restartAutoplay();
+
+      if (profileCard) {
+        openProfile(slide);
+      } else {
+        restartAutoplay();
+      }
     });
   });
+
+  profileClose?.addEventListener('click', closeProfile);
 
   carousel.addEventListener('focusin', stopAutoplay);
   carousel.addEventListener('focusout', startAutoplay);
