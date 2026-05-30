@@ -741,68 +741,95 @@
           <p class="section-tag tag-light">Admisión</p>
           <h2>Proceso de admisión</h2>
 
-
           <div class="admission-actions">
             <a href="mailto:ctpulloa.procesodeadmision@gmail.com" class="button-primary">Escribir a admisiones</a>
           </div>
         </div>
 
-        <!-- <div class="admission-steps">
-          <div class="step">
-            <strong>Paso 1</strong>
-            Consultar la apertura del período de admisión y las publicaciones oficiales del colegio.
-          </div>
-          <div class="step">
-            <strong>Paso 2</strong>
-            Revisar los requisitos solicitados para el nivel correspondiente y preparar la documentación.
-          </div>
-          <div class="step">
-            <strong>Paso 3</strong>
-            Presentar la información por el canal indicado y dar seguimiento a cualquier solicitud adicional.
-          </div>
-          <div class="step">
-            <strong>Paso 4</strong>
-            Verificar fechas importantes, comunicados y recordatorios en las redes sociales institucionales.
-          </div>
-        </div> -->
-
-        <div class="admission-posters" aria-label="Cronogramas del proceso de admisión">
+        <div class="admission-documents" aria-label="Documentos del proceso de admisión">
           <button
-            class="admission-poster"
+            class="admission-document"
             type="button"
-            data-admission-image="assets/img/admision-setimo.jpg"
-            data-admission-title="Cronograma de admisión para séptimo año"
+            data-admission-pdf="assets/docs/admision-nuevo-ingreso-setimo.pdf"
+            data-admission-title="Admisión nuevo ingreso a sétimo año"
             aria-haspopup="dialog"
           >
-            <img
-              src="assets/img/admision-setimo.jpg"
-              alt="Cronograma del proceso de admisión para séptimo año, curso lectivo 2027"
-              loading="lazy"
-            />
-            <span>Sétimo año</span>
+            <span class="admission-document-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7Z" />
+                <path d="M14 2v5h5" />
+                <path d="M9 13h6" />
+                <path d="M9 17h4" />
+              </svg>
+            </span>
+            <span class="admission-document-content">
+              <span class="admission-document-kicker">Nuevo ingreso</span>
+              <strong>Sétimo año</strong>
+              <span>Requisitos y proceso de admisión</span>
+            </span>
+            <span class="admission-document-action">Ver PDF</span>
           </button>
 
           <button
-            class="admission-poster"
+            class="admission-document"
             type="button"
-            data-admission-image="assets/img/admision-decimo.jpg"
-            data-admission-title="Cronograma de admisión para décimo año"
+            data-admission-pdf="assets/docs/admision-nuevo-ingreso-decimo.pdf"
+            data-admission-title="Admisión nuevo ingreso a décimo año"
             aria-haspopup="dialog"
           >
-            <img
-              src="assets/img/admision-decimo.jpg"
-              alt="Cronograma del proceso de admisión para décimo año, curso lectivo 2027"
-              loading="lazy"
-            />
-            <span>Décimo año</span>
+            <span class="admission-document-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7Z" />
+                <path d="M14 2v5h5" />
+                <path d="M9 13h6" />
+                <path d="M9 17h4" />
+              </svg>
+            </span>
+            <span class="admission-document-content">
+              <span class="admission-document-kicker">Nuevo ingreso</span>
+              <strong>Décimo año</strong>
+              <span>Información para estudiantes externos</span>
+            </span>
+            <span class="admission-document-action">Ver PDF</span>
+          </button>
+
+          <button
+            class="admission-document"
+            type="button"
+            data-admission-pdf="assets/docs/admision-decimo.pdf"
+            data-admission-title="Admisión a décimo año"
+            aria-haspopup="dialog"
+          >
+            <span class="admission-document-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7Z" />
+                <path d="M14 2v5h5" />
+                <path d="M9 13h6" />
+                <path d="M9 17h4" />
+              </svg>
+            </span>
+            <span class="admission-document-content">
+              <span class="admission-document-kicker">Admisión técnica</span>
+              <strong>Décimo año</strong>
+              <span>Información para estudiantes regulares de noveno del CTP Ulloa</span>
+            </span>
+            <span class="admission-document-action">Ver PDF</span>
           </button>
         </div>
       </div>
 
       <dialog class="admission-modal" aria-labelledby="admission-modal-title">
-        <button class="admission-modal-close" type="button" aria-label="Cerrar cronograma ampliado">×</button>
-        <h3 id="admission-modal-title" class="sr-only"></h3>
-        <img class="admission-modal-image" src="" alt="" />
+        <div class="admission-modal-panel">
+          <button class="admission-modal-close" type="button" aria-label="Cerrar documento de admisión">×</button>
+          <div class="admission-modal-header">
+            <h3 id="admission-modal-title"></h3>
+            <a class="admission-modal-link" href="#" target="_blank" rel="noopener noreferrer">Abrir en nueva pestaña</a>
+          </div>
+          <iframe class="admission-modal-pdf" title=""></iframe>
+          <p class="admission-modal-fallback">
+            Si el documento no carga, podés abrirlo en una nueva pestaña desde el enlace superior.
+          </p>
+        </div>
       </dialog>
     </section>
 

@@ -465,21 +465,37 @@ if (exchangeModal && exchangeModalTrigger) {
 }
 
 const admissionModal = document.querySelector('.admission-modal');
-const admissionModalImage = admissionModal?.querySelector('.admission-modal-image');
+const admissionModalPdf = admissionModal?.querySelector('.admission-modal-pdf');
 const admissionModalTitle = admissionModal?.querySelector('#admission-modal-title');
 const admissionModalClose = admissionModal?.querySelector('.admission-modal-close');
+const admissionModalLink = admissionModal?.querySelector('.admission-modal-link');
 
-if (admissionModal && admissionModalImage && admissionModalTitle) {
-  document.querySelectorAll('.admission-poster').forEach(poster => {
-    poster.addEventListener('click', () => {
-      const image = poster.dataset.admissionImage;
-      const title = poster.dataset.admissionTitle;
+if (admissionModal && admissionModalPdf && admissionModalTitle && admissionModalLink) {
+  const resetAdmissionModal = () => {
+    admissionModalPdf.removeAttribute('src');
+    admissionModalPdf.title = '';
+  };
 
-      if (!image || !title) return;
+  const closeAdmissionModal = () => {
+    if (typeof admissionModal.close === 'function') {
+      admissionModal.close();
+    } else {
+      admissionModal.removeAttribute('open');
+      resetAdmissionModal();
+    }
+  };
 
-      admissionModalImage.src = image;
-      admissionModalImage.alt = title;
+  document.querySelectorAll('.admission-document').forEach(documentButton => {
+    documentButton.addEventListener('click', () => {
+      const pdf = documentButton.dataset.admissionPdf;
+      const title = documentButton.dataset.admissionTitle;
+
+      if (!pdf || !title) return;
+
       admissionModalTitle.textContent = title;
+      admissionModalPdf.src = `${pdf}#view=FitH`;
+      admissionModalPdf.title = title;
+      admissionModalLink.href = pdf;
 
       if (typeof admissionModal.showModal === 'function') {
         admissionModal.showModal();
@@ -491,13 +507,17 @@ if (admissionModal && admissionModalImage && admissionModalTitle) {
   });
 
   admissionModalClose?.addEventListener('click', () => {
-    admissionModal.close();
+    closeAdmissionModal();
   });
 
   admissionModal.addEventListener('click', event => {
     if (event.target === admissionModal) {
-      admissionModal.close();
+      closeAdmissionModal();
     }
+  });
+
+  admissionModal.addEventListener('close', () => {
+    resetAdmissionModal();
   });
 }
 
