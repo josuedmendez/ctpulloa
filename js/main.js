@@ -485,7 +485,7 @@ if (admissionModal && admissionModalPdf && admissionModalTitle && admissionModal
     }
   };
 
-  document.querySelectorAll('.admission-document').forEach(documentButton => {
+  document.querySelectorAll('.admission-document[data-admission-pdf]').forEach(documentButton => {
     documentButton.addEventListener('click', () => {
       const pdf = documentButton.dataset.admissionPdf;
       const title = documentButton.dataset.admissionTitle;
