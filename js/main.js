@@ -471,6 +471,17 @@ const admissionModalClose = admissionModal?.querySelector('.admission-modal-clos
 const admissionModalLink = admissionModal?.querySelector('.admission-modal-link');
 
 if (admissionModal && admissionModalPdf && admissionModalTitle && admissionModalLink) {
+  const isMacSafari = (() => {
+    const userAgent = navigator.userAgent;
+    const platform = navigator.platform || '';
+
+    return (
+      /Mac/.test(platform) &&
+      /Safari/.test(userAgent) &&
+      !/Chrome|Chromium|CriOS|FxiOS|Edg|OPR/.test(userAgent)
+    );
+  })();
+
   const resetAdmissionModal = () => {
     admissionModalPdf.removeAttribute('src');
     admissionModalPdf.title = '';
@@ -491,6 +502,11 @@ if (admissionModal && admissionModalPdf && admissionModalTitle && admissionModal
       const title = documentButton.dataset.admissionTitle;
 
       if (!pdf || !title) return;
+
+      if (isMacSafari) {
+        window.open(pdf, '_blank', 'noopener,noreferrer');
+        return;
+      }
 
       admissionModalTitle.textContent = title;
       admissionModalPdf.src = `${pdf}#view=FitH`;

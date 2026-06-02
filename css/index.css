@@ -1614,10 +1614,10 @@ section[id] {
 
 .service-circles {
   display: grid;
-  grid-template-columns: repeat(5, minmax(140px, 180px));
+  grid-template-columns: repeat(3, minmax(170px, 210px));
   justify-content: center;
-  gap: clamp(1.25rem, 3vw, 2.65rem);
-  max-width: 1120px;
+  gap: clamp(2.75rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem);
+  max-width: 980px;
 }
 
 .service-circle {
@@ -4304,8 +4304,8 @@ textarea {
   }
 
   .service-circles {
-    grid-template-columns: repeat(3, minmax(140px, 180px));
-    row-gap: 2.5rem;
+    grid-template-columns: repeat(3, minmax(150px, 190px));
+    gap: 2.75rem clamp(2rem, 4vw, 3.5rem);
   }
 
   .identity-content h3 {
