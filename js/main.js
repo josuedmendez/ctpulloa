@@ -639,6 +639,27 @@ if (galleryModal && galleryModalImage) {
     }
   };
 
+  const addGalleryControlAction = (control, action) => {
+    if (!control) return;
+
+    let lastTouchActivation = 0;
+
+    control.addEventListener('touchend', event => {
+      event.preventDefault();
+      lastTouchActivation = Date.now();
+      action();
+    }, { passive: false });
+
+    control.addEventListener('click', event => {
+      if (Date.now() - lastTouchActivation < 500) {
+        event.preventDefault();
+        return;
+      }
+
+      action();
+    });
+  };
+
   document.querySelectorAll('.gallery-zoom-trigger').forEach(trigger => {
     trigger.addEventListener('click', () => {
       const sourceImage = trigger.querySelector('img');
@@ -663,15 +684,15 @@ if (galleryModal && galleryModalImage) {
     closeGalleryModal();
   });
 
-  galleryModalZoomIn?.addEventListener('click', () => {
+  addGalleryControlAction(galleryModalZoomIn, () => {
     setGalleryZoom(galleryZoom + 0.25);
   });
 
-  galleryModalZoomOut?.addEventListener('click', () => {
+  addGalleryControlAction(galleryModalZoomOut, () => {
     setGalleryZoom(galleryZoom - 0.25);
   });
 
-  galleryModalZoomReset?.addEventListener('click', () => {
+  addGalleryControlAction(galleryModalZoomReset, () => {
     setGalleryZoom(1);
     galleryModalViewport?.scrollTo(0, 0);
   });

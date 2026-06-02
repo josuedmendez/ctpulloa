@@ -1838,6 +1838,8 @@ section[id] {
 }
 
 .gallery-modal-tools {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   justify-self: center;
   gap: 0.35rem;
@@ -1854,6 +1856,7 @@ section[id] {
   background: #f7fbf8;
   color: var(--navy);
   cursor: pointer;
+  touch-action: manipulation;
   font-family: "Montserrat", Arial, sans-serif;
   font-size: 1rem;
   font-weight: 800;
