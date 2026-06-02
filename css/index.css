@@ -4354,13 +4354,15 @@ textarea {
   }
 
   .brand-logo {
-    height: 56px;
-    max-width: 150px;
+    height: 48px;
+    max-width: 96px;
   }
 
   .header-shell {
-    grid-template-columns: minmax(0, 1fr) auto auto;
-    gap: 0.65rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.45rem;
+    min-height: calc(var(--header-height) - 44px);
+    padding: 0.55rem 0;
   }
 
   .header-top {
@@ -4389,36 +4391,85 @@ textarea {
   }
 
   .header-actions {
-    order: 3;
-    grid-column: 1 / -1;
-    justify-self: stretch;
+    order: 2;
+    grid-column: auto;
+    justify-self: end;
     justify-content: flex-end;
+    gap: 0.35rem;
+    min-width: 0;
   }
 
   .header-admission-btn {
-    width: 122px;
-    min-height: 46px;
-    font-size: 0.72rem;
+    width: 96px;
+    min-height: 42px;
+    padding: 0.45rem 0.5rem;
+    border-radius: 9px;
+    font-size: 0.63rem;
   }
 
   .admissions-btn {
-    min-height: 46px;
-    gap: 0.34rem;
-    padding: 0.28rem 0.62rem 0.28rem 0.3rem;
-    font-size: 1.52rem;
+    min-height: 42px;
+    gap: 0.24rem;
+    padding: 0.26rem 0.48rem 0.26rem 0.24rem;
+    border-radius: 9px;
+    font-size: 1.12rem;
   }
 
   .admissions-btn::before {
-    width: 1.95rem;
-    height: 1.95rem;
-    border-radius: 6px;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 5px;
   }
 
   .nav-toggle {
-    order: 2;
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
+    order: 3;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .nav-toggle span {
+    width: 20px;
+    height: 2.5px;
+  }
+
+  @media (max-width: 360px) {
+    .header-shell {
+      gap: 0.32rem;
+    }
+
+    .brand-logo {
+      height: 42px;
+      max-width: 78px;
+    }
+
+    .header-actions {
+      gap: 0.24rem;
+    }
+
+    .header-admission-btn {
+      width: 84px;
+      min-height: 40px;
+      padding-inline: 0.38rem;
+      font-size: 0.56rem;
+    }
+
+    .admissions-btn {
+      min-height: 40px;
+      gap: 0.18rem;
+      padding: 0.24rem 0.38rem 0.24rem 0.2rem;
+      font-size: 0.95rem;
+    }
+
+    .admissions-btn::before {
+      width: 1.35rem;
+      height: 1.35rem;
+    }
+
+    .nav-toggle {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .site-nav {
