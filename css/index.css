@@ -1675,9 +1675,15 @@ section[id] {
 
 .admission-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
-  gap: 1.4rem;
+  grid-template-columns: minmax(240px, 0.38fr) minmax(0, 0.62fr);
+  gap: clamp(2rem, 4vw, 3.25rem);
   align-items: center;
+}
+
+.admission-copy {
+  justify-self: start;
+  max-width: 560px;
+  text-align: left;
 }
 
 .tag-light {
@@ -1698,12 +1704,19 @@ section[id] {
 }
 
 .admission-copy h2 {
+  margin: 0;
+  max-width: 13ch;
   color: var(--navy);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(2.25rem, 4.2vw, 4.15rem);
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 .admission-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 0.85rem;
   margin-top: 1.5rem;
 }
@@ -1717,164 +1730,146 @@ section[id] {
 
 .admission-documents {
   display: grid;
-  gap: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.25rem);
   justify-self: end;
-  width: min(100%, 560px);
+  align-items: start;
+  width: min(100%, 720px);
 }
 
-.admission-document {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 0.9rem;
-  min-height: 112px;
-  padding: 0.95rem;
-  border: 1px solid rgba(13, 114, 52, 0.14);
+.admission-visual-card {
+  margin: 0;
+  text-align: center;
+}
+
+.admission-visual-trigger {
+  display: block;
+  width: 100%;
+  padding: clamp(0.45rem, 1vw, 0.72rem);
+  border: 1px solid rgba(13, 114, 52, 0.16);
   border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(247, 251, 255, 0.94)),
-    linear-gradient(135deg, rgba(13, 114, 52, 0.12), rgba(243, 194, 68, 0.17));
-  box-shadow: 0 16px 34px rgba(8, 21, 52, 0.1);
-  color: var(--navy);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 42px rgba(8, 21, 52, 0.13);
   cursor: pointer;
-  text-decoration: none;
-  text-align: left;
   transition:
     border-color 180ms ease,
     box-shadow 180ms ease,
     transform 180ms ease;
 }
 
-.admission-document:hover,
-.admission-document:focus-visible {
+.admission-visual-trigger:hover,
+.admission-visual-trigger:focus-visible {
   border-color: rgba(13, 114, 52, 0.38);
-  box-shadow: 0 22px 42px rgba(8, 21, 52, 0.16);
-  transform: translateY(-3px);
+  box-shadow: 0 26px 52px rgba(8, 21, 52, 0.18);
+  transform: translateY(-5px);
 }
 
-.admission-document:focus-visible {
+.admission-visual-trigger:focus-visible {
   outline: 3px solid rgba(13, 114, 52, 0.3);
   outline-offset: 3px;
 }
 
-.admission-document-icon {
-  display: grid;
-  place-items: center;
-  width: 3.3rem;
-  height: 3.3rem;
-  border-radius: 50%;
-  background: var(--green);
-  color: white;
-  box-shadow: inset 0 -10px 18px rgba(8, 21, 52, 0.13);
+.admission-visual-media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 792 / 1225;
+  border-radius: 6px;
+  background: white;
+  object-fit: contain;
+  animation: admissionVisualFloat 4.8s ease-in-out infinite;
 }
 
-.admission-document-icon svg {
-  width: 1.8rem;
-  height: 1.8rem;
-  stroke-width: 1.8;
+.admission-visual-card:nth-child(2) .admission-visual-media {
+  animation-delay: -1.2s;
 }
 
-.admission-document-content {
-  display: grid;
-  gap: 0.2rem;
-  min-width: 0;
+.admission-visual-card:nth-child(3) .admission-visual-media {
+  animation-delay: -2.4s;
 }
 
-.admission-document-kicker {
-  color: var(--green-deep);
-  font-family: "Montserrat", Arial, sans-serif;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.admission-document-content strong {
+.admission-visual-card figcaption {
+  margin-top: 1rem;
   color: var(--navy);
   font-family: "Montserrat", Arial, sans-serif;
-  font-size: clamp(1.18rem, 2vw, 1.48rem);
-  line-height: 1.15;
-}
-
-.admission-document-content span:last-child {
-  color: var(--muted);
-  font-size: 0.98rem;
-  line-height: 1.35;
-}
-
-.admission-document-action {
-  color: var(--green-deep);
-  font-family: "Montserrat", Arial, sans-serif;
-  font-size: 0.88rem;
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
   font-weight: 800;
-  white-space: nowrap;
+  line-height: 1.25;
 }
 
-.admission-modal {
-  width: min(1120px, calc(100% - 2rem));
+@keyframes admissionVisualFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.gallery-modal {
+  width: min(920px, calc(100% - 2rem));
   max-width: calc(100% - 2rem);
-  height: min(86vh, 820px);
-  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
   margin: auto;
   padding: 0;
   border: 0;
-  border-radius: 14px;
+  border-radius: 8px;
   background: transparent;
   box-shadow: 0 28px 70px rgba(8, 21, 52, 0.32);
   overflow: visible;
 }
 
-.admission-modal::backdrop {
-  background: rgba(9, 19, 45, 0.68);
+.gallery-modal::backdrop {
+  background: rgba(9, 19, 45, 0.72);
   backdrop-filter: blur(4px);
 }
 
-.admission-modal-panel {
+.gallery-modal-panel {
+  position: relative;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  height: 100%;
-  border-radius: 14px;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  max-height: calc(100dvh - 2rem);
+  padding: clamp(0.65rem, 2vw, 1rem);
+  border-radius: 8px;
   background: white;
   overflow: hidden;
 }
 
-.admission-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid rgba(13, 114, 52, 0.14);
+.gallery-modal-tools {
+  display: inline-flex;
+  justify-self: center;
+  gap: 0.35rem;
+  padding-right: 3.2rem;
 }
 
-.admission-modal-header h3 {
-  margin: 0;
+.gallery-modal-tools button {
+  display: grid;
+  place-items: center;
+  min-width: 2.45rem;
+  height: 2.45rem;
+  border: 1px solid rgba(13, 114, 52, 0.16);
+  border-radius: 999px;
+  background: #f7fbf8;
   color: var(--navy);
+  cursor: pointer;
   font-family: "Montserrat", Arial, sans-serif;
-  font-size: clamp(1rem, 2vw, 1.35rem);
-  line-height: 1.25;
-}
-
-.admission-modal-link {
-  flex: 0 0 auto;
-  color: var(--green-deep);
-  font-family: "Montserrat", Arial, sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 800;
-  text-decoration: none;
+  line-height: 1;
 }
 
-.admission-modal-link:hover,
-.admission-modal-link:focus-visible {
-  color: var(--navy);
-  text-decoration: underline;
-  text-underline-offset: 0.2rem;
+.gallery-modal-tools button:hover,
+.gallery-modal-tools button:focus-visible {
+  border-color: rgba(13, 114, 52, 0.38);
+  background: rgba(13, 114, 52, 0.09);
 }
 
-.admission-modal-close {
+.gallery-modal-close {
   position: absolute;
-  top: -0.75rem;
-  right: -0.75rem;
+  top: 0.55rem;
+  right: 0.55rem;
   z-index: 1;
   display: grid;
   place-items: center;
@@ -1890,27 +1885,44 @@ section[id] {
   line-height: 1;
 }
 
-.admission-modal-close:hover,
-.admission-modal-close:focus-visible {
+.gallery-modal-close:hover,
+.gallery-modal-close:focus-visible {
   background: var(--navy);
 }
 
-.admission-modal-pdf {
+.gallery-modal-viewport {
   display: block;
   width: 100%;
-  height: 100%;
-  min-height: 420px;
-  border: 0;
-  background: #f4f7fb;
+  max-height: calc(100dvh - 7.4rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: #f7f9fc;
+  border-radius: 6px;
 }
 
-.admission-modal-fallback {
-  margin: 0;
-  padding: 0.75rem 1.25rem;
-  border-top: 1px solid rgba(13, 114, 52, 0.14);
-  color: var(--muted);
-  font-size: 0.94rem;
-  line-height: 1.35;
+.gallery-modal-viewport.is-draggable {
+  cursor: grab;
+  touch-action: none;
+}
+
+.gallery-modal-viewport.is-panning {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.gallery-modal-image {
+  display: block;
+  width: var(--gallery-image-width, min(100%, 760px));
+  max-width: none;
+  margin: 0 auto;
+  border-radius: 6px;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.gallery-modal-image:not([src]) {
+  display: none;
 }
 
 .admission-steps {
@@ -3588,8 +3600,10 @@ section[id] {
   }
 
   .admission-documents {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-self: stretch;
-    width: 100%;
+    width: min(100%, 680px);
+    margin-inline: auto;
   }
 
   .exchange-highlights,
@@ -4507,45 +4521,36 @@ textarea {
   }
 
   .admission-documents {
+    grid-template-columns: 1fr;
     margin-top: 0.9rem;
-    width: 100%;
+    width: min(100%, 360px);
   }
 
-  .admission-document {
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: start;
-    min-height: 0;
-    padding: 0.85rem;
+  .admission-visual-card figcaption {
+    font-size: 1rem;
   }
 
-  .admission-document-action {
-    grid-column: 2;
-  }
-
-  .admission-modal {
+  .gallery-modal {
     width: calc(100% - 0.8rem);
-    height: calc(100dvh - 0.8rem);
     max-height: none;
   }
 
-  .admission-modal-panel {
-    border-radius: 12px;
+  .gallery-modal-panel {
+    max-height: calc(100dvh - 0.8rem);
   }
 
-  .admission-modal-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.35rem;
-    padding: 0.9rem 3.3rem 0.85rem 0.95rem;
+  .gallery-modal-tools {
+    justify-self: start;
+    padding-right: 3.1rem;
   }
 
-  .admission-modal-close {
+  .gallery-modal-viewport {
+    max-height: calc(100dvh - 6.2rem);
+  }
+
+  .gallery-modal-close {
     top: 0.55rem;
     right: 0.55rem;
-  }
-
-  .admission-modal-pdf {
-    min-height: 0;
   }
 
   .offer-grid,
@@ -4729,6 +4734,10 @@ textarea {
     font-size: 2.35rem;
   }
 
+  .admission-copy h2 {
+    font-size: 2.35rem;
+  }
+
   .blue-flag-stars li {
     min-height: 0;
   }
@@ -4840,13 +4849,17 @@ textarea {
     transform: none;
   }
 
-  .admission-document {
+  .admission-visual-trigger {
     transition: none;
   }
 
-  .admission-document:hover,
-  .admission-document:focus-visible {
+  .admission-visual-trigger:hover,
+  .admission-visual-trigger:focus-visible {
     transform: none;
+  }
+
+  .admission-visual-media {
+    animation: none;
   }
 
   .back-to-top.is-visible,

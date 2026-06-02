@@ -540,14 +540,113 @@ if (admissionModal && admissionModalPdf && admissionModalTitle && admissionModal
 const galleryModal = document.querySelector('.gallery-modal');
 const galleryModalImage = galleryModal?.querySelector('.gallery-modal-image');
 const galleryModalClose = galleryModal?.querySelector('.gallery-modal-close');
+const galleryModalViewport = galleryModal?.querySelector('.gallery-modal-viewport');
+const galleryModalZoomIn = galleryModal?.querySelector('.gallery-modal-zoom-in');
+const galleryModalZoomOut = galleryModal?.querySelector('.gallery-modal-zoom-out');
+const galleryModalZoomReset = galleryModal?.querySelector('.gallery-modal-zoom-reset');
 
 if (galleryModal && galleryModalImage) {
+  let galleryZoom = 1;
+  let galleryScrollY = 0;
+  let isGalleryScrollLocked = false;
+  let galleryBodyStyleSnapshot = {};
+  let galleryRootScrollBehavior = '';
+  let isGalleryPanning = false;
+  let galleryPanStartX = 0;
+  let galleryPanStartY = 0;
+  let galleryPanStartLeft = 0;
+  let galleryPanStartTop = 0;
+
+  const lockPageScroll = () => {
+    if (isGalleryScrollLocked) return;
+
+    galleryScrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    galleryBodyStyleSnapshot = {
+      position: document.body.style.position,
+      top: document.body.style.top,
+      left: document.body.style.left,
+      right: document.body.style.right,
+      width: document.body.style.width,
+      overflowY: document.body.style.overflowY
+    };
+    galleryRootScrollBehavior = document.documentElement.style.scrollBehavior;
+    isGalleryScrollLocked = true;
+
+    document.documentElement.style.scrollBehavior = 'auto';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${galleryScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflowY = 'scroll';
+  };
+
+  const unlockPageScroll = () => {
+    if (!isGalleryScrollLocked) return;
+
+    const targetScrollY = galleryScrollY;
+
+    document.body.style.position = galleryBodyStyleSnapshot.position || '';
+    document.body.style.top = galleryBodyStyleSnapshot.top || '';
+    document.body.style.left = galleryBodyStyleSnapshot.left || '';
+    document.body.style.right = galleryBodyStyleSnapshot.right || '';
+    document.body.style.width = galleryBodyStyleSnapshot.width || '';
+    document.body.style.overflowY = galleryBodyStyleSnapshot.overflowY || '';
+    isGalleryScrollLocked = false;
+
+    window.scrollTo(0, targetScrollY);
+    requestAnimationFrame(() => {
+      window.scrollTo(0, targetScrollY);
+      requestAnimationFrame(() => {
+        window.scrollTo(0, targetScrollY);
+        document.documentElement.style.scrollBehavior = galleryRootScrollBehavior;
+      });
+    });
+  };
+
+  const setGalleryZoom = zoom => {
+    galleryZoom = Math.min(Math.max(zoom, 1), 3);
+    if (galleryZoom === 1) {
+      galleryModalImage.style.removeProperty('--gallery-image-width');
+    } else {
+      galleryModalImage.style.setProperty('--gallery-image-width', `${galleryZoom * 100}%`);
+    }
+    galleryModalViewport?.classList.toggle('is-draggable', galleryZoom > 1);
+    galleryModalZoomReset && (galleryModalZoomReset.textContent = `${galleryZoom.toFixed(1).replace('.0', '')}x`);
+  };
+
+  const stopGalleryPanning = () => {
+    if (!isGalleryPanning) return;
+
+    isGalleryPanning = false;
+    galleryModalViewport?.classList.remove('is-panning');
+  };
+
+  const resetGalleryModal = () => {
+    galleryModalImage.removeAttribute('src');
+    galleryModalImage.alt = '';
+    setGalleryZoom(1);
+    galleryModalViewport?.scrollTo(0, 0);
+  };
+
+  const closeGalleryModal = () => {
+    if (typeof galleryModal.close === 'function') {
+      galleryModal.close();
+    } else {
+      galleryModal.removeAttribute('open');
+      unlockPageScroll();
+      resetGalleryModal();
+    }
+  };
+
   document.querySelectorAll('.gallery-zoom-trigger').forEach(trigger => {
     trigger.addEventListener('click', () => {
       const sourceImage = trigger.querySelector('img');
 
       if (!sourceImage) return;
 
+      lockPageScroll();
+      setGalleryZoom(1);
       galleryModalImage.src = sourceImage.currentSrc || sourceImage.src;
       galleryModalImage.alt = sourceImage.alt;
 
@@ -561,12 +660,85 @@ if (galleryModal && galleryModalImage) {
   });
 
   galleryModalClose?.addEventListener('click', () => {
-    galleryModal.close();
+    closeGalleryModal();
   });
+
+  galleryModalZoomIn?.addEventListener('click', () => {
+    setGalleryZoom(galleryZoom + 0.25);
+  });
+
+  galleryModalZoomOut?.addEventListener('click', () => {
+    setGalleryZoom(galleryZoom - 0.25);
+  });
+
+  galleryModalZoomReset?.addEventListener('click', () => {
+    setGalleryZoom(1);
+    galleryModalViewport?.scrollTo(0, 0);
+  });
+
+  galleryModalViewport?.addEventListener('wheel', event => {
+    event.preventDefault();
+
+    const previousZoom = galleryZoom;
+    const zoomStep = event.deltaY < 0 ? 0.25 : -0.25;
+    const nextZoom = Math.min(Math.max(previousZoom + zoomStep, 1), 3);
+
+    if (nextZoom === previousZoom) return;
+
+    const viewportRect = galleryModalViewport.getBoundingClientRect();
+    const pointerX = event.clientX - viewportRect.left;
+    const pointerY = event.clientY - viewportRect.top;
+    const scrollRatioX = (galleryModalViewport.scrollLeft + pointerX) / Math.max(galleryModalViewport.scrollWidth, 1);
+    const scrollRatioY = (galleryModalViewport.scrollTop + pointerY) / Math.max(galleryModalViewport.scrollHeight, 1);
+
+    setGalleryZoom(nextZoom);
+
+    requestAnimationFrame(() => {
+      galleryModalViewport.scrollLeft = (galleryModalViewport.scrollWidth * scrollRatioX) - pointerX;
+      galleryModalViewport.scrollTop = (galleryModalViewport.scrollHeight * scrollRatioY) - pointerY;
+    });
+  }, { passive: false });
+
+  galleryModalViewport?.addEventListener('pointerdown', event => {
+    if (galleryZoom <= 1 || event.button !== 0) return;
+
+    isGalleryPanning = true;
+    galleryPanStartX = event.clientX;
+    galleryPanStartY = event.clientY;
+    galleryPanStartLeft = galleryModalViewport.scrollLeft;
+    galleryPanStartTop = galleryModalViewport.scrollTop;
+    galleryModalViewport.classList.add('is-panning');
+    galleryModalViewport.setPointerCapture?.(event.pointerId);
+    event.preventDefault();
+  });
+
+  galleryModalViewport?.addEventListener('pointermove', event => {
+    if (!isGalleryPanning) return;
+
+    const deltaX = event.clientX - galleryPanStartX;
+    const deltaY = event.clientY - galleryPanStartY;
+
+    galleryModalViewport.scrollLeft = galleryPanStartLeft - deltaX;
+    galleryModalViewport.scrollTop = galleryPanStartTop - deltaY;
+    event.preventDefault();
+  });
+
+  galleryModalViewport?.addEventListener('pointerup', event => {
+    galleryModalViewport.releasePointerCapture?.(event.pointerId);
+    stopGalleryPanning();
+  });
+
+  galleryModalViewport?.addEventListener('pointercancel', stopGalleryPanning);
+  galleryModalViewport?.addEventListener('lostpointercapture', stopGalleryPanning);
 
   galleryModal.addEventListener('click', event => {
     if (event.target === galleryModal) {
-      galleryModal.close();
+      closeGalleryModal();
     }
+  });
+
+  galleryModal.addEventListener('close', () => {
+    unlockPageScroll();
+    resetGalleryModal();
   });
 }
