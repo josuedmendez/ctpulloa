@@ -79,6 +79,7 @@ if (backToTop) {
 
 document.querySelectorAll('[data-carousel]').forEach(carousel => {
   const slides = Array.from(carousel.querySelectorAll('.carousel-person'));
+  const stage = carousel.querySelector('.carousel-stage');
   const dotsWrap = carousel.querySelector('.carousel-dots');
   const profileCard = carousel.querySelector('[data-profile-card]');
   const profileImage = profileCard?.querySelector('[data-profile-image]');
@@ -88,8 +89,14 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
   const profileClose = profileCard?.querySelector('[data-profile-close]');
   const profileGroup = profileCard?.dataset.profileGroup || 'equipo institucional';
   const intervalDuration = 1500;
+  const dragThreshold = 42;
   let autoplay = null;
   let isProfileOpen = false;
+  let activeCarouselPointerId = null;
+  let dragStartX = 0;
+  let dragDistanceX = 0;
+  let dragMoved = false;
+  let suppressSlideClick = false;
   let current = slides.findIndex(slide => slide.classList.contains('is-active'));
 
   if (!slides.length || !dotsWrap) return;
@@ -102,13 +109,7 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
     dot.type = 'button';
     dot.setAttribute('aria-label', `Ver persona ${index + 1}`);
     dot.addEventListener('click', () => {
-      updateCarousel(index);
-
-      if (isProfileOpen) {
-        openProfile(slides[index]);
-      } else {
-        restartAutoplay();
-      }
+      selectSlide(index);
     });
     dotsWrap.appendChild(dot);
     return dot;
@@ -153,6 +154,21 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
   function restartAutoplay() {
     stopAutoplay();
     startAutoplay();
+  }
+
+  function selectSlide(index) {
+    updateCarousel(index);
+
+    if (isProfileOpen) {
+      openProfile(slides[index]);
+    } else {
+      restartAutoplay();
+    }
+  }
+
+  function moveCarouselManually(direction) {
+    const targetIndex = direction > 0 ? getNextIndex(current) : getPrevIndex(current);
+    selectSlide(targetIndex);
   }
 
   function openProfile(slide) {
@@ -202,7 +218,12 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
   }
 
   slides.forEach((slide, index) => {
-    slide.addEventListener('click', () => {
+    slide.addEventListener('click', event => {
+      if (suppressSlideClick) {
+        event.preventDefault();
+        return;
+      }
+
       updateCarousel(index);
 
       if (profileCard) {
@@ -214,6 +235,78 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
   });
 
   profileClose?.addEventListener('click', closeProfile);
+
+  if (stage) {
+    stage.addEventListener('pointerdown', event => {
+      if (slides.length < 2 || (event.button !== undefined && event.button !== 0)) return;
+
+      activeCarouselPointerId = event.pointerId;
+      dragStartX = event.clientX;
+      dragDistanceX = 0;
+      dragMoved = false;
+      suppressSlideClick = false;
+
+      stopAutoplay();
+      carousel.style.setProperty('--team-carousel-drag-x', '0px');
+    });
+
+    stage.addEventListener('pointermove', event => {
+      if (activeCarouselPointerId !== event.pointerId) return;
+
+      dragDistanceX = event.clientX - dragStartX;
+
+      if (Math.abs(dragDistanceX) > 6) {
+        dragMoved = true;
+      }
+
+      if (!dragMoved) return;
+
+      if (!stage.hasPointerCapture(activeCarouselPointerId)) {
+        stage.setPointerCapture(activeCarouselPointerId);
+      }
+
+      carousel.classList.add('is-dragging');
+      const visualOffset = Math.max(-52, Math.min(52, dragDistanceX * 0.36));
+      carousel.style.setProperty('--team-carousel-drag-x', `${visualOffset}px`);
+    });
+
+    const finishCarouselDrag = event => {
+      if (activeCarouselPointerId !== event.pointerId) return;
+
+      const shouldMove = Math.abs(dragDistanceX) >= dragThreshold;
+      const wasDrag = dragMoved;
+
+      if (stage.hasPointerCapture(activeCarouselPointerId)) {
+        stage.releasePointerCapture(activeCarouselPointerId);
+      }
+
+      activeCarouselPointerId = null;
+      carousel.classList.remove('is-dragging');
+      carousel.style.removeProperty('--team-carousel-drag-x');
+
+      if (shouldMove) {
+        moveCarouselManually(dragDistanceX < 0 ? 1 : -1);
+      } else if (!isProfileOpen) {
+        startAutoplay();
+      }
+
+      if (wasDrag) {
+        suppressSlideClick = true;
+
+        window.setTimeout(() => {
+          suppressSlideClick = false;
+          dragMoved = false;
+        }, 160);
+      } else {
+        dragMoved = false;
+      }
+
+      dragDistanceX = 0;
+    };
+
+    stage.addEventListener('pointerup', finishCarouselDrag);
+    stage.addEventListener('pointercancel', finishCarouselDrag);
+  }
 
   carousel.addEventListener('focusin', stopAutoplay);
   carousel.addEventListener('focusout', startAutoplay);

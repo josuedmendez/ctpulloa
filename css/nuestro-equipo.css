@@ -160,6 +160,13 @@
   width: min(100%, 360px);
   height: 168px;
   overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.team-carousel.is-dragging .carousel-stage {
+  cursor: grabbing;
 }
 
 .carousel-person {
@@ -209,7 +216,7 @@
   height: 138px;
   opacity: 1;
   box-shadow: 0 16px 32px rgba(8, 21, 52, 0.2);
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(calc(-50% + var(--team-carousel-drag-x, 0px)), -50%) scale(1);
 }
 
 .carousel-person.is-prev,
@@ -220,11 +227,11 @@
 }
 
 .carousel-person.is-prev {
-  transform: translate(calc(-50% - 128px), -50%) scale(0.9);
+  transform: translate(calc(-50% - 128px + var(--team-carousel-drag-x, 0px)), -50%) scale(0.9);
 }
 
 .carousel-person.is-next {
-  transform: translate(calc(-50% + 128px), -50%) scale(0.9);
+  transform: translate(calc(-50% + 128px + var(--team-carousel-drag-x, 0px)), -50%) scale(0.9);
 }
 
 .carousel-person:focus-visible {
@@ -420,11 +427,11 @@
   }
 
   .carousel-person.is-prev {
-    transform: translate(calc(-50% - 104px), -50%) scale(0.84);
+    transform: translate(calc(-50% - 104px + var(--team-carousel-drag-x, 0px)), -50%) scale(0.84);
   }
 
   .carousel-person.is-next {
-    transform: translate(calc(-50% + 104px), -50%) scale(0.84);
+    transform: translate(calc(-50% + 104px + var(--team-carousel-drag-x, 0px)), -50%) scale(0.84);
   }
 
   .team-profile-card {
