@@ -15,7 +15,7 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/index.css?v=2" />
-  <link rel="stylesheet" href="css/junta-administrativa.css?v=2" />
+  <link rel="stylesheet" href="css/junta-administrativa.css?v=4" />
   <link rel="icon" type="image/png" href="assets/img/logo-web-ctpulloa-2026.png">
 </head>
 <body>
@@ -123,122 +123,17 @@
       </div>
     </section>
 
-    <section class="section junta-blog-section" aria-label="Blog de la Junta Administrativa">
-      <div class="container junta-featured">
-        <article class="junta-main-post">
-          <div class="junta-main-media">
-            <img src="assets/img/comunidad-educativa-junta-administrativa.png" alt="Comunidad educativa del CTP de Ulloa" />
-          </div>
-          <div class="junta-main-content">
-            <span class="junta-pill">Comunicado</span>
-            <h2>Espacio oficial para publicaciones de la Junta Administrativa</h2>
-            <p>
-              Este blog centraliza avisos, carteles, acuerdos y documentos administrativos de interés institucional.
-            </p>
-            <div class="junta-post-meta">
-              <span>Junta Administrativa</span>
-              <time datetime="2026-05-12">12/05/2026</time>
-            </div>
-            <button
-              class="junta-link publication-trigger"
-              type="button"
-              data-category="Comunicado"
-              data-title="Espacio oficial para publicaciones de la Junta Administrativa"
-              data-date="12/05/2026"
-              data-image="assets/img/comunidad-educativa-junta-administrativa.png"
-              data-detail="Este blog centraliza avisos, carteles, acuerdos y documentos administrativos de interés institucional para facilitar el acceso ordenado de la comunidad educativa."
-            >
-              Ver publicación <span aria-hidden="true">-></span>
-            </button>
-          </div>
-        </article>
+    <section class="section junta-blog-section" id="junta-blog" aria-labelledby="junta-blog-title">
+      <div class="container junta-section-heading">
+        <p class="section-tag">Blog Junta Administrativa</p>
+        <h2 id="junta-blog-title">Entradas recientes</h2>
       </div>
 
-      <!-- <div class="container junta-post-grid" id="junta-post-grid">
-        <article class="junta-post-card" data-junta-item>
-          <img src="assets/img/portada-colegio.jpg" alt="Entrada del CTP de Ulloa" />
-          <div class="junta-post-card-body">
-            <span class="junta-pill">Avisos</span>
-            <h3>Publicaciones administrativas disponibles para consulta</h3>
-            <p>Actualizaciones de interés sobre procesos y comunicados administrativos.</p>
-            <div class="junta-post-meta">
-              <span>Junta Administrativa</span>
-              <time datetime="2026-05-10">10/05/2026</time>
-            </div>
-            <button class="junta-link publication-trigger" type="button" data-category="Avisos" data-title="Publicaciones administrativas disponibles para consulta" data-date="10/05/2026" data-image="assets/img/portada-colegio.jpg" data-detail="Actualizaciones de interés sobre procesos y comunicados administrativos disponibles para la comunidad educativa.">Ver publicación</button>
-          </div>
-        </article>
+      <div class="container junta-featured" id="junta-featured-wrap" aria-live="polite">
+        <div class="junta-loading" role="status">Cargando entradas...</div>
+      </div>
 
-        <article class="junta-post-card" data-junta-item>
-          <img src="assets/img/nuestro-colegio-arcos.jpg" alt="Pasillos y arcos del CTP de Ulloa" />
-          <div class="junta-post-card-body">
-            <span class="junta-pill">Documentos</span>
-            <h3>Organización de documentos institucionales</h3>
-            <p>Espacio para acuerdos, actas, documentos de referencia y publicaciones formales.</p>
-            <div class="junta-post-meta">
-              <span>Administración</span>
-              <time datetime="2026-05-08">08/05/2026</time>
-            </div>
-            <button class="junta-link publication-trigger" type="button" data-category="Documentos" data-title="Organización de documentos institucionales" data-date="08/05/2026" data-image="assets/img/nuestro-colegio-arcos.jpg" data-detail="Espacio para acuerdos, actas, documentos de referencia y publicaciones formales vinculadas con la gestión institucional.">Ver publicación</button>
-          </div>
-        </article>
-
-        <article class="junta-post-card" data-junta-item>
-          <img src="assets/img/mapa-ctpulloa.png" alt="Mapa del CTP de Ulloa" />
-          <div class="junta-post-card-body">
-            <span class="junta-pill">Consultas</span>
-            <h3>Canales institucionales para consultas</h3>
-            <p>Información de referencia para consultas sobre procesos publicados y atención institucional.</p>
-            <div class="junta-post-meta">
-              <span>CTP de Ulloa</span>
-              <time datetime="2026-05-06">06/05/2026</time>
-            </div>
-            <button class="junta-link publication-trigger" type="button" data-category="Consultas" data-title="Canales institucionales para consultas" data-date="06/05/2026" data-image="assets/img/mapa-ctpulloa.png" data-detail="Información de referencia para consultas sobre procesos publicados, documentos administrativos y atención institucional.">Ver publicación</button>
-          </div>
-        </article>
-
-        <article class="junta-post-card" data-junta-item hidden>
-          <img src="assets/img/comunidad-educativa-junta-administrativa.png" alt="Comunidad educativa del CTP de Ulloa" />
-          <div class="junta-post-card-body">
-            <span class="junta-pill">Acuerdos</span>
-            <h3>Seguimiento a acuerdos institucionales</h3>
-            <p>Resumen de acciones y acuerdos que fortalecen la gestión administrativa del colegio.</p>
-            <div class="junta-post-meta">
-              <span>Junta Administrativa</span>
-              <time datetime="2026-05-04">04/05/2026</time>
-            </div>
-            <button class="junta-link publication-trigger" type="button" data-category="Acuerdos" data-title="Seguimiento a acuerdos institucionales" data-date="04/05/2026" data-image="assets/img/comunidad-educativa-junta-administrativa.png" data-detail="Resumen de acciones y acuerdos que fortalecen la gestión administrativa del colegio y el seguimiento de procesos institucionales.">Ver publicación</button>
-          </div>
-        </article>
-
-        <article class="junta-post-card" data-junta-item hidden>
-          <img src="assets/img/programa-area-academica.png" alt="Estudiantes en actividades académicas del CTP de Ulloa" />
-          <div class="junta-post-card-body">
-            <span class="junta-pill">Comunidad</span>
-            <h3>Información para familias y estudiantes</h3>
-            <p>Recordatorios institucionales para apoyar la comunicación con la comunidad educativa.</p>
-            <div class="junta-post-meta">
-              <span>CTP de Ulloa</span>
-              <time datetime="2026-05-02">02/05/2026</time>
-            </div>
-            <button class="junta-link publication-trigger" type="button" data-category="Comunidad" data-title="Información para familias y estudiantes" data-date="02/05/2026" data-image="assets/img/programa-area-academica.png" data-detail="Recordatorios institucionales para apoyar la comunicación con familias, estudiantes y personal del CTP de Ulloa.">Ver publicación</button>
-          </div>
-        </article>
-
-        <article class="junta-post-card" data-junta-item hidden>
-          <img src="assets/img/programa-plan-nacional.png" alt="Materiales institucionales del CTP de Ulloa" />
-          <div class="junta-post-card-body">
-            <span class="junta-pill">Transparencia</span>
-            <h3>Orden y acceso a publicaciones oficiales</h3>
-            <p>Espacio para mantener comunicados y documentos disponibles de forma clara y ordenada.</p>
-            <div class="junta-post-meta">
-              <span>Administración</span>
-              <time datetime="2026-04-30">30/04/2026</time>
-            </div>
-            <button class="junta-link publication-trigger" type="button" data-category="Transparencia" data-title="Orden y acceso a publicaciones oficiales" data-date="30/04/2026" data-image="assets/img/programa-plan-nacional.png" data-detail="Espacio para mantener comunicados, documentos y publicaciones oficiales disponibles de forma clara y ordenada.">Ver publicación</button>
-          </div>
-        </article>
-      </div> -->
+      <div class="container junta-post-grid" id="junta-post-list" aria-label="Entradas paginadas" aria-live="polite"></div>
 
       <nav class="junta-pagination" aria-label="Paginación del blog de la Junta Administrativa" data-junta-pagination></nav>
     </section>
@@ -337,7 +232,14 @@
           <time id="publication-modal-date"></time>
         </div>
         <h2 id="publication-modal-title"></h2>
-        <p id="publication-modal-detail"></p>
+        <div class="publication-modal-body" id="publication-modal-detail"></div>
+        <div class="publication-carousel" id="publication-carousel" hidden>
+          <img class="publication-carousel-image" src="" alt="" />
+          <button class="publication-carousel-control is-prev" type="button" aria-label="Imagen anterior" data-carousel-prev>&lsaquo;</button>
+          <button class="publication-carousel-control is-next" type="button" aria-label="Imagen siguiente" data-carousel-next>&rsaquo;</button>
+          <div class="publication-carousel-dots" aria-label="Imágenes de la entrada" data-carousel-dots></div>
+          <span class="publication-carousel-count" data-carousel-count></span>
+        </div>
       </div>
     </article>
   </div>
@@ -357,6 +259,6 @@
     <span aria-hidden="true">&uarr;</span>
   </a>
   <script src="js/main.js"></script>
-  <script src="js/junta-administrativa.js"></script>
+  <script src="js/junta-administrativa.js?v=4"></script>
 </body>
 </html>

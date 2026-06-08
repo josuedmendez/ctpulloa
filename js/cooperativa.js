@@ -1,18 +1,18 @@
-const steamhPublicationModal = document.querySelector('#steamh-publication-modal');
+const cooperativePublicationModal = document.querySelector('#cooperative-publication-modal');
 
-if (steamhPublicationModal) {
-  const modalCarousel = steamhPublicationModal.querySelector('#steamh-publication-carousel');
-  const modalImage = steamhPublicationModal.querySelector('.publication-modal-image');
-  const carouselImage = steamhPublicationModal.querySelector('.publication-carousel-image');
-  const carouselPrevious = steamhPublicationModal.querySelector('[data-carousel-prev]');
-  const carouselNext = steamhPublicationModal.querySelector('[data-carousel-next]');
-  const carouselDots = steamhPublicationModal.querySelector('[data-carousel-dots]');
-  const carouselCount = steamhPublicationModal.querySelector('[data-carousel-count]');
-  const modalCategory = steamhPublicationModal.querySelector('#steamh-publication-modal-category');
-  const modalDate = steamhPublicationModal.querySelector('#steamh-publication-modal-date');
-  const modalTitle = steamhPublicationModal.querySelector('#steamh-publication-modal-title');
-  const modalDetail = steamhPublicationModal.querySelector('#steamh-publication-modal-detail');
-  const closeControls = steamhPublicationModal.querySelectorAll('[data-modal-close]');
+if (cooperativePublicationModal) {
+  const modalCarousel = cooperativePublicationModal.querySelector('#cooperative-publication-carousel');
+  const modalImage = cooperativePublicationModal.querySelector('.publication-modal-image');
+  const carouselImage = cooperativePublicationModal.querySelector('.publication-carousel-image');
+  const carouselPrevious = cooperativePublicationModal.querySelector('[data-carousel-prev]');
+  const carouselNext = cooperativePublicationModal.querySelector('[data-carousel-next]');
+  const carouselDots = cooperativePublicationModal.querySelector('[data-carousel-dots]');
+  const carouselCount = cooperativePublicationModal.querySelector('[data-carousel-count]');
+  const modalCategory = cooperativePublicationModal.querySelector('#cooperative-publication-modal-category');
+  const modalDate = cooperativePublicationModal.querySelector('#cooperative-publication-modal-date');
+  const modalTitle = cooperativePublicationModal.querySelector('#cooperative-publication-modal-title');
+  const modalDetail = cooperativePublicationModal.querySelector('#cooperative-publication-modal-detail');
+  const closeControls = cooperativePublicationModal.querySelectorAll('[data-modal-close]');
   let carouselImages = [];
   let carouselIndex = 0;
   let carouselTimer = null;
@@ -84,7 +84,7 @@ if (steamhPublicationModal) {
   const startCarousel = () => {
     stopCarousel();
 
-    if (carouselImages.length <= 1 || steamhPublicationModal.hidden) {
+    if (carouselImages.length <= 1 || cooperativePublicationModal.hidden) {
       return;
     }
 
@@ -192,7 +192,7 @@ if (steamhPublicationModal) {
 
   const closeModal = () => {
     stopCarousel();
-    steamhPublicationModal.hidden = true;
+    cooperativePublicationModal.hidden = true;
     document.body.classList.remove('modal-is-open');
   };
 
@@ -228,10 +228,10 @@ if (steamhPublicationModal) {
       modalDetail.replaceChildren(paragraph);
     }
 
-    steamhPublicationModal.hidden = false;
+    cooperativePublicationModal.hidden = false;
     document.body.classList.add('modal-is-open');
     renderCarousel(preparedContent.images);
-    steamhPublicationModal.querySelector('.publication-modal-close').focus();
+    cooperativePublicationModal.querySelector('.publication-modal-close').focus();
   };
 
   if (carouselPrevious) {
@@ -255,30 +255,30 @@ if (steamhPublicationModal) {
   });
 
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !steamhPublicationModal.hidden) {
+    if (event.key === 'Escape' && !cooperativePublicationModal.hidden) {
       closeModal();
     }
 
-    if (event.key === 'ArrowLeft' && !steamhPublicationModal.hidden && carouselImages.length > 1) {
+    if (event.key === 'ArrowLeft' && !cooperativePublicationModal.hidden && carouselImages.length > 1) {
       moveCarousel(-1);
     }
 
-    if (event.key === 'ArrowRight' && !steamhPublicationModal.hidden && carouselImages.length > 1) {
+    if (event.key === 'ArrowRight' && !cooperativePublicationModal.hidden && carouselImages.length > 1) {
       moveCarousel(1);
     }
   });
 }
 
 (() => {
-  const API_BASE = 'https://steamh.ctpulloa.com/wp-json/wp/v2/posts';
-  const CACHE_KEY = 'ctpulloa:steamh-blog-cache:v1';
+  const API_BASE = 'https://cooperativa.ctpulloa.com/wp-json/wp/v2/posts';
+  const CACHE_KEY = 'ctpulloa:cooperative-blog-cache:v1';
   const INDEX_PER_PAGE = 100;
   const ITEMS_PER_PAGE = 3;
   const SECONDARY_FETCH_LIMIT = ITEMS_PER_PAGE + 1;
 
-  const featuredWrap = document.querySelector('#steamh-featured-wrap');
-  const postList = document.querySelector('#steamh-post-list');
-  const pagination = document.querySelector('[data-steamh-pagination]');
+  const featuredWrap = document.querySelector('#cooperative-featured-wrap');
+  const postList = document.querySelector('#cooperative-post-list');
+  const pagination = document.querySelector('[data-cooperative-pagination]');
 
   if (!featuredWrap || !postList || !pagination) {
     return;
@@ -291,24 +291,19 @@ if (steamhPublicationModal) {
   let secondaryRequestId = 0;
   let blogSignature = '';
 
-  const buildUrl = ({ perPage, offset, fields, page }) => {
+  const buildUrl = ({ perPage, offset, fields }) => {
     const url = new URL(API_BASE);
     url.searchParams.set('per_page', String(perPage));
     url.searchParams.set('orderby', 'date');
     url.searchParams.set('order', 'desc');
+    url.searchParams.set('_embed', '1');
 
     if (typeof offset === 'number') {
       url.searchParams.set('offset', String(offset));
     }
 
-    if (typeof page === 'number') {
-      url.searchParams.set('page', String(page));
-    }
-
     if (fields && fields.length) {
       url.searchParams.set('_fields', fields.join(','));
-    } else {
-      url.searchParams.set('_embed', '1');
     }
 
     return url.toString();
@@ -342,14 +337,14 @@ if (steamhPublicationModal) {
     return Number.isFinite(value) ? value : 0;
   };
 
-  const fetchPostIndexPage = async page => {
+  const fetchPostIndexPage = async offset => {
     const url = new URL(buildUrl({
       perPage: INDEX_PER_PAGE,
-      page,
+      offset,
       fields: ['id', 'modified', 'modified_gmt'],
     }));
 
-    url.searchParams.set('steamh_check', String(Date.now()));
+    url.searchParams.set('cooperative_check', String(Date.now()));
 
     const response = await fetch(url.toString(), {
       cache: 'no-store',
@@ -367,27 +362,27 @@ if (steamhPublicationModal) {
     return {
       posts: Array.isArray(posts) ? posts : [],
       total: getHeaderNumber(response, 'X-WP-Total'),
-      totalPages: getHeaderNumber(response, 'X-WP-TotalPages') || 1,
     };
   };
 
   const fetchPostIndex = async () => {
-    const firstPage = await fetchPostIndexPage(1);
+    const firstPage = await fetchPostIndexPage(0);
     const posts = [...firstPage.posts];
+    const indexedTotal = firstPage.total || posts.length;
 
-    for (let page = 2; page <= firstPage.totalPages; page += 1) {
-      const nextPage = await fetchPostIndexPage(page);
+    for (let offset = INDEX_PER_PAGE; offset < indexedTotal; offset += INDEX_PER_PAGE) {
+      const nextPage = await fetchPostIndexPage(offset);
       posts.push(...nextPage.posts);
     }
 
     const signature = [
-      `total:${firstPage.total}`,
+      `total:${indexedTotal}`,
       ...posts.map(post => `${post.id}:${post.modified_gmt || post.modified || ''}`),
     ].join('|');
 
     return {
       signature,
-      total: firstPage.total,
+      total: indexedTotal,
     };
   };
 
@@ -396,7 +391,7 @@ if (steamhPublicationModal) {
       const rawCache = localStorage.getItem(CACHE_KEY);
       return rawCache ? JSON.parse(rawCache) : null;
     } catch (error) {
-      console.warn('No se pudo leer el cache STEAM+H:', error);
+      console.warn('No se pudo leer el cache de Cooperativa:', error);
       return null;
     }
   };
@@ -405,7 +400,7 @@ if (steamhPublicationModal) {
     try {
       localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
     } catch (error) {
-      console.warn('No se pudo guardar el cache STEAM+H:', error);
+      console.warn('No se pudo guardar el cache de Cooperativa:', error);
     }
   };
 
@@ -569,7 +564,7 @@ if (steamhPublicationModal) {
 
   const createCategory = post => {
     const category = document.createElement('span');
-    category.className = 'steamh-category';
+    category.className = 'cooperative-category';
     category.textContent = post.category;
     return category;
   };
@@ -577,7 +572,7 @@ if (steamhPublicationModal) {
   const createReadMoreButton = (post, label) => {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'steamh-link publication-trigger';
+    button.className = 'cooperative-link publication-trigger';
     button.textContent = label;
     button.dataset.category = post.category;
     button.dataset.title = post.title;
@@ -598,11 +593,11 @@ if (steamhPublicationModal) {
 
   const renderFeatured = post => {
     const article = document.createElement('article');
-    article.className = 'steamh-featured-post';
+    article.className = 'cooperative-featured-post';
 
     if (post.image) {
       const media = document.createElement('div');
-      media.className = 'steamh-featured-media';
+      media.className = 'cooperative-featured-media';
       media.append(createImage(post.image, post.title, 'eager'));
       article.append(media);
     } else {
@@ -610,7 +605,7 @@ if (steamhPublicationModal) {
     }
 
     const content = document.createElement('div');
-    content.className = 'steamh-featured-copy';
+    content.className = 'cooperative-featured-copy';
 
     if (post.category) {
       content.append(createCategory(post));
@@ -627,10 +622,10 @@ if (steamhPublicationModal) {
     }
 
     const footer = document.createElement('div');
-    footer.className = 'steamh-card-footer';
+    footer.className = 'cooperative-card-footer';
 
     const author = document.createElement('div');
-    author.className = 'steamh-author';
+    author.className = 'cooperative-author';
 
     if (post.author) {
       const authorName = document.createElement('span');
@@ -663,11 +658,11 @@ if (steamhPublicationModal) {
 
     posts.forEach(post => {
       const article = document.createElement('article');
-      article.className = 'steamh-post-card';
+      article.className = 'cooperative-post-card';
 
       if (post.image) {
         const media = document.createElement('figure');
-        media.className = 'steamh-post-media';
+        media.className = 'cooperative-post-media';
         media.append(createImage(post.image, post.title));
         article.append(media);
       } else {
@@ -675,7 +670,7 @@ if (steamhPublicationModal) {
       }
 
       const body = document.createElement('div');
-      body.className = 'steamh-post-body';
+      body.className = 'cooperative-post-body';
 
       if (post.category) {
         body.append(createCategory(post));
@@ -686,7 +681,7 @@ if (steamhPublicationModal) {
       body.append(title);
 
       const meta = document.createElement('p');
-      meta.className = 'steamh-post-meta';
+      meta.className = 'cooperative-post-meta';
 
       if (post.author) {
         meta.append('por ');
@@ -709,7 +704,7 @@ if (steamhPublicationModal) {
 
       if (post.summary) {
         const summary = document.createElement('p');
-        summary.className = 'steamh-post-summary';
+        summary.className = 'cooperative-post-summary';
         summary.textContent = post.summary;
         body.append(summary);
       }
@@ -763,29 +758,29 @@ if (steamhPublicationModal) {
       return;
     }
 
-    const previous = createPaginationButton('Anterior', 'steamh-page-control', currentPage - 1);
+    const previous = createPaginationButton('Anterior', 'cooperative-page-control', currentPage - 1);
     previous.disabled = currentPage === 1;
     pagination.append(previous);
 
     if (hasKnownTotal) {
       for (let page = 1; page <= totalSecondaryPages; page += 1) {
-        pagination.append(createPaginationButton(String(page), 'steamh-page-number', page, page === currentPage));
+        pagination.append(createPaginationButton(String(page), 'cooperative-page-number', page, page === currentPage));
       }
     } else {
-      pagination.append(createPaginationButton(String(currentPage), 'steamh-page-number', currentPage, true));
+      pagination.append(createPaginationButton(String(currentPage), 'cooperative-page-number', currentPage, true));
     }
 
-    const next = createPaginationButton('Siguiente', 'steamh-page-control', currentPage + 1);
+    const next = createPaginationButton('Siguiente', 'cooperative-page-control', currentPage + 1);
     next.disabled = hasKnownTotal ? currentPage >= totalSecondaryPages : !canGoNext;
     pagination.append(next);
   };
 
-  const showMessage = (container, message, className = 'steamh-loading') => {
+  const showMessage = (container, message, className = 'cooperative-loading') => {
     const box = document.createElement('div');
     box.className = className;
     box.textContent = message;
 
-    if (className === 'steamh-loading') {
+    if (className === 'cooperative-loading') {
       box.setAttribute('role', 'status');
     }
 
@@ -842,16 +837,16 @@ if (steamhPublicationModal) {
         },
       });
     } catch (error) {
-      console.error('Error al cargar las entradas STEAM+H:', error);
+      console.error('Error al cargar las entradas de Cooperativa:', error);
       postList.hidden = false;
       pagination.hidden = true;
-      showMessage(postList, 'No se pudieron cargar más entradas en este momento.', 'steamh-empty');
+      showMessage(postList, 'No se pudieron cargar más entradas en este momento.', 'cooperative-empty');
     } finally {
       postList.removeAttribute('aria-busy');
     }
   };
 
-  const initSteamhBlog = async () => {
+  const initCooperativeBlog = async () => {
     showMessage(featuredWrap, 'Cargando entradas...');
     postList.hidden = true;
     pagination.hidden = true;
@@ -859,6 +854,12 @@ if (steamhPublicationModal) {
     try {
       const postIndex = await fetchPostIndex();
       blogSignature = postIndex.signature;
+      updateTotal(postIndex.total);
+
+      if (postIndex.total === 0) {
+        showMessage(featuredWrap, 'No hay entradas de Cooperativa publicadas por el momento.', 'cooperative-empty');
+        return;
+      }
 
       const cachedBlog = getValidCache();
 
@@ -875,7 +876,7 @@ if (steamhPublicationModal) {
       updateTotal(total);
 
       if (!posts.length) {
-        showMessage(featuredWrap, 'No hay entradas STEAM+H publicadas por el momento.', 'steamh-empty');
+        showMessage(featuredWrap, 'No hay entradas de Cooperativa publicadas por el momento.', 'cooperative-empty');
         return;
       }
 
@@ -899,10 +900,10 @@ if (steamhPublicationModal) {
         featuredPost,
       });
     } catch (error) {
-      console.error('Error al cargar las entradas STEAM+H:', error);
+      console.error('Error al cargar las entradas de Cooperativa:', error);
       postList.hidden = true;
       pagination.hidden = true;
-      showMessage(featuredWrap, 'No se pudieron cargar las entradas STEAM+H en este momento.', 'steamh-empty');
+      showMessage(featuredWrap, 'No se pudieron cargar las entradas de Cooperativa en este momento.', 'cooperative-empty');
     }
   };
 
@@ -916,5 +917,5 @@ if (steamhPublicationModal) {
     loadSecondaryPage(Number(button.dataset.page));
   });
 
-  initSteamhBlog();
+  initCooperativeBlog();
 })();

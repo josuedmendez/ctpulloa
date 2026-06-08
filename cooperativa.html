@@ -15,7 +15,7 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/index.css?v=2" />
-  <link rel="stylesheet" href="css/cooperativa.css?v=2" />
+  <link rel="stylesheet" href="css/cooperativa.css?v=3" />
   <link rel="icon" type="image/png" href="assets/img/logo-web-ctpulloa-2026.png">
 </head>
 <body>
@@ -157,8 +157,46 @@
       </div>
     </section>
 
+    <section class="cooperative-blog-section" id="cooperative-blog" aria-labelledby="cooperative-blog-title">
+      <div class="container cooperative-section-heading">
+        <p class="cooperative-kicker">Blog Cooperativa</p>
+        <h2 id="cooperative-blog-title">Entradas recientes</h2>
+      </div>
+
+      <div class="container cooperative-featured-wrap" id="cooperative-featured-wrap" aria-live="polite">
+        <div class="cooperative-loading" role="status">Cargando entradas...</div>
+      </div>
+
+      <div class="container cooperative-post-grid" id="cooperative-post-list" aria-label="Entradas paginadas" aria-live="polite"></div>
+
+      <nav class="cooperative-pagination" aria-label="Paginación del blog de la Cooperativa" data-cooperative-pagination></nav>
+    </section>
+
      
   </main>
+
+  <div class="publication-modal" id="cooperative-publication-modal" role="dialog" aria-modal="true" aria-labelledby="cooperative-publication-modal-title" hidden>
+    <div class="publication-modal-backdrop" data-modal-close></div>
+    <article class="publication-modal-card">
+      <button class="publication-modal-close" type="button" aria-label="Cerrar entrada" data-modal-close>&times;</button>
+      <img class="publication-modal-image" src="" alt="" />
+      <div class="publication-modal-content">
+        <div class="publication-modal-meta">
+          <span id="cooperative-publication-modal-category"></span>
+          <time id="cooperative-publication-modal-date"></time>
+        </div>
+        <h2 id="cooperative-publication-modal-title"></h2>
+        <div class="publication-modal-body" id="cooperative-publication-modal-detail"></div>
+        <div class="publication-carousel" id="cooperative-publication-carousel" hidden>
+          <img class="publication-carousel-image" src="" alt="" />
+          <button class="publication-carousel-control is-prev" type="button" aria-label="Imagen anterior" data-carousel-prev>&lsaquo;</button>
+          <button class="publication-carousel-control is-next" type="button" aria-label="Imagen siguiente" data-carousel-next>&rsaquo;</button>
+          <div class="publication-carousel-dots" aria-label="Imágenes de la entrada" data-carousel-dots></div>
+          <span class="publication-carousel-count" data-carousel-count></span>
+        </div>
+      </div>
+    </article>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -175,5 +213,6 @@
     <span aria-hidden="true">↑</span>
   </a>
   <script src="js/main.js"></script>
+  <script src="js/cooperativa.js?v=1"></script>
 </body>
 </html>
