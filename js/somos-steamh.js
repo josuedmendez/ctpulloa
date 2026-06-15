@@ -1,4 +1,117 @@
 const steamhPublicationModal = document.querySelector('#steamh-publication-modal');
+const steamhImageLightbox = document.querySelector('#steamh-image-lightbox');
+
+const getLargestImageSource = image => {
+  if (!image) {
+    return '';
+  }
+
+  const srcset = image.getAttribute('srcset') || '';
+  const candidates = srcset
+    .split(',')
+    .map(candidate => {
+      const [src = '', descriptor = ''] = candidate.trim().split(/\s+/);
+      const width = descriptor.endsWith('w') ? Number.parseInt(descriptor, 10) : 0;
+      return {
+        src,
+        width: Number.isFinite(width) ? width : 0,
+      };
+    })
+    .filter(candidate => candidate.src);
+
+  if (!candidates.length) {
+    return image.currentSrc || image.src || image.getAttribute('src') || '';
+  }
+
+  candidates.sort((first, second) => second.width - first.width);
+  return candidates[0].src;
+};
+
+const markImageAsExpandable = image => {
+  if (!image) {
+    return image;
+  }
+
+  image.classList.add('publication-expandable-image');
+  image.tabIndex = 0;
+  image.setAttribute('role', 'button');
+  image.setAttribute('aria-label', 'Ampliar imagen');
+  return image;
+};
+
+if (steamhImageLightbox) {
+  const lightboxImage = steamhImageLightbox.querySelector('.image-lightbox-image');
+  const lightboxCloseControls = steamhImageLightbox.querySelectorAll('[data-lightbox-close]');
+  let lightboxTrigger = null;
+
+  const closeImageLightbox = () => {
+    steamhImageLightbox.hidden = true;
+    document.body.classList.remove('lightbox-is-open');
+
+    if (lightboxImage) {
+      lightboxImage.src = '';
+      lightboxImage.alt = '';
+    }
+
+    if (lightboxTrigger) {
+      lightboxTrigger.focus();
+      lightboxTrigger = null;
+    }
+  };
+
+  const openImageLightbox = trigger => {
+    if (!lightboxImage || !trigger) {
+      return;
+    }
+
+    const src = trigger.dataset.fullSrc || trigger.currentSrc || trigger.src || trigger.getAttribute('src') || '';
+
+    if (!src) {
+      return;
+    }
+
+    lightboxTrigger = trigger;
+    lightboxImage.src = src;
+    lightboxImage.alt = trigger.alt || 'Imagen ampliada';
+    steamhImageLightbox.hidden = false;
+    document.body.classList.add('lightbox-is-open');
+
+    const closeButton = steamhImageLightbox.querySelector('.image-lightbox-close');
+
+    if (closeButton) {
+      closeButton.focus();
+    }
+  };
+
+  document.addEventListener('click', event => {
+    const image = event.target.closest('.publication-expandable-image');
+
+    if (image) {
+      openImageLightbox(image);
+    }
+  });
+
+  document.addEventListener('keydown', event => {
+    const image = event.target.closest && event.target.closest('.publication-expandable-image');
+
+    if (image && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      openImageLightbox(image);
+      return;
+    }
+
+    if (event.key === 'Escape' && !steamhImageLightbox.hidden) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      closeImageLightbox();
+    }
+  });
+
+  lightboxCloseControls.forEach(control => {
+    control.addEventListener('click', closeImageLightbox);
+  });
+}
 
 if (steamhPublicationModal) {
   const modalCarousel = steamhPublicationModal.querySelector('#steamh-publication-carousel');
@@ -16,6 +129,9 @@ if (steamhPublicationModal) {
   let carouselImages = [];
   let carouselIndex = 0;
   let carouselTimer = null;
+
+  markImageAsExpandable(modalImage);
+  markImageAsExpandable(carouselImage);
 
   const sanitizePublicationHtml = html => {
     const template = document.createElement('template');
@@ -68,6 +184,7 @@ if (steamhPublicationModal) {
 
     carouselImage.src = image.src;
     carouselImage.alt = image.alt || modalTitle.textContent || 'Imagen de la entrada';
+    carouselImage.dataset.fullSrc = image.fullSrc || image.src;
 
     if (carouselCount) {
       carouselCount.textContent = `${carouselIndex + 1} / ${carouselImages.length}`;
@@ -103,22 +220,24 @@ if (steamhPublicationModal) {
     template.innerHTML = content ? sanitizePublicationHtml(content) : '';
 
     const images = [];
-    const addImage = (src, alt = '') => {
+    const addImage = (src, alt = '', fullSrc = src) => {
       if (!src || images.some(image => image.src === src)) {
         return;
       }
 
       images.push({
         src,
+        fullSrc,
         alt,
       });
     };
 
     template.content.querySelectorAll('img').forEach(image => {
       const imageSource = image.getAttribute('src') || image.getAttribute('data-src') || '';
+      const fullSource = getLargestImageSource(image) || imageSource;
 
       if (imageSource !== coverImage) {
-        addImage(imageSource, image.getAttribute('alt') || fallbackAlt);
+        addImage(imageSource, image.getAttribute('alt') || fallbackAlt, fullSource);
       }
 
       const figure = image.closest('figure');
@@ -203,10 +322,12 @@ if (steamhPublicationModal) {
       modalImage.hidden = false;
       modalImage.src = image;
       modalImage.alt = title || 'Imagen de la entrada';
+      modalImage.dataset.fullSrc = image;
     } else {
       modalImage.hidden = true;
       modalImage.removeAttribute('src');
       modalImage.alt = '';
+      modalImage.dataset.fullSrc = '';
     }
 
     modalCategory.textContent = category || '';
@@ -255,6 +376,10 @@ if (steamhPublicationModal) {
   });
 
   document.addEventListener('keydown', event => {
+    if (steamhImageLightbox && !steamhImageLightbox.hidden) {
+      return;
+    }
+
     if (event.key === 'Escape' && !steamhPublicationModal.hidden) {
       closeModal();
     }
@@ -270,52 +395,82 @@ if (steamhPublicationModal) {
 }
 
 (() => {
-  const API_BASE = 'https://steamh.ctpulloa.com/wp-json/wp/v2/posts';
+  const API_BASE = 'https://blog.ctpulloa.com/wp-json/wp/v2/posts';
   const CACHE_KEY = 'ctpulloa:steamh-blog-cache:v1';
   const INDEX_PER_PAGE = 100;
   const ITEMS_PER_PAGE = 3;
   const SECONDARY_FETCH_LIMIT = ITEMS_PER_PAGE + 1;
+  const CATEGORY_FILTERS = {
+    all: {
+      categoryId: null,
+      emptyMessage: 'No hay entradas publicadas por el momento.',
+    },
+    noticia: {
+      categoryId: 1,
+      emptyMessage: 'No hay entradas publicadas en la categoría Noticia por el momento.',
+    },
+    cooperativa: {
+      categoryId: 3,
+      emptyMessage: 'No hay entradas publicadas en la categoría Cooperativa por el momento.',
+    },
+    steam: {
+      categoryId: 4,
+      emptyMessage: 'No hay entradas publicadas en la categoría STEAM por el momento.',
+    },
+    pastoral: {
+      categoryId: 6,
+      emptyMessage: 'No hay entradas publicadas en la categoría Pastoral Educativa por el momento.',
+    },
+    junta: {
+      categoryId: 5,
+      emptyMessage: 'No hay entradas publicadas en la categoría Junta Administrativa por el momento.',
+    },
+  };
 
   const featuredWrap = document.querySelector('#steamh-featured-wrap');
   const postList = document.querySelector('#steamh-post-list');
   const pagination = document.querySelector('[data-steamh-pagination]');
+  const filterButtons = [...document.querySelectorAll('[data-steamh-filter]')];
 
   if (!featuredWrap || !postList || !pagination) {
     return;
   }
 
+  let activeFilter = 'steam';
   let currentPage = 1;
   let totalPosts = null;
   let totalSecondaryPages = 0;
   let canGoNext = false;
+  let blogRequestId = 0;
   let secondaryRequestId = 0;
   let blogSignature = '';
 
-  const buildUrl = ({ perPage, offset, fields, page }) => {
+  const getActiveCategory = () => CATEGORY_FILTERS[activeFilter] || CATEGORY_FILTERS.steam;
+
+  const buildUrl = ({ perPage, offset, fields, categoryId }) => {
     const url = new URL(API_BASE);
     url.searchParams.set('per_page', String(perPage));
     url.searchParams.set('orderby', 'date');
     url.searchParams.set('order', 'desc');
+    url.searchParams.set('_embed', '1');
 
     if (typeof offset === 'number') {
       url.searchParams.set('offset', String(offset));
     }
 
-    if (typeof page === 'number') {
-      url.searchParams.set('page', String(page));
-    }
-
     if (fields && fields.length) {
       url.searchParams.set('_fields', fields.join(','));
-    } else {
-      url.searchParams.set('_embed', '1');
+    }
+
+    if (categoryId !== null && categoryId !== undefined) {
+      url.searchParams.set('categories', String(categoryId));
     }
 
     return url.toString();
   };
 
-  const fetchPosts = async ({ perPage, offset }) => {
-    const response = await fetch(buildUrl({ perPage, offset }), {
+  const fetchPosts = async ({ perPage, offset, categoryId = getActiveCategory().categoryId }) => {
+    const response = await fetch(buildUrl({ perPage, offset, categoryId }), {
       cache: 'no-cache',
       headers: {
         Accept: 'application/json',
@@ -342,10 +497,10 @@ if (steamhPublicationModal) {
     return Number.isFinite(value) ? value : 0;
   };
 
-  const fetchPostIndexPage = async page => {
+  const fetchPostIndexPage = async offset => {
     const url = new URL(buildUrl({
       perPage: INDEX_PER_PAGE,
-      page,
+      offset,
       fields: ['id', 'modified', 'modified_gmt'],
     }));
 
@@ -367,27 +522,27 @@ if (steamhPublicationModal) {
     return {
       posts: Array.isArray(posts) ? posts : [],
       total: getHeaderNumber(response, 'X-WP-Total'),
-      totalPages: getHeaderNumber(response, 'X-WP-TotalPages') || 1,
     };
   };
 
   const fetchPostIndex = async () => {
-    const firstPage = await fetchPostIndexPage(1);
+    const firstPage = await fetchPostIndexPage(0);
     const posts = [...firstPage.posts];
+    const indexedTotal = firstPage.total || posts.length;
 
-    for (let page = 2; page <= firstPage.totalPages; page += 1) {
-      const nextPage = await fetchPostIndexPage(page);
+    for (let offset = INDEX_PER_PAGE; offset < indexedTotal; offset += INDEX_PER_PAGE) {
+      const nextPage = await fetchPostIndexPage(offset);
       posts.push(...nextPage.posts);
     }
 
     const signature = [
-      `total:${firstPage.total}`,
+      `total:${indexedTotal}`,
       ...posts.map(post => `${post.id}:${post.modified_gmt || post.modified || ''}`),
     ].join('|');
 
     return {
       signature,
-      total: firstPage.total,
+      total: indexedTotal,
     };
   };
 
@@ -396,7 +551,7 @@ if (steamhPublicationModal) {
       const rawCache = localStorage.getItem(CACHE_KEY);
       return rawCache ? JSON.parse(rawCache) : null;
     } catch (error) {
-      console.warn('No se pudo leer el cache STEAM+H:', error);
+      console.warn('No se pudo leer el cache de STEAM+H:', error);
       return null;
     }
   };
@@ -405,7 +560,7 @@ if (steamhPublicationModal) {
     try {
       localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
     } catch (error) {
-      console.warn('No se pudo guardar el cache STEAM+H:', error);
+      console.warn('No se pudo guardar el cache de STEAM+H:', error);
     }
   };
 
@@ -462,6 +617,21 @@ if (steamhPublicationModal) {
 
     totalPosts = total;
     totalSecondaryPages = Math.ceil(Math.max(totalPosts - 1, 0) / ITEMS_PER_PAGE);
+  };
+
+  const resetPaginationState = () => {
+    currentPage = 1;
+    totalPosts = null;
+    totalSecondaryPages = 0;
+    canGoNext = false;
+  };
+
+  const syncFilterButtons = () => {
+    filterButtons.forEach(button => {
+      const isActive = button.dataset.steamhFilter === activeFilter;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
   };
 
   const stripHtml = value => {
@@ -564,7 +734,8 @@ if (steamhPublicationModal) {
     image.alt = imageData.alt || fallbackAlt || '';
     image.decoding = 'async';
     image.loading = loading;
-    return image;
+    image.dataset.fullSrc = imageData.src;
+    return markImageAsExpandable(image);
   };
 
   const createCategory = post => {
@@ -574,26 +745,38 @@ if (steamhPublicationModal) {
     return category;
   };
 
+  const applyPublicationDataset = (element, post) => {
+    element.dataset.category = post.category;
+    element.dataset.title = post.title;
+    element.dataset.date = post.date.display;
+    element.dataset.datetime = post.date.datetime;
+    element.dataset.detail = post.summary;
+
+    if (post.image) {
+      element.dataset.image = post.image.src;
+    }
+
+    if (post.content) {
+      element.dataset.content = post.content;
+    }
+
+    return element;
+  };
+
   const createReadMoreButton = (post, label) => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'steamh-link publication-trigger';
     button.textContent = label;
-    button.dataset.category = post.category;
-    button.dataset.title = post.title;
-    button.dataset.date = post.date.display;
-    button.dataset.datetime = post.date.datetime;
-    button.dataset.detail = post.summary;
+    return applyPublicationDataset(button, post);
+  };
 
-    if (post.image) {
-      button.dataset.image = post.image.src;
-    }
-
-    if (post.content) {
-      button.dataset.content = post.content;
-    }
-
-    return button;
+  const createTitleButton = post => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'steamh-title-trigger publication-trigger';
+    button.textContent = post.title;
+    return applyPublicationDataset(button, post);
   };
 
   const renderFeatured = post => {
@@ -617,7 +800,7 @@ if (steamhPublicationModal) {
     }
 
     const title = document.createElement('h2');
-    title.textContent = post.title;
+    title.append(createTitleButton(post));
     content.append(title);
 
     if (post.summary) {
@@ -645,7 +828,7 @@ if (steamhPublicationModal) {
       author.append(time);
     }
 
-    footer.append(author, createReadMoreButton(post, 'Leer entrada'));
+    footer.append(author, createReadMoreButton(post, 'Leer noticia'));
     content.append(footer);
     article.append(content);
     featuredWrap.replaceChildren(article);
@@ -682,7 +865,7 @@ if (steamhPublicationModal) {
       }
 
       const title = document.createElement('h3');
-      title.textContent = post.title;
+      title.append(createTitleButton(post));
       body.append(title);
 
       const meta = document.createElement('p');
@@ -714,7 +897,7 @@ if (steamhPublicationModal) {
         body.append(summary);
       }
 
-      body.append(createReadMoreButton(post, 'Leer más'));
+      body.append(createReadMoreButton(post, 'Leer noticia'));
       article.append(body);
       fragment.append(article);
     });
@@ -792,22 +975,24 @@ if (steamhPublicationModal) {
     container.replaceChildren(box);
   };
 
-  const loadSecondaryPage = async page => {
-    const targetPage = Math.max(1, Number(page) || 1);
-    const requestId = ++secondaryRequestId;
-    const offset = 1 + (targetPage - 1) * ITEMS_PER_PAGE;
-    const cachedBlog = getValidCache();
-    const cachedPage = cachedBlog && cachedBlog.secondaryPages && cachedBlog.secondaryPages[targetPage];
-
-    currentPage = targetPage;
-
-    if (cachedPage) {
-      renderSecondaryPosts(cachedPage);
-      canGoNext = currentPage < totalSecondaryPages;
+  const loadSecondaryPage = async (page, requestToken = blogRequestId) => {
+    if (totalPosts !== null && totalSecondaryPages === 0) {
+      currentPage = 1;
+      postList.removeAttribute('aria-busy');
+      renderSecondaryPosts([]);
       renderPagination();
       return;
     }
 
+    const requestedPage = Math.max(1, Number(page) || 1);
+    const targetPage = totalPosts !== null
+      ? Math.min(requestedPage, totalSecondaryPages)
+      : requestedPage;
+    const requestId = ++secondaryRequestId;
+    const offset = 1 + (targetPage - 1) * ITEMS_PER_PAGE;
+    const { categoryId } = getActiveCategory();
+
+    currentPage = targetPage;
     postList.hidden = false;
     postList.setAttribute('aria-busy', 'true');
     showMessage(postList, 'Cargando más entradas...');
@@ -816,9 +1001,10 @@ if (steamhPublicationModal) {
       const { posts, total } = await fetchPosts({
         perPage: SECONDARY_FETCH_LIMIT,
         offset,
+        categoryId,
       });
 
-      if (requestId !== secondaryRequestId) {
+      if (requestId !== secondaryRequestId || requestToken !== blogRequestId) {
         return;
       }
 
@@ -830,19 +1016,14 @@ if (steamhPublicationModal) {
         : posts.length > ITEMS_PER_PAGE;
 
       if (!secondaryPosts.length && currentPage > 1) {
-        await loadSecondaryPage(currentPage - 1);
+        await loadSecondaryPage(currentPage - 1, requestToken);
         return;
       }
 
       renderSecondaryPosts(secondaryPosts);
       renderPagination();
-      updateCache({
-        secondaryPages: {
-          [currentPage]: secondaryPosts,
-        },
-      });
     } catch (error) {
-      console.error('Error al cargar las entradas STEAM+H:', error);
+      console.error('Error al cargar las entradas de STEAM+H:', error);
       postList.hidden = false;
       pagination.hidden = true;
       showMessage(postList, 'No se pudieron cargar más entradas en este momento.', 'steamh-empty');
@@ -851,31 +1032,33 @@ if (steamhPublicationModal) {
     }
   };
 
-  const initSteamhBlog = async () => {
+  const initSteamhBlog = async (filterKey = activeFilter) => {
+    activeFilter = CATEGORY_FILTERS[filterKey] ? filterKey : 'steam';
+    const { categoryId, emptyMessage } = getActiveCategory();
+    const requestId = ++blogRequestId;
+    secondaryRequestId += 1;
+    resetPaginationState();
+    syncFilterButtons();
     showMessage(featuredWrap, 'Cargando entradas...');
+    postList.removeAttribute('aria-busy');
     postList.hidden = true;
     pagination.hidden = true;
 
     try {
-      const postIndex = await fetchPostIndex();
-      blogSignature = postIndex.signature;
-
-      const cachedBlog = getValidCache();
-
-      if (cachedBlog) {
-        renderFromCache(cachedBlog);
-        return;
-      }
-
       const { posts, total } = await fetchPosts({
         perPage: 1,
         offset: 0,
+        categoryId,
       });
+
+      if (requestId !== blogRequestId) {
+        return;
+      }
 
       updateTotal(total);
 
       if (!posts.length) {
-        showMessage(featuredWrap, 'No hay entradas STEAM+H publicadas por el momento.', 'steamh-empty');
+        showMessage(featuredWrap, emptyMessage, 'steamh-empty');
         return;
       }
 
@@ -885,24 +1068,19 @@ if (steamhPublicationModal) {
       if (totalPosts !== null && totalPosts <= 1) {
         renderSecondaryPosts([]);
         renderPagination();
-        updateCache({
-          featuredPost,
-          secondaryPages: {
-            1: [],
-          },
-        });
         return;
       }
 
-      await loadSecondaryPage(1);
-      updateCache({
-        featuredPost,
-      });
+      await loadSecondaryPage(1, requestId);
     } catch (error) {
-      console.error('Error al cargar las entradas STEAM+H:', error);
+      if (requestId !== blogRequestId) {
+        return;
+      }
+
+      console.error('Error al cargar las entradas de STEAM+H:', error);
       postList.hidden = true;
       pagination.hidden = true;
-      showMessage(featuredWrap, 'No se pudieron cargar las entradas STEAM+H en este momento.', 'steamh-empty');
+      showMessage(featuredWrap, 'No se pudieron cargar las entradas de STEAM+H en este momento.', 'steamh-empty');
     }
   };
 
@@ -914,6 +1092,18 @@ if (steamhPublicationModal) {
     }
 
     loadSecondaryPage(Number(button.dataset.page));
+  });
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filterKey = button.dataset.steamhFilter;
+
+      if (!filterKey || filterKey === activeFilter) {
+        return;
+      }
+
+      initSteamhBlog(filterKey);
+    });
   });
 
   initSteamhBlog();

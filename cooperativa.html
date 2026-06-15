@@ -15,7 +15,7 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/index.css?v=2" />
-  <link rel="stylesheet" href="css/cooperativa.css?v=3" />
+  <link rel="stylesheet" href="css/cooperativa.css?v=6" />
   <link rel="icon" type="image/png" href="assets/img/logo-web-ctpulloa-2026.png">
 </head>
 <body>
@@ -163,6 +163,18 @@
         <h2 id="cooperative-blog-title">Entradas recientes</h2>
       </div>
 
+      <div class="container cooperative-filter-bar" aria-label="Filtrar entradas por categoría" data-cooperative-filters>
+        <span class="cooperative-filter-label">Categoría</span>
+        <div class="cooperative-filter-options" role="group" aria-label="Categorías del blog">
+          <button class="cooperative-filter-button" type="button" data-cooperative-filter="all" aria-pressed="false">Todas</button>
+          <button class="cooperative-filter-button" type="button" data-cooperative-filter="noticia" aria-pressed="false">Noticia</button>
+          <button class="cooperative-filter-button is-active" type="button" data-cooperative-filter="cooperativa" aria-pressed="true">Cooperativa</button>
+          <button class="cooperative-filter-button" type="button" data-cooperative-filter="steam" aria-pressed="false">STEAM</button>
+          <button class="cooperative-filter-button" type="button" data-cooperative-filter="pastoral" aria-pressed="false">Pastoral Educativa</button>
+          <button class="cooperative-filter-button" type="button" data-cooperative-filter="junta" aria-pressed="false">Junta Administrativa</button>
+        </div>
+      </div>
+
       <div class="container cooperative-featured-wrap" id="cooperative-featured-wrap" aria-live="polite">
         <div class="cooperative-loading" role="status">Cargando entradas...</div>
       </div>
@@ -198,6 +210,14 @@
     </article>
   </div>
 
+  <div class="image-lightbox" id="cooperative-image-lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" hidden>
+    <div class="image-lightbox-backdrop" data-lightbox-close></div>
+    <button class="image-lightbox-close" type="button" aria-label="Cerrar imagen ampliada" data-lightbox-close>&times;</button>
+    <div class="image-lightbox-stage">
+      <img class="image-lightbox-image" src="" alt="" />
+    </div>
+  </div>
+
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
@@ -213,6 +233,6 @@
     <span aria-hidden="true">↑</span>
   </a>
   <script src="js/main.js"></script>
-  <script src="js/cooperativa.js?v=1"></script>
+  <script src="js/cooperativa.js?v=5"></script>
 </body>
 </html>

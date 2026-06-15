@@ -15,7 +15,7 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/index.css?v=2" />
-  <link rel="stylesheet" href="css/noticias.css?v=8" />
+  <link rel="stylesheet" href="css/noticias.css?v=12" />
   <link rel="icon" type="image/png" href="assets/img/logo-web-ctpulloa-2026.png">
 </head>
 <body>
@@ -122,6 +122,18 @@
     </section>
 
     <section class="section latest-news-section" id="noticias" aria-label="Noticias recientes">
+      <div class="container news-filter-bar" aria-label="Filtrar noticias por categoría" data-news-filters>
+        <span class="news-filter-label">Categoría</span>
+        <div class="news-filter-options" role="group" aria-label="Categorías de noticias">
+          <button class="news-filter-button is-active" type="button" data-news-filter="all" aria-pressed="true">Todas</button>
+          <button class="news-filter-button" type="button" data-news-filter="noticia" aria-pressed="false">Noticia</button>
+          <button class="news-filter-button" type="button" data-news-filter="cooperativa" aria-pressed="false">Cooperativa</button>
+          <button class="news-filter-button" type="button" data-news-filter="steam" aria-pressed="false">STEAM</button>
+          <button class="news-filter-button" type="button" data-news-filter="pastoral" aria-pressed="false">Pastoral Educativa</button>
+          <button class="news-filter-button" type="button" data-news-filter="junta" aria-pressed="false">Junta Administrativa</button>
+        </div>
+      </div>
+
       <div class="container featured-news-wrap" id="featured-news-wrap" aria-live="polite">
         <div class="news-loading" role="status">Cargando noticias...</div>
       </div>
@@ -331,6 +343,14 @@
     </article>
   </div>
 
+  <div class="image-lightbox" id="image-lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" hidden>
+    <div class="image-lightbox-backdrop" data-lightbox-close></div>
+    <button class="image-lightbox-close" type="button" aria-label="Cerrar imagen ampliada" data-lightbox-close>&times;</button>
+    <div class="image-lightbox-stage">
+      <img class="image-lightbox-image" src="" alt="" />
+    </div>
+  </div>
+
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
@@ -346,6 +366,6 @@
     <span aria-hidden="true">&uarr;</span>
   </a>
   <script src="js/main.js"></script>
-  <script src="js/noticias.js?v=8"></script>
+  <script src="js/noticias.js?v=14"></script>
 </body>
 </html>
