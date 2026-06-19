@@ -1728,6 +1728,41 @@ section[id] {
   box-shadow: 0 14px 34px rgba(8, 21, 52, 0.08);
 }
 
+.admission-actions .admission-download-button {
+  border-color: rgba(13, 114, 52, 0.58);
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+  color: white;
+  box-shadow: 0 16px 34px rgba(13, 114, 52, 0.22);
+  animation: admissionDownloadNudge 1.9s ease-in-out infinite;
+}
+
+.admission-actions .admission-download-button:hover,
+.admission-actions .admission-download-button:focus-visible {
+  color: white;
+  box-shadow: 0 20px 42px rgba(13, 114, 52, 0.28);
+}
+
+@keyframes admissionDownloadNudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  45% {
+    transform: translateX(6px);
+  }
+
+  70% {
+    transform: translateX(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admission-actions .admission-download-button {
+    animation: none;
+  }
+}
+
 .admission-documents {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
