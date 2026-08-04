@@ -630,6 +630,15 @@ if (admissionModal && admissionModalPdf && admissionModalTitle && admissionModal
   });
 }
 
+const admissionOptionsModal = document.querySelector('.admission-options-modal');
+const admissionOptionsTrigger = document.querySelector('.admission-options-trigger');
+const admissionOptionsClose = admissionOptionsModal?.querySelector('.admission-options-close');
+if (admissionOptionsModal && admissionOptionsTrigger) {
+  admissionOptionsTrigger.addEventListener('click', () => admissionOptionsModal.showModal());
+  admissionOptionsClose?.addEventListener('click', () => admissionOptionsModal.close());
+  admissionOptionsModal.addEventListener('click', event => { if (event.target === admissionOptionsModal) admissionOptionsModal.close(); });
+}
+
 const galleryModal = document.querySelector('.gallery-modal');
 const galleryModalImage = galleryModal?.querySelector('.gallery-modal-image');
 const galleryModalClose = galleryModal?.querySelector('.gallery-modal-close');
