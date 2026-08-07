@@ -84,7 +84,7 @@
                 <div class="publication-modal-body">${post.content?.rendered || ''}</div>
               </div>
             </article>`;
-          preview.querySelector('#blog-post-share').addEventListener('click', () => openFacebookShareWindow(`https://www.ctpulloa.com/blog.html?post=${encodeURIComponent(postId)}`));
+          preview.querySelector('#blog-post-share').addEventListener('click', () => openFacebookShareWindow(post.link || `https://www.ctpulloa.com/blog.html?post=${encodeURIComponent(postId)}`));
         })
         .catch(() => { preview.innerHTML = '<p class="cooperative-empty">No se pudo cargar esta publicación.</p>'; });
     })();

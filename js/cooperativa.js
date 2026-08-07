@@ -849,7 +849,7 @@ if (cooperativePublicationModal) {
     button.innerHTML = '<span class="facebook-share-icon" aria-hidden="true">f</span><span>Compartir</span>';
     button.addEventListener('click', event => {
       event.stopPropagation();
-      openFacebookShareWindow(getBlogPostUrl(post.id));
+      openFacebookShareWindow(post.link || getBlogPostUrl(post.id));
     });
     return button;
   };
