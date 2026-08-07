@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Noticias, actividades y publicaciones del CTP de Ulloa." />
+  <title>Blog | CTP de Ulloa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/index.css?v=2" />
+  <link rel="stylesheet" href="css/cooperativa.css?v=7" />
+  <link rel="icon" type="image/png" href="assets/img/logo-web-ctpulloa-2026.png" />
+</head>
+<body data-blog-page="general" data-blog-filter="all">
+  <header class="site-header" id="top">
+    <div class="container header-top">
+      <div class="header-contact">
+        <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-link">ctp.ulloa@mep.go.cr</a>
+        <a href="tel:+50622938390" class="contact-link">+506 2293 8390</a>
+      </div>
+      <div class="header-social" aria-label="Redes sociales">
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="Facebook">f</a>
+      </div>
+    </div>
+    <div class="container header-shell">
+      <a href="index.html#inicio" class="brand" aria-label="Inicio CTP de Ulloa"><img src="assets/img/logo-web-ctpulloa-2026.png" alt="CTP de Ulloa" class="brand-logo" /></a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav"><a href="index.html#inicio">Inicio</a><a href="cooperativa.html">Cooperativa</a><a href="noticias.html">Noticias</a></nav>
+      <div class="header-actions"><a href="index.html#admision" class="header-admission-btn">Admisiones</a></div>
+    </div>
+  </header>
+
+  <main class="cooperative-page">
+    <section class="cooperative-hero">
+      <div class="container cooperative-hero-grid"><div class="cooperative-hero-copy">
+        <p class="cooperative-kicker">Actualidad institucional</p><h1>Blog del CTP de Ulloa</h1>
+        <p>Noticias, proyectos y experiencias de nuestra comunidad educativa.</p>
+      </div></div>
+    </section>
+    <section class="blog-post-preview" id="blog-post-preview" hidden aria-live="polite"></section>
+    <section class="cooperative-blog-section" id="cooperative-blog" aria-labelledby="cooperative-blog-title">
+      <div class="container cooperative-section-heading"><p class="cooperative-kicker">Publicaciones</p><h2 id="cooperative-blog-title">Entradas recientes</h2></div>
+      <div class="container cooperative-filter-bar" aria-label="Filtrar entradas por categoría" data-cooperative-filters>
+        <span class="cooperative-filter-label">Categoría</span><div class="cooperative-filter-options" role="group" aria-label="Categorías del blog">
+          <button class="cooperative-filter-button is-active" type="button" data-cooperative-filter="all" aria-pressed="true">Todas</button><button class="cooperative-filter-button" type="button" data-cooperative-filter="noticia" aria-pressed="false">Noticia</button><button class="cooperative-filter-button" type="button" data-cooperative-filter="cooperativa" aria-pressed="false">Cooperativa</button><button class="cooperative-filter-button" type="button" data-cooperative-filter="steam" aria-pressed="false">STEAM</button><button class="cooperative-filter-button" type="button" data-cooperative-filter="pastoral" aria-pressed="false">Pastoral Educativa</button><button class="cooperative-filter-button" type="button" data-cooperative-filter="junta" aria-pressed="false">Junta Administrativa</button>
+        </div>
+      </div>
+      <div class="container cooperative-featured-wrap" id="cooperative-featured-wrap" aria-live="polite"><div class="cooperative-loading" role="status">Cargando entradas...</div></div>
+      <div class="container cooperative-post-grid" id="cooperative-post-list" aria-label="Entradas paginadas" aria-live="polite"></div>
+      <nav class="cooperative-pagination" aria-label="Paginación del blog" data-cooperative-pagination></nav>
+    </section>
+  </main>
+
+  <div class="publication-modal" id="cooperative-publication-modal" role="dialog" aria-modal="true" aria-labelledby="cooperative-publication-modal-title" hidden>
+    <div class="publication-modal-backdrop" data-modal-close></div><article class="publication-modal-card"><button class="publication-modal-close" type="button" aria-label="Cerrar entrada" data-modal-close>&times;</button><img class="publication-modal-image" src="" alt="" /><div class="publication-modal-content"><div class="publication-modal-meta"><span id="cooperative-publication-modal-category"></span><time id="cooperative-publication-modal-date"></time></div><h2 id="cooperative-publication-modal-title"></h2><div class="publication-modal-actions"><button class="facebook-share-button" id="cooperative-publication-share" type="button"><span class="facebook-share-icon" aria-hidden="true">f</span><span>Compartir en Facebook</span></button></div><div class="publication-modal-body" id="cooperative-publication-modal-detail"></div><div class="publication-carousel" id="cooperative-publication-carousel" hidden><img class="publication-carousel-image" src="" alt="" /><button class="publication-carousel-control is-prev" type="button" aria-label="Imagen anterior" data-carousel-prev>&lsaquo;</button><button class="publication-carousel-control is-next" type="button" aria-label="Imagen siguiente" data-carousel-next>&rsaquo;</button><div class="publication-carousel-dots" data-carousel-dots></div><span class="publication-carousel-count" data-carousel-count></span></div></div></article>
+  </div>
+  <div class="image-lightbox" id="cooperative-image-lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" hidden><div class="image-lightbox-backdrop" data-lightbox-close></div><button class="image-lightbox-close" type="button" aria-label="Cerrar imagen ampliada" data-lightbox-close>&times;</button><div class="image-lightbox-stage"><img class="image-lightbox-image" src="" alt="" /></div></div>
+  <footer class="site-footer"><div class="container footer-bottom"><p>&copy; 2026 Colegio Técnico Profesional de Ulloa.</p></div></footer>
+  <script src="js/main.js"></script><script src="js/cooperativa.js?v=9"></script>
+  <script>
+    (() => {
+      const postId = new URLSearchParams(location.search).get('post');
+      if (!postId) return;
+      const listing = document.querySelector('#cooperative-blog');
+      const preview = document.querySelector('#blog-post-preview');
+      document.body.classList.add('blog-post-preview-mode');
+      listing.hidden = true;
+      preview.hidden = false;
+      preview.innerHTML = '<p class="cooperative-loading">Cargando publicación...</p>';
+      fetch(`https://blog.ctpulloa.com/wp-json/wp/v2/posts/${encodeURIComponent(postId)}?_embed=1`)
+        .then(response => { if (!response.ok) throw new Error(); return response.json(); })
+        .then(post => {
+          const media = post._embedded?.['wp:featuredmedia']?.[0];
+          const category = post._embedded?.['wp:term']?.flat()?.find(term => term.taxonomy === 'category')?.name || 'Publicación';
+          const date = new Date(post.date).toLocaleDateString('es-CR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+          preview.innerHTML = `
+            <article class="blog-post-preview-card">
+              ${media?.source_url ? `<img class="blog-post-preview-image" src="${media.source_url}" alt="${media.alt_text || ''}">` : ''}
+              <div class="blog-post-preview-content">
+                <div class="publication-modal-meta"><span>${category}</span><time datetime="${post.date.slice(0, 10)}">${date}</time></div>
+                <h1>${post.title?.rendered || ''}</h1>
+                <div class="publication-modal-actions"><button class="facebook-share-button" id="blog-post-share" type="button"><span class="facebook-share-icon" aria-hidden="true">f</span><span>Compartir en Facebook</span></button></div>
+                <div class="publication-modal-body">${post.content?.rendered || ''}</div>
+              </div>
+            </article>`;
+          preview.querySelector('#blog-post-share').addEventListener('click', () => openFacebookShareWindow(`https://www.ctpulloa.com/blog.html?post=${encodeURIComponent(postId)}`));
+        })
+        .catch(() => { preview.innerHTML = '<p class="cooperative-empty">No se pudo cargar esta publicación.</p>'; });
+    })();
+  </script>
+</body>
+</html>

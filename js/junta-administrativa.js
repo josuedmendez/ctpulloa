@@ -367,6 +367,10 @@ if (publicationModal) {
     const trigger = event.target.closest('.publication-trigger');
 
     if (trigger) {
+      if (trigger.dataset.postId && window.openBlogPostFrame) {
+        window.openBlogPostFrame(trigger.dataset.postId);
+        return;
+      }
       openModal(trigger);
     }
   });
@@ -589,6 +593,7 @@ if (publicationModal) {
     const image = getFeaturedImage(post);
 
     return {
+      id: post.id || '',
       title,
       summary: trimText(sourceSummary, 190),
       content: (post.content && post.content.rendered) || (post.excerpt && post.excerpt.rendered) || '',
@@ -617,6 +622,7 @@ if (publicationModal) {
   };
 
   const applyPublicationDataset = (element, post) => {
+    element.dataset.postId = post.id || '';
     element.dataset.category = post.category;
     element.dataset.title = post.title;
     element.dataset.date = post.date.display;
@@ -648,6 +654,18 @@ if (publicationModal) {
     button.className = 'junta-title-trigger publication-trigger';
     button.textContent = post.title;
     return applyPublicationDataset(button, post);
+  };
+
+  const createShareButton = post => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'blog-share-button';
+    button.textContent = 'Compartir en Facebook';
+    button.addEventListener('click', event => {
+      event.stopPropagation();
+      window.shareBlogPost?.(post.id);
+    });
+    return button;
   };
 
   const renderFeatured = post => {
@@ -696,7 +714,10 @@ if (publicationModal) {
       meta.append(time);
     }
 
-    content.append(meta, createReadMoreButton(post));
+    const actions = document.createElement('div');
+    actions.className = 'blog-card-actions';
+    actions.append(createReadMoreButton(post), createShareButton(post));
+    content.append(meta, actions);
     article.append(content);
     featuredWrap.replaceChildren(article);
   };
@@ -762,7 +783,10 @@ if (publicationModal) {
         body.append(summary);
       }
 
-      body.append(createReadMoreButton(post));
+      const actions = document.createElement('div');
+      actions.className = 'blog-card-actions';
+      actions.append(createReadMoreButton(post), createShareButton(post));
+      body.append(actions);
       article.append(body);
       fragment.append(article);
     });

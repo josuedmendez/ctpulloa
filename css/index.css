@@ -1765,8 +1765,8 @@ section[id] {
 
 .admission-documents {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.25rem, 3vw, 2.25rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.8rem, 1.7vw, 1.35rem);
   justify-self: end;
   align-items: start;
   width: min(100%, 720px);
@@ -1822,11 +1822,18 @@ section[id] {
   animation-delay: -2.4s;
 }
 
+.admission-visual-card:nth-child(4) .admission-visual-media {
+  animation-delay: -3.6s;
+}
+
 .admission-visual-card figcaption {
-  margin-top: 1rem;
+  display: grid;
+  min-height: 3.75em;
+  margin-top: 0.8rem;
+  place-items: center;
   color: var(--navy);
   font-family: "Montserrat", Arial, sans-serif;
-  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  font-size: clamp(0.88rem, 1.1vw, 1rem);
   font-weight: 800;
   line-height: 1.25;
 }

@@ -367,6 +367,10 @@ if (steamhPublicationModal) {
     const trigger = event.target.closest('.publication-trigger');
 
     if (trigger) {
+      if (trigger.dataset.postId && window.openBlogPostFrame) {
+        window.openBlogPostFrame(trigger.dataset.postId);
+        return;
+      }
       openModal(trigger);
     }
   });
@@ -718,6 +722,7 @@ if (steamhPublicationModal) {
     const image = getFeaturedImage(post);
 
     return {
+      id: post.id || '',
       title,
       summary: trimText(sourceSummary, 190),
       content: (post.content && post.content.rendered) || (post.excerpt && post.excerpt.rendered) || '',
@@ -746,6 +751,7 @@ if (steamhPublicationModal) {
   };
 
   const applyPublicationDataset = (element, post) => {
+    element.dataset.postId = post.id || '';
     element.dataset.category = post.category;
     element.dataset.title = post.title;
     element.dataset.date = post.date.display;
@@ -777,6 +783,18 @@ if (steamhPublicationModal) {
     button.className = 'steamh-title-trigger publication-trigger';
     button.textContent = post.title;
     return applyPublicationDataset(button, post);
+  };
+
+  const createShareButton = post => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'blog-share-button';
+    button.textContent = 'Compartir en Facebook';
+    button.addEventListener('click', event => {
+      event.stopPropagation();
+      window.shareBlogPost?.(post.id);
+    });
+    return button;
   };
 
   const renderFeatured = post => {
@@ -828,7 +846,10 @@ if (steamhPublicationModal) {
       author.append(time);
     }
 
-    footer.append(author, createReadMoreButton(post, 'Leer noticia'));
+    const actions = document.createElement('div');
+    actions.className = 'blog-card-actions';
+    actions.append(createReadMoreButton(post, 'Leer noticia'), createShareButton(post));
+    footer.append(author, actions);
     content.append(footer);
     article.append(content);
     featuredWrap.replaceChildren(article);
@@ -897,7 +918,10 @@ if (steamhPublicationModal) {
         body.append(summary);
       }
 
-      body.append(createReadMoreButton(post, 'Leer noticia'));
+      const actions = document.createElement('div');
+      actions.className = 'blog-card-actions';
+      actions.append(createReadMoreButton(post, 'Leer noticia'), createShareButton(post));
+      body.append(actions);
       article.append(body);
       fragment.append(article);
     });

@@ -1,5 +1,58 @@
 const cooperativePublicationModal = document.querySelector('#cooperative-publication-modal');
 const cooperativeImageLightbox = document.querySelector('#cooperative-image-lightbox');
+const cooperativeBlogFrame = document.querySelector('#cooperative-blog-frame');
+const cooperativeBlogFrameIframe = document.querySelector('#cooperative-blog-frame-iframe');
+const PUBLIC_SITE_URL = 'https://www.ctpulloa.com/';
+
+const closeCooperativeBlogFrame = () => {
+  if (!cooperativeBlogFrame) return;
+  cooperativeBlogFrame.hidden = true;
+  document.body.classList.remove('modal-is-open');
+  if (cooperativeBlogFrameIframe) cooperativeBlogFrameIframe.src = 'about:blank';
+};
+
+const openCooperativeBlogFrame = postId => {
+  if (!cooperativeBlogFrame || !cooperativeBlogFrameIframe || !postId) return;
+  cooperativeBlogFrameIframe.src = getBlogPostUrl(postId);
+  cooperativeBlogFrame.hidden = false;
+  document.body.classList.add('modal-is-open');
+  cooperativeBlogFrame.querySelector('.blog-frame-close')?.focus();
+};
+
+if (cooperativeBlogFrame) {
+  cooperativeBlogFrame.querySelectorAll('[data-blog-frame-close]').forEach(control => {
+    control.addEventListener('click', closeCooperativeBlogFrame);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !cooperativeBlogFrame.hidden) {
+      closeCooperativeBlogFrame();
+    }
+  });
+}
+
+const openFacebookShareWindow = url => {
+  const shareUrl = url || window.location.href;
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+  const popup = window.open(
+    facebookUrl,
+    'facebook-share',
+    'width=620,height=520,menubar=no,toolbar=no,location=yes,status=no,resizable=yes,scrollbars=yes'
+  );
+
+  if (popup) {
+    popup.focus();
+  } else {
+    window.location.href = facebookUrl;
+  }
+};
+
+const getBlogPostUrl = postId => {
+  if (!postId) return window.location.href;
+  const url = new URL('blog.html', PUBLIC_SITE_URL);
+  url.searchParams.set('post', postId);
+  return url.toString();
+};
 
 const getLargestImageSource = image => {
   if (!image) {
@@ -124,6 +177,7 @@ if (cooperativePublicationModal) {
   const modalCategory = cooperativePublicationModal.querySelector('#cooperative-publication-modal-category');
   const modalDate = cooperativePublicationModal.querySelector('#cooperative-publication-modal-date');
   const modalTitle = cooperativePublicationModal.querySelector('#cooperative-publication-modal-title');
+  const modalShare = cooperativePublicationModal.querySelector('#cooperative-publication-share');
   const modalDetail = cooperativePublicationModal.querySelector('#cooperative-publication-modal-detail');
   const closeControls = cooperativePublicationModal.querySelectorAll('[data-modal-close]');
   let carouselImages = [];
@@ -316,7 +370,7 @@ if (cooperativePublicationModal) {
   };
 
   const openModal = trigger => {
-    const { category, title, date, datetime, image, detail, content } = trigger.dataset;
+    const { category, title, date, datetime, image, detail, content, link } = trigger.dataset;
 
     if (image) {
       modalImage.hidden = false;
@@ -334,6 +388,10 @@ if (cooperativePublicationModal) {
     modalDate.textContent = date || '';
     modalDate.dateTime = datetime || '';
     modalTitle.textContent = title || '';
+
+    if (modalShare) {
+      modalShare.dataset.shareUrl = link || window.location.href;
+    }
 
     const preparedContent = preparePublicationContent({
       content,
@@ -363,10 +421,18 @@ if (cooperativePublicationModal) {
     carouselNext.addEventListener('click', () => moveCarousel(1));
   }
 
+  if (modalShare) {
+    modalShare.addEventListener('click', () => openFacebookShareWindow(modalShare.dataset.shareUrl));
+  }
+
   document.addEventListener('click', event => {
     const trigger = event.target.closest('.publication-trigger');
 
     if (trigger) {
+      if (document.body.dataset.blogPage !== 'general' && trigger.dataset.postId) {
+        openCooperativeBlogFrame(trigger.dataset.postId);
+        return;
+      }
       openModal(trigger);
     }
   });
@@ -396,7 +462,7 @@ if (cooperativePublicationModal) {
 
 (() => {
   const API_BASE = 'https://blog.ctpulloa.com/wp-json/wp/v2/posts';
-  const CACHE_KEY = 'ctpulloa:cooperative-blog-cache:v1';
+  const CACHE_KEY = `ctpulloa:cooperative-blog-cache:v2:${document.body.dataset.blogPage || 'cooperativa'}`;
   const INDEX_PER_PAGE = 100;
   const ITEMS_PER_PAGE = 3;
   const SECONDARY_FETCH_LIMIT = ITEMS_PER_PAGE + 1;
@@ -436,7 +502,7 @@ if (cooperativePublicationModal) {
     return;
   }
 
-  let activeFilter = 'cooperativa';
+  let activeFilter = document.body.dataset.blogFilter || 'cooperativa';
   let currentPage = 1;
   let totalPosts = null;
   let totalSecondaryPages = 0;
@@ -718,6 +784,7 @@ if (cooperativePublicationModal) {
     const image = getFeaturedImage(post);
 
     return {
+      id: post.id || '',
       title,
       summary: trimText(sourceSummary, 190),
       content: (post.content && post.content.rendered) || (post.excerpt && post.excerpt.rendered) || '',
@@ -725,6 +792,7 @@ if (cooperativePublicationModal) {
       author: getAuthor(post),
       date,
       image,
+      link: post.link || '',
     };
   };
 
@@ -746,11 +814,13 @@ if (cooperativePublicationModal) {
   };
 
   const applyPublicationDataset = (element, post) => {
+    element.dataset.postId = post.id || '';
     element.dataset.category = post.category;
     element.dataset.title = post.title;
     element.dataset.date = post.date.display;
     element.dataset.datetime = post.date.datetime;
     element.dataset.detail = post.summary;
+    element.dataset.link = post.link || window.location.href;
 
     if (post.image) {
       element.dataset.image = post.image.src;
@@ -769,6 +839,19 @@ if (cooperativePublicationModal) {
     button.className = 'cooperative-link publication-trigger';
     button.textContent = label;
     return applyPublicationDataset(button, post);
+  };
+
+  const createFacebookShareButton = post => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'facebook-share-button cooperative-facebook-share';
+    button.setAttribute('aria-label', `Compartir “${post.title}” en Facebook`);
+    button.innerHTML = '<span class="facebook-share-icon" aria-hidden="true">f</span><span>Compartir</span>';
+    button.addEventListener('click', event => {
+      event.stopPropagation();
+      openFacebookShareWindow(getBlogPostUrl(post.id));
+    });
+    return button;
   };
 
   const createTitleButton = post => {
@@ -828,7 +911,10 @@ if (cooperativePublicationModal) {
       author.append(time);
     }
 
-    footer.append(author, createReadMoreButton(post, 'Leer noticia'));
+    const actions = document.createElement('div');
+    actions.className = 'cooperative-card-actions';
+    actions.append(createReadMoreButton(post, 'Leer noticia'), createFacebookShareButton(post));
+    footer.append(author, actions);
     content.append(footer);
     article.append(content);
     featuredWrap.replaceChildren(article);
@@ -897,7 +983,10 @@ if (cooperativePublicationModal) {
         body.append(summary);
       }
 
-      body.append(createReadMoreButton(post, 'Leer noticia'));
+      const actions = document.createElement('div');
+      actions.className = 'cooperative-card-actions';
+      actions.append(createReadMoreButton(post, 'Leer noticia'), createFacebookShareButton(post));
+      body.append(actions);
       article.append(body);
       fragment.append(article);
     });

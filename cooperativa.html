@@ -15,7 +15,7 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/index.css?v=2" />
-  <link rel="stylesheet" href="css/cooperativa.css?v=6" />
+  <link rel="stylesheet" href="css/cooperativa.css?v=7" />
   <link rel="icon" type="image/png" href="assets/img/logo-web-ctpulloa-2026.png">
 </head>
 <body>
@@ -198,6 +198,12 @@
           <time id="cooperative-publication-modal-date"></time>
         </div>
         <h2 id="cooperative-publication-modal-title"></h2>
+        <div class="publication-modal-actions">
+          <button class="facebook-share-button" id="cooperative-publication-share" type="button" aria-label="Compartir esta noticia en Facebook">
+            <span class="facebook-share-icon" aria-hidden="true">f</span>
+            <span>Compartir en Facebook</span>
+          </button>
+        </div>
         <div class="publication-modal-body" id="cooperative-publication-modal-detail"></div>
         <div class="publication-carousel" id="cooperative-publication-carousel" hidden>
           <img class="publication-carousel-image" src="" alt="" />
@@ -208,6 +214,14 @@
         </div>
       </div>
     </article>
+  </div>
+
+  <div class="blog-frame-modal" id="cooperative-blog-frame" role="dialog" aria-modal="true" aria-label="Publicación del blog" hidden>
+    <div class="blog-frame-backdrop" data-blog-frame-close></div>
+    <div class="blog-frame-card">
+      <button class="blog-frame-close" type="button" aria-label="Cerrar publicación" data-blog-frame-close>&times;</button>
+      <iframe id="cooperative-blog-frame-iframe" title="Publicación del blog" src="about:blank"></iframe>
+    </div>
   </div>
 
   <div class="image-lightbox" id="cooperative-image-lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" hidden>
@@ -233,6 +247,6 @@
     <span aria-hidden="true">↑</span>
   </a>
   <script src="js/main.js"></script>
-  <script src="js/cooperativa.js?v=5"></script>
+  <script src="js/cooperativa.js?v=9"></script>
 </body>
 </html>
