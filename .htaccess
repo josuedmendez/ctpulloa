@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Facebook and other crawlers need the metadata in the initial HTML response.
+  # Keep the public URL as blog.html?post=<id>, while serving it through PHP.
+  RewriteCond %{QUERY_STRING} (^|&)post=[0-9]+(&|$)
+  RewriteRule ^blog\.html$ blog-social.php [L]
+</IfModule>
