@@ -9,34 +9,102 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/index.css?v=2" />
-  <link rel="stylesheet" href="css/cooperativa.css?v=7" />
+  <link rel="stylesheet" href="css/cooperativa.css?v=8" />
   <link rel="icon" type="image/png" href="assets/img/logo-web-ctpulloa-2026.png" />
 </head>
 <body data-blog-page="general" data-blog-filter="all">
   <header class="site-header" id="top">
     <div class="container header-top">
       <div class="header-contact">
-        <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-link">ctp.ulloa@mep.go.cr</a>
-        <a href="tel:+50622938390" class="contact-link">+506 2293 8390</a>
+        <a href="mailto:ctp.ulloa@mep.go.cr" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16v16H4z" />
+            <path d="m22 6-10 7L2 6" />
+          </svg>
+          ctp.ulloa@mep.go.cr
+        </a>
+        <a href="tel:+50622938390" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.6 2.6a2 2 0 0 1-.45 2.11L8 9.69a16 16 0 0 0 6.31 6.31l1.26-1.26a2 2 0 0 1 2.11-.45c.83.28 1.7.48 2.6.6A2 2 0 0 1 22 16.92Z" />
+          </svg>
+          +506 2293 8390
+        </a>
       </div>
       <div class="header-social" aria-label="Redes sociales">
-        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="Facebook">f</a>
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14 8h2V5h-2c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.4l.6-3h-3V9c0-.6.4-1 1-1Z" />
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="4" />
+            <circle cx="12" cy="12" r="3.2" />
+            <path d="M16.8 7.2h.01" />
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61561948085768" class="social-link" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1A31 31 0 0 0 1.9 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM10 15.4V8.6l6 3.4-6 3.4Z" />
+          </svg>
+        </a>
       </div>
     </div>
     <div class="container header-shell">
-      <a href="index.html#inicio" class="brand" aria-label="Inicio CTP de Ulloa"><img src="assets/img/logo-web-ctpulloa-2026.png" alt="CTP de Ulloa" class="brand-logo" /></a>
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
-      <nav class="site-nav" id="site-nav"><a href="index.html#inicio">Inicio</a><a href="cooperativa.html">Cooperativa</a><a href="noticias.html">Noticias</a></nav>
-      <div class="header-actions"><a href="index.html#admision" class="header-admission-btn">Admisiones</a></div>
+      <a href="index.html#inicio" class="brand" aria-label="Inicio CTP de Ulloa">
+        <img src="assets/img/logo-web-ctpulloa-2026.png" alt="Colegio Técnico Profesional de Ulloa" class="brand-logo" />
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#inicio">Inicio</a>
+        <div class="nav-item has-submenu">
+          <button class="nav-submenu-toggle" type="button" aria-expanded="false">
+            Oferta Educativa
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="especialidades-tecnicas.html">Carreras Técnicas</a>
+            <a href="index.html#area-academica">Área Académica</a>
+            <a href="plan-nacional.html">Plan Nacional</a>
+            <a href="https://dual.mep.go.cr/" target="_blank" rel="noopener noreferrer">Educación dual</a>
+          </div>
+        </div>
+        <div class="nav-item has-submenu">
+          <button class="nav-submenu-toggle" type="button" aria-expanded="false">
+            Sobre el CTP Ulloa
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="nuestra-identidad.html">Nuestra Identidad</a>
+            <a href="nuestro-equipo.html">Nuestro Equipo</a>
+          </div>
+        </div>
+        <a href="noticias.html">Noticias</a>
+      </nav>
+
+      <div class="header-actions" aria-label="Accesos rápidos">
+        <a href="index.html#admision" class="header-admission-btn">Admisiones</a>
+        <a href="https://sicai.cr/" class="admissions-btn" target="_blank" rel="noopener noreferrer" aria-label="SICAI">ICAI</a>
+      </div>
     </div>
   </header>
 
   <main class="cooperative-page">
-    <section class="cooperative-hero">
-      <div class="container cooperative-hero-grid"><div class="cooperative-hero-copy">
-        <p class="cooperative-kicker">Actualidad institucional</p><h1>Blog del CTP de Ulloa</h1>
-        <p>Noticias, proyectos y experiencias de nuestra comunidad educativa.</p>
-      </div></div>
+    <section class="blog-page-hero">
+      <div class="container blog-page-hero-copy">
+        <h1>Blog</h1>
+        <a href="noticias.html" class="blog-page-back-button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5" />
+            <path d="m12 19-7-7 7-7" />
+          </svg>
+          Volver a noticias
+        </a>
+      </div>
     </section>
     <section class="blog-post-preview" id="blog-post-preview" hidden aria-live="polite"></section>
     <section class="cooperative-blog-section" id="cooperative-blog" aria-labelledby="cooperative-blog-title">
@@ -57,7 +125,7 @@
   </div>
   <div class="image-lightbox" id="cooperative-image-lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" hidden><div class="image-lightbox-backdrop" data-lightbox-close></div><button class="image-lightbox-close" type="button" aria-label="Cerrar imagen ampliada" data-lightbox-close>&times;</button><div class="image-lightbox-stage"><img class="image-lightbox-image" src="" alt="" /></div></div>
   <footer class="site-footer"><div class="container footer-bottom"><p>&copy; 2026 Colegio Técnico Profesional de Ulloa.</p></div></footer>
-  <script src="js/main.js"></script><script src="js/cooperativa.js?v=10"></script>
+  <script src="js/main.js"></script><script src="js/cooperativa.js?v=11"></script>
   <script>
     (() => {
       const postId = new URLSearchParams(location.search).get('post');

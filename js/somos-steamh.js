@@ -1,5 +1,15 @@
 const steamhPublicationModal = document.querySelector('#steamh-publication-modal');
 const steamhImageLightbox = document.querySelector('#steamh-image-lightbox');
+const PUBLIC_SITE_URL = 'https://www.ctpulloa.com/';
+const getBlogPostUrl = postId => {
+  const url = new URL('blog.html', PUBLIC_SITE_URL);
+  url.searchParams.set('post', postId);
+  return url.toString();
+};
+const openFacebookShareWindow = url => {
+  const popup = window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, 'facebook-share', 'width=620,height=520,menubar=no,toolbar=no,location=yes,status=no,resizable=yes,scrollbars=yes');
+  if (!popup) window.location.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+};
 
 const getLargestImageSource = image => {
   if (!image) {
@@ -124,6 +134,7 @@ if (steamhPublicationModal) {
   const modalCategory = steamhPublicationModal.querySelector('#steamh-publication-modal-category');
   const modalDate = steamhPublicationModal.querySelector('#steamh-publication-modal-date');
   const modalTitle = steamhPublicationModal.querySelector('#steamh-publication-modal-title');
+  const modalShare = steamhPublicationModal.querySelector('.publication-modal-share');
   const modalDetail = steamhPublicationModal.querySelector('#steamh-publication-modal-detail');
   const closeControls = steamhPublicationModal.querySelectorAll('[data-modal-close]');
   let carouselImages = [];
@@ -316,7 +327,7 @@ if (steamhPublicationModal) {
   };
 
   const openModal = trigger => {
-    const { category, title, date, datetime, image, detail, content } = trigger.dataset;
+    const { postId, category, title, date, datetime, image, detail, content } = trigger.dataset;
 
     if (image) {
       modalImage.hidden = false;
@@ -334,6 +345,7 @@ if (steamhPublicationModal) {
     modalDate.textContent = date || '';
     modalDate.dateTime = datetime || '';
     modalTitle.textContent = title || '';
+    if (modalShare) modalShare.dataset.shareUrl = postId ? getBlogPostUrl(postId) : window.location.href;
 
     const preparedContent = preparePublicationContent({
       content,
@@ -363,14 +375,12 @@ if (steamhPublicationModal) {
     carouselNext.addEventListener('click', () => moveCarousel(1));
   }
 
+  modalShare?.addEventListener('click', () => openFacebookShareWindow(modalShare.dataset.shareUrl));
+
   document.addEventListener('click', event => {
     const trigger = event.target.closest('.publication-trigger');
 
     if (trigger) {
-      if (trigger.dataset.postId && window.openBlogPostFrame) {
-        window.openBlogPostFrame(trigger.dataset.postId);
-        return;
-      }
       openModal(trigger);
     }
   });
@@ -788,11 +798,12 @@ if (steamhPublicationModal) {
   const createShareButton = post => {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'blog-share-button';
-    button.textContent = 'Compartir en Facebook';
+    button.className = 'facebook-share-button';
+    button.setAttribute('aria-label', `Compartir “${post.title}” en Facebook`);
+    button.innerHTML = '<span class="facebook-share-icon" aria-hidden="true">f</span><span>Compartir</span>';
     button.addEventListener('click', event => {
       event.stopPropagation();
-      window.shareBlogPost?.(post.id);
+      openFacebookShareWindow(getBlogPostUrl(post.id));
     });
     return button;
   };

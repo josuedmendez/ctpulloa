@@ -68,6 +68,40 @@ section[id] {
   scroll-margin-top: calc(var(--header-height) + 24px);
 }
 
+.facebook-share-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  background: #1877f2;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 800;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.facebook-share-button:hover,
+.facebook-share-button:focus-visible {
+  background: #0d65d9;
+  transform: translateY(-1px);
+}
+
+.facebook-share-icon {
+  font-family: Arial, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 0.8;
+}
+
+.publication-modal-actions {
+  margin-top: 1rem;
+}
+
 .container {
   width: min(calc(100% - 2rem), var(--container));
   margin: 0 auto;

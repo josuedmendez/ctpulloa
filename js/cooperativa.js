@@ -1,35 +1,6 @@
 const cooperativePublicationModal = document.querySelector('#cooperative-publication-modal');
 const cooperativeImageLightbox = document.querySelector('#cooperative-image-lightbox');
-const cooperativeBlogFrame = document.querySelector('#cooperative-blog-frame');
-const cooperativeBlogFrameIframe = document.querySelector('#cooperative-blog-frame-iframe');
 const PUBLIC_SITE_URL = 'https://www.ctpulloa.com/';
-
-const closeCooperativeBlogFrame = () => {
-  if (!cooperativeBlogFrame) return;
-  cooperativeBlogFrame.hidden = true;
-  document.body.classList.remove('modal-is-open');
-  if (cooperativeBlogFrameIframe) cooperativeBlogFrameIframe.src = 'about:blank';
-};
-
-const openCooperativeBlogFrame = postId => {
-  if (!cooperativeBlogFrame || !cooperativeBlogFrameIframe || !postId) return;
-  cooperativeBlogFrameIframe.src = getBlogPostUrl(postId);
-  cooperativeBlogFrame.hidden = false;
-  document.body.classList.add('modal-is-open');
-  cooperativeBlogFrame.querySelector('.blog-frame-close')?.focus();
-};
-
-if (cooperativeBlogFrame) {
-  cooperativeBlogFrame.querySelectorAll('[data-blog-frame-close]').forEach(control => {
-    control.addEventListener('click', closeCooperativeBlogFrame);
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !cooperativeBlogFrame.hidden) {
-      closeCooperativeBlogFrame();
-    }
-  });
-}
 
 const openFacebookShareWindow = url => {
   const shareUrl = url || window.location.href;
@@ -370,7 +341,7 @@ if (cooperativePublicationModal) {
   };
 
   const openModal = trigger => {
-    const { category, title, date, datetime, image, detail, content, link } = trigger.dataset;
+    const { postId, category, title, date, datetime, image, detail, content, link } = trigger.dataset;
 
     if (image) {
       modalImage.hidden = false;
@@ -390,7 +361,7 @@ if (cooperativePublicationModal) {
     modalTitle.textContent = title || '';
 
     if (modalShare) {
-      modalShare.dataset.shareUrl = link || window.location.href;
+      modalShare.dataset.shareUrl = postId ? getBlogPostUrl(postId) : link || window.location.href;
     }
 
     const preparedContent = preparePublicationContent({
@@ -429,10 +400,6 @@ if (cooperativePublicationModal) {
     const trigger = event.target.closest('.publication-trigger');
 
     if (trigger) {
-      if (document.body.dataset.blogPage !== 'general' && trigger.dataset.postId) {
-        openCooperativeBlogFrame(trigger.dataset.postId);
-        return;
-      }
       openModal(trigger);
     }
   });
