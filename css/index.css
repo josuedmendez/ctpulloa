@@ -1881,6 +1881,14 @@ section[id] {
 .admission-options-panel { position:relative; padding:clamp(1.6rem,4vw,2.5rem); background:linear-gradient(145deg,#fff,#f5fbf7); border-radius:24px; }
 .admission-options-panel h2 { margin:0; color:var(--navy); font:800 clamp(1.55rem,4vw,2.1rem)/1.1 "Montserrat",Arial,sans-serif; }
 .admission-options-intro { margin:.8rem 0 1.35rem; color:var(--muted); }
+.admission-availability-notice { margin:-.3rem 0 1.35rem; padding:1rem 1.1rem 1.1rem; border:1px solid rgba(243,194,68,.7); border-left:4px solid var(--green); border-radius:14px; background:linear-gradient(135deg,var(--gold-soft),rgba(255,255,255,.92)); color:var(--navy); }
+.admission-availability-heading { display:flex; align-items:center; gap:.65rem; }
+.admission-availability-notice p { margin:.75rem 0 .6rem; font-size:1rem; line-height:1.45; }
+.admission-availability-heading strong { color:var(--green-deep); font-family:"Montserrat",Arial,sans-serif; font-size:.88rem; letter-spacing:.02em; text-transform:uppercase; }
+.admission-availability-icon { display:grid; width:1.7rem; height:1.7rem; place-items:center; border-radius:50%; background:var(--gold); color:var(--navy-deep); font:800 1.1rem/1 "Montserrat",Arial,sans-serif; }
+.admission-availability-list { display:grid; gap:.4rem; margin:0; padding:0; list-style:none; }
+.admission-availability-list li { position:relative; padding-left:1.25rem; font-weight:700; line-height:1.35; }
+.admission-availability-list li::before { position:absolute; top:.45rem; left:.15rem; width:.45rem; height:.45rem; border-radius:50%; background:var(--green); content:""; }
 .admission-options-close { position:absolute; top:.8rem; right:1rem; border:0; background:transparent; color:var(--muted); font-size:1.8rem; cursor:pointer; }
 .admission-options-list { display:grid; gap:.75rem; }
 .admission-option { display:flex; align-items:center; gap:.9rem; padding:1rem; border:1px solid rgba(13,114,52,.14); border-radius:16px; background:#fff; color:var(--navy); text-decoration:none; transition:180ms ease; }

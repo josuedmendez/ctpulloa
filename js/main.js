@@ -630,14 +630,18 @@ if (admissionModal && admissionModalPdf && admissionModalTitle && admissionModal
   });
 }
 
-const admissionOptionsModal = document.querySelector('.admission-options-modal');
-const admissionOptionsTrigger = document.querySelector('.admission-options-trigger');
-const admissionOptionsClose = admissionOptionsModal?.querySelector('.admission-options-close');
-if (admissionOptionsModal && admissionOptionsTrigger) {
+document.querySelectorAll('.admission-options-trigger').forEach(admissionOptionsTrigger => {
+  const admissionOptionsModal = document.getElementById(admissionOptionsTrigger.getAttribute('aria-controls'));
+  const admissionOptionsClose = admissionOptionsModal?.querySelector('.admission-options-close');
+
+  if (!admissionOptionsModal) return;
+
   admissionOptionsTrigger.addEventListener('click', () => admissionOptionsModal.showModal());
   admissionOptionsClose?.addEventListener('click', () => admissionOptionsModal.close());
-  admissionOptionsModal.addEventListener('click', event => { if (event.target === admissionOptionsModal) admissionOptionsModal.close(); });
-}
+  admissionOptionsModal.addEventListener('click', event => {
+    if (event.target === admissionOptionsModal) admissionOptionsModal.close();
+  });
+});
 
 const galleryModal = document.querySelector('.gallery-modal');
 const galleryModalImage = galleryModal?.querySelector('.gallery-modal-image');
