@@ -141,7 +141,8 @@
   pointer-events: none;
 }
 
-.network-hero-media img {
+.network-hero-media img,
+.network-hero-media video {
   width: 100%;
   height: clamp(330px, 39vw, 500px);
   padding: clamp(1rem, 3vw, 2rem);
@@ -590,7 +591,8 @@
     align-items: stretch;
   }
 
-  .network-hero-media img {
+.network-hero-media img,
+.network-hero-media video {
     height: 300px;
   }
 

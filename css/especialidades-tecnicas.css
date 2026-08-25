@@ -85,14 +85,16 @@ body.modal-is-open {
   pointer-events: none;
 }
 
-.specialty-media img {
+.specialty-media img,
+.specialty-media video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.35s ease;
 }
 
-.specialty-card:hover .specialty-media img {
+.specialty-card:hover .specialty-media img,
+.specialty-card:hover .specialty-media video {
   transform: scale(1.04);
 }
 

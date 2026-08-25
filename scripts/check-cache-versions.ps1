@@ -19,7 +19,16 @@ function Get-GitFileContent {
 function Get-HeadFileContent {
   param([Parameter(Mandatory = $true)][string]$Path)
 
-  $content = & git show ("HEAD:$Path") 2>$null
+  # Un archivo nuevo no existe todavía en HEAD. Silenciamos esa comprobación
+  # esperada sin cambiar el comportamiento estricto del resto del hook.
+  $previousErrorActionPreference = $ErrorActionPreference
+  try {
+    $ErrorActionPreference = 'SilentlyContinue'
+    $content = & git show ("HEAD:$Path") 2>$null
+  }
+  finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+  }
   if ($LASTEXITCODE -ne 0) {
     return ''
   }
@@ -29,7 +38,7 @@ function Get-HeadFileContent {
 
 function Get-ResourceReferences {
   param(
-    [Parameter(Mandatory = $true)][string]$Content,
+    [Parameter(Mandatory = $true)][AllowEmptyString()][string]$Content,
     [Parameter(Mandatory = $true)][string]$ResourcePath
   )
 
