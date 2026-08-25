@@ -1709,7 +1709,7 @@ section[id] {
 
 .admission-wrap {
   display: grid;
-  grid-template-columns: minmax(240px, 0.38fr) minmax(0, 0.62fr);
+  grid-template-columns: minmax(260px, 0.34fr) minmax(0, 0.66fr);
   gap: clamp(2rem, 4vw, 3.25rem);
   align-items: center;
 }
@@ -1739,11 +1739,12 @@ section[id] {
 
 .admission-copy h2 {
   margin: 0;
-  max-width: 13ch;
+  max-width: 11.5ch;
   color: var(--navy);
   font-family: "Montserrat", Arial, sans-serif;
   font-size: clamp(2.25rem, 4.2vw, 4.15rem);
   line-height: 1;
+  text-wrap: balance;
   letter-spacing: 0;
 }
 
@@ -1799,16 +1800,38 @@ section[id] {
 
 .admission-documents {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(0.8rem, 1.7vw, 1.35rem);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  column-gap: clamp(1.35rem, 2.4vw, 2rem);
+  row-gap: clamp(2.15rem, 3.2vw, 2.9rem);
   justify-self: end;
   align-items: start;
-  width: min(100%, 720px);
+  width: min(86%, 720px);
+  margin-left: 0;
 }
 
 .admission-visual-card {
   margin: 0;
   text-align: center;
+}
+
+.admission-visual-card:nth-child(1) {
+  grid-column: 2 / span 2;
+}
+
+.admission-visual-card:nth-child(2) {
+  grid-column: 4 / span 2;
+}
+
+.admission-visual-card:nth-child(3) {
+  grid-column: 1 / span 2;
+}
+
+.admission-visual-card:nth-child(4) {
+  grid-column: 3 / span 2;
+}
+
+.admission-visual-card:nth-child(5) {
+  grid-column: 5 / span 2;
 }
 
 .admission-visual-trigger {
@@ -1860,6 +1883,10 @@ section[id] {
   animation-delay: -3.6s;
 }
 
+.admission-visual-card:nth-child(5) .admission-visual-media {
+  animation-delay: -4.8s;
+}
+
 .admission-visual-card figcaption {
   display: grid;
   min-height: 3.75em;
@@ -1868,7 +1895,7 @@ section[id] {
   color: var(--navy);
   font-family: "Montserrat", Arial, sans-serif;
   font-size: clamp(0.88rem, 1.1vw, 1rem);
-  font-weight: 800;
+  font-weight: 1000;
   line-height: 1.25;
 }
 
@@ -3710,6 +3737,10 @@ section[id] {
     margin-inline: auto;
   }
 
+  .admission-documents > .admission-visual-card {
+    grid-column: auto;
+  }
+
   .exchange-highlights,
   .exchange-timeline {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4628,6 +4659,10 @@ textarea {
     grid-template-columns: 1fr;
     margin-top: 0.9rem;
     width: min(100%, 360px);
+  }
+
+  .admission-documents > .admission-visual-card {
+    grid-column: auto;
   }
 
   .admission-visual-card figcaption {

@@ -1,0 +1,4 @@
+#!/bin/sh
+# Ejecutado por Git antes de cada commit, incluido el realizado desde VS Code.
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/check-cache-versions.ps1
+exit $?
