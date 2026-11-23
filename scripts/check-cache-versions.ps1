@@ -26,7 +26,7 @@ function Update-ResourceVersion {
   return [regex]::Replace($Content, $pattern, {
     param($match)
     $query = $match.Groups['query'].Value
-    if ([string]::IsNullOrEmpty($query)) { return "$ResourcePath?v=$Version" }
+    if ([string]::IsNullOrEmpty($query)) { return "${ResourcePath}?v=$Version" }
 
     # Conserva otros parámetros y deja exactamente una versión al inicio.
     $otherParameters = @(
