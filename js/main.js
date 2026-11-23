@@ -653,6 +653,7 @@ const galleryModalZoomReset = galleryModal?.querySelector('.gallery-modal-zoom-r
 
 if (galleryModal && galleryModalImage) {
   let galleryZoom = 1;
+  let galleryWheelAction = 'zoom';
   let galleryScrollY = 0;
   let isGalleryScrollLocked = false;
   let galleryBodyStyleSnapshot = {};
@@ -767,15 +768,18 @@ if (galleryModal && galleryModalImage) {
   };
 
   document.querySelectorAll('.gallery-zoom-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
+    trigger.addEventListener('click', event => {
       const sourceImage = trigger.querySelector('img');
+      const imageSource = sourceImage?.currentSrc || sourceImage?.src || trigger.getAttribute('href');
 
-      if (!sourceImage) return;
+      if (!imageSource) return;
 
+      event.preventDefault();
       lockPageScroll();
       setGalleryZoom(1);
-      galleryModalImage.src = sourceImage.currentSrc || sourceImage.src;
-      galleryModalImage.alt = sourceImage.alt;
+      galleryWheelAction = trigger.dataset.galleryWheel || 'zoom';
+      galleryModalImage.src = imageSource;
+      galleryModalImage.alt = sourceImage?.alt || trigger.dataset.galleryAlt || '';
 
       if (typeof galleryModal.showModal === 'function') {
         galleryModal.showModal();
@@ -804,6 +808,8 @@ if (galleryModal && galleryModalImage) {
   });
 
   galleryModalViewport?.addEventListener('wheel', event => {
+    if (galleryWheelAction === 'scroll') return;
+
     event.preventDefault();
 
     const previousZoom = galleryZoom;
